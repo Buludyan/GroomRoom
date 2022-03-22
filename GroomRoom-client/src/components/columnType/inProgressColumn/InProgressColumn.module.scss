@@ -1,0 +1,34 @@
+.column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4;
+    height: 100vh;
+    width: 60vw;
+    z-index: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+
+.doneButton {
+    position: relative;
+    left: 0vw;
+    transition: all .22s ease-in;
+}
+
+.doneButton.doneClose {
+    left: 19.9vw;
+}
+
+@media screen and (max-width: 960px) {
+    .column {
+        width: 100vw;
+    }
+}

@@ -1,0 +1,53 @@
+.draggingCard {
+    user-select: none;
+    max-width: 85%;
+    max-height: 150px;
+    padding: 16px;
+    margin: 0 0 8px 0;
+    background-color: #263B4A;
+    color: white;
+    border-radius: 5px;
+}
+
+.inProgress {
+    user-select: none;
+    min-width: 918px;
+    padding: 16px;
+    margin: 0 0 8px 0;
+    color: white;
+    border-radius: 5px;
+}
+
+
+.card {
+    user-select: none;
+    width: 80%;
+    padding: 16px;
+    margin: 0 0 8px 0;
+    color: white;
+    border-radius: 5px;
+}
+
+
+.link {
+    position: relative;
+    left: 83%;
+    text-decoration: none;
+}
+
+.cardHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    height: 12px;
+    width: 90px;
+}
