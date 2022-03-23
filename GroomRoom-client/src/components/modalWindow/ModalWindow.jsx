@@ -5,13 +5,14 @@ import styles from './ModalWindow.module.scss';
 import { v4 as uuid } from 'uuid';
 import { modalState, setIsActiveAdd } from '../store/ModalWindowSlice';
 import { Button, TextField } from '@mui/material';
+import { socketSend } from '../helpers/socketSend';
 
 
 
 export const ModalWindow = () => {
 
     const dispatch = useDispatch();
-    const { columns } = useSelector(columnsState);
+    const { columns, socket } = useSelector(columnsState);
     const { isActive, name, description, source, id, columnName } = useSelector(modalState);
 
     const [inputData, setInputData] = useState({
@@ -66,6 +67,7 @@ export const ModalWindow = () => {
         }
 
         dispatch(setColumns(updatedColumns));
+        socketSend(socket, updatedColumns);
 
         setInputData({
             taskName: '',
@@ -101,6 +103,7 @@ export const ModalWindow = () => {
         }
 
         dispatch(setColumns(updatedColumns));
+        socketSend(socket, updatedColumns);
     }
 
     return (

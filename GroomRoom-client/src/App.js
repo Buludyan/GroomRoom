@@ -5,7 +5,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { ModalWindow } from "./components/modalWindow/ModalWindow";
 import { columnsState, setColumns, setSocket } from "./components/store/ColumnsSlice";
 import { useEffect } from 'react';
-import { Axios } from './components/axios/axiosCofing';
+import { socketSend } from './components/helpers/socketSend';
 
 export const onDragEnd = (result, columns, dispatch, setColumns, socket) => {
 
@@ -39,6 +39,7 @@ export const onDragEnd = (result, columns, dispatch, setColumns, socket) => {
     }
 
     dispatch(setColumns(updatedColumns));
+    socketSend(socket, updatedColumns);
 
   } else {
     const column = columns[source.droppableId];
@@ -55,6 +56,7 @@ export const onDragEnd = (result, columns, dispatch, setColumns, socket) => {
     }
 
     dispatch(setColumns(updatedColumns));
+    socketSend(socket, updatedColumns);
   }
 };
 
@@ -94,12 +96,7 @@ const onDragMove = (columns, dispatch, setColumns, sourceColumn, source, socket)
   }
 
   dispatch(setColumns(updatedColumns));
-
-  socket.send(JSON.stringify({
-    method: 'broadcast',
-    columns: updatedColumns
-  }))
-
+  socketSend(socket, updatedColumns);
 }
 
 
@@ -110,7 +107,7 @@ function App() {
 
   const { columns, socket } = useSelector(columnsState);
 
-  useEffect(async () => {
+  useEffect(() => { 
     const socket = new WebSocket(`ws://localhost:6060/`);
     dispatch(setSocket(socket));
     socket.onopen = () => {
@@ -124,10 +121,11 @@ function App() {
       let msg = JSON.parse(event.data)
       switch (msg.method) {
         case "connection":
-          dispatch(setColumns(msg.data));
+          const data = {'1': msg.columns[1], '2': msg.columns[2], '3': msg.columns[3]};
+          dispatch(setColumns(data));
           break
         case "broadcast":
-          dispatch(setColumns(msg.data))
+          dispatch(setColumns(msg.columns))
           break
         default: return; 
       }

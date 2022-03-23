@@ -7,11 +7,12 @@ import { IconButton, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import LinkIcon from '@mui/icons-material/Link';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { socketSend } from '../helpers/socketSend';
 
 const Card = ({ provided, snapshot, column, item }) => {
 
     const dispatch = useDispatch();
-    const { columns } = useSelector(columnsState);
+    const { columns, socket } = useSelector(columnsState);
 
     const onItemDelete = () => {
         const todoId = Object.entries(columns).filter(column => column[1].name === 'To do')[0][0];
@@ -28,8 +29,9 @@ const Card = ({ provided, snapshot, column, item }) => {
                 items: items
             },
         }
-
+        
         dispatch(setColumns(updatedColumns));
+        socketSend(socket, updatedColumns);
     }
 
     const onItemEdit = () => {

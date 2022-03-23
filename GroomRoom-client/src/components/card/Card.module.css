@@ -1,0 +1,79 @@
+.draggingCard {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  max-width: 85%;
+  max-height: 150px;
+  padding: 16px;
+  margin: 0 0 8px 0;
+  background-color: #263B4A;
+  color: white;
+  border-radius: 5px;
+}
+
+.inProgress {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  min-width: 918px;
+  padding: 16px;
+  margin: 0 0 8px 0;
+  color: white;
+  border-radius: 5px;
+}
+
+.card {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 80%;
+  padding: 16px;
+  margin: 0 0 8px 0;
+  color: white;
+  border-radius: 5px;
+}
+
+.link {
+  position: relative;
+  left: 83%;
+  text-decoration: none;
+}
+
+.cardHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 15px;
+  height: 12px;
+  width: 90px;
+}
+/*# sourceMappingURL=Card.module.css.map */

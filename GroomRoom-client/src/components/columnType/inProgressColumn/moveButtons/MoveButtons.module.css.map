@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACL,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,eAAe,EAAE,YAAY;EAC7B,MAAM,EAAE,WAAW;CACtB;;AAGD,MAAM,CAAC,MAAM,MAAM,SAAS,EAAE,KAAK;EAE/B,AAAA,QAAQ,CAAC,MAAM,CAAC;IACZ,aAAa,EAAE,GAAG;GACrB",
+    "sources": [
+        "MoveButtons.module.scss"
+    ],
+    "names": [],
+    "file": "MoveButtons.module.css"
+}
