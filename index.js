@@ -21,12 +21,12 @@ app.ws('/', (ws, req) => {
         msg = JSON.parse(msg)
         switch (msg.method) {
             case 'connection':
-                const columns = await columnsController.getColumns();
-                broadcastConnection(ws, columns, 'connection');
+                const columns = await columnsController.getColumns(msg.id);
+                connectionHandler(ws, columns, 'connection', msg.id);
                 break
             case 'broadcast':
-                await columnsController.setColumns(msg.columns);
-                broadcastConnection(ws, msg.columns, 'broadcast');
+                await columnsController.setColumns(msg.columns, msg.clientId);
+                broadcastConnection(ws, msg.columns, 'broadcast', msg.clientId);
                 break
         }
     })
@@ -49,12 +49,17 @@ async function start() {
     }
 }
 
-const broadcastConnection = (ws, columns, method) => {
+const connectionHandler = (ws, columns, method, id) => {
+    ws.id = id
+    broadcastConnection(ws, columns, method, id)
+}
+
+const broadcastConnection = (ws, columns, method, id) => {
     aWss.clients.forEach(client => {
-        //if (client.id === msg.id) {
-        const msg = { method: method, columns: columns }
-        client.send(JSON.stringify(msg));
-        //}
+        if (client.id === id) {
+            const msg = { method: method, columns: columns, id: id }
+            client.send(JSON.stringify(msg));
+        }
     })
 }
 

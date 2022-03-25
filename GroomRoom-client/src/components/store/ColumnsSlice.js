@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { createSlice } from "@reduxjs/toolkit";
-import { Axios } from "../axios/axiosCofing";
+//import { Axios } from "../axios/axiosCofing";
 
 const initialState = {
     columns: {
@@ -18,6 +18,7 @@ const initialState = {
         }
     },
     socket: null,
+    clientId: null,
     isMobile: false,
     isLeftOpen: {
         status: true,
@@ -44,6 +45,9 @@ export const columnsSlice = createSlice({
     reducers: {
         setSocket: (state, action) => {
             state.socket = action.payload;
+        },
+        setClientId: (state, action) => {
+            state.clientId = action.payload;
         },
         setColumns: (state, action) => {
             state.columns = { ...action.payload };
@@ -75,7 +79,8 @@ export const {
     setIsMobToDoneOpen,
     setIsMobile,
     setNewTask,
-    setSocket
+    setSocket,
+    setClientId
 } = columnsSlice.actions;
 
 export const columnsState = (state) => state.columns;

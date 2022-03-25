@@ -12,7 +12,7 @@ import { socketSend } from '../helpers/socketSend';
 export const ModalWindow = () => {
 
     const dispatch = useDispatch();
-    const { columns, socket } = useSelector(columnsState);
+    const { columns, socket, clientId } = useSelector(columnsState);
     const { isActive, name, description, source, id, columnName } = useSelector(modalState);
 
     const [inputData, setInputData] = useState({
@@ -67,7 +67,7 @@ export const ModalWindow = () => {
         }
 
         dispatch(setColumns(updatedColumns));
-        socketSend(socket, updatedColumns);
+        socketSend(socket, updatedColumns, clientId);
 
         setInputData({
             taskName: '',
@@ -103,7 +103,7 @@ export const ModalWindow = () => {
         }
 
         dispatch(setColumns(updatedColumns));
-        socketSend(socket, updatedColumns);
+        socketSend(socket, updatedColumns, clientId);
     }
 
     return (

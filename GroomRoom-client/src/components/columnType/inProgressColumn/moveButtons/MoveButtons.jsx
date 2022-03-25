@@ -8,7 +8,7 @@ import { Button, IconButton } from '@mui/material';
 import { socketSend } from '../../../helpers/socketSend';
 
 
-const onButtonMove = (columns, dispatch, setColumns, dir, socket) => {
+const onButtonMove = (columns, dispatch, setColumns, dir, socket, clientId) => {
   const keys = Object.entries(columns).map(el => el[0]);
   let dirKeys = [];
   dir === 'todo' ? dirKeys = [keys[1], keys[0]] : dirKeys = [keys[1], keys[2]];
@@ -33,12 +33,12 @@ const onButtonMove = (columns, dispatch, setColumns, dir, socket) => {
     }
 
     dispatch(setColumns(updatedColumns));
-    socketSend(socket, updatedColumns);
+    socketSend(socket, updatedColumns, clientId);
   }
 }
 
 
-const onNextTask = (columns, dispatch, setColumns, socket) => {
+const onNextTask = (columns, dispatch, setColumns, socket, clientId) => {
   console.log(columns)
   const keys = Object.entries(columns).map(el => el[0]);
   const toDoColumn = columns[keys[0]];
@@ -72,7 +72,7 @@ const onNextTask = (columns, dispatch, setColumns, socket) => {
   }
 
   dispatch(setColumns(updatedColumns));
-  socketSend(socket, updatedColumns);
+  socketSend(socket, updatedColumns, clientId);
 }
 
 
@@ -80,24 +80,24 @@ const onNextTask = (columns, dispatch, setColumns, socket) => {
 const MoveButtons = () => {
 
   const dispatch = useDispatch();
-  const { columns, socket } = useSelector(columnsState);
+  const { columns, socket, clientId } = useSelector(columnsState);
 
   return (
     <div className={styles.buttons}>
       <IconButton
-        onClick={() => onButtonMove(columns, dispatch, setColumns, 'todo', socket)}
+        onClick={() => onButtonMove(columns, dispatch, setColumns, 'todo', socket, clientId)}
       >
         <ArrowBackIosNewIcon />
       </IconButton>
       <Button
-        onClick={() => onNextTask(columns, dispatch, setColumns, socket)}
+        onClick={() => onNextTask(columns, dispatch, setColumns, socket, clientId)}
         variant='contained'
         sx={{backgroundColor: '#7D53DE'}}
       >
         Next task
       </Button>
       <IconButton
-        onClick={() => onButtonMove(columns, dispatch, setColumns, 'todone', socket)}
+        onClick={() => onButtonMove(columns, dispatch, setColumns, 'todone', socket, clientId)}
       >
         <ArrowForwardIosIcon />
       </IconButton>
