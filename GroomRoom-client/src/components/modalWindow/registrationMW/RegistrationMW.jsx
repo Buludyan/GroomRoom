@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './RegistrationMW.module.scss';
+import { Axios } from "../../axios/axiosCofing";
 
 const RegistrationMW = ({ isRegMWOpen, setRegMWOpen }) => {
 
@@ -10,9 +11,11 @@ const RegistrationMW = ({ isRegMWOpen, setRegMWOpen }) => {
         reset
     } = useForm()
 
-    const onSubmit = (data) => {
-        console.log(JSON.stringify(data));
+    const onSubmit = async (data) => {
         reset()
+        console.log(JSON.stringify(data));
+        const res = await Axios.post('/auth/registration', data)
+        
     }
 
     return (

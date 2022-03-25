@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import RegistrationMW from '../modalWindow/registrationMW/RegistrationMW';
+import { Axios } from "../axios/axiosCofing";
 
 const Login = () => {
 
@@ -14,9 +15,11 @@ const Login = () => {
         mode: 'onBlur'
     });
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log(JSON.stringify(data));
         reset()
+        const res = await Axios.post('/auth/login', data)
+        console.log(res)
     }
 
     return (

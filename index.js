@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
 const mongoose = require('mongoose');
 const { columnsController } = require('./controllers/columnsController');
 
@@ -15,6 +14,7 @@ app.use(cors({
     origin: "http://localhost:3000",
     credentials: true,
 }));
+app.use('/auth', require('./routes/auth.route'));
 
 app.ws('/', (ws, req) => {
     ws.on('message', async (msg) => {
@@ -32,7 +32,6 @@ app.ws('/', (ws, req) => {
     })
 });
 
-//app.use('/column', require('./routes/columns.route'));
 
 async function start() {
     try {
