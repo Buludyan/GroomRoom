@@ -9,7 +9,7 @@ const initialState = {
     columnName: ''
 }
 
-export const modalWindowSlice = createSlice({
+export const AddEditMWSlice = createSlice({
     name: 'modal window',
     initialState,
     reducers: {
@@ -32,5 +32,5 @@ export const modalWindowSlice = createSlice({
 })
 
 
-export const { setIsActiveAdd, setIsActiveEdit } = modalWindowSlice.actions;
-export const modalState = (state) => state.modal;
+export const { setIsActiveAdd, setIsActiveEdit } = AddEditMWSlice.actions;
+export const addEditModalState = (state) => state.addEditmodal;

@@ -2,15 +2,16 @@ import React from 'react';
 import Column from './Column/Column';
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { ModalWindow } from '../modalWindow/ModalWindow';
 import { columnsState, setClientId, setColumns, setSocket } from '../store/ColumnsSlice';
 import { useEffect } from 'react';
 import { socketSend } from '../helpers/socketSend';
 import { useParams } from 'react-router-dom';
+import { AddEditMW } from '../modalWindow/addEditMW/AddEditMW';
+
+
 
 
 const Columns = () => {
-
 
     const params = useParams();
 
@@ -169,7 +170,7 @@ const Columns = () => {
                     );
                 })}
             </DragDropContext>
-            <ModalWindow />
+            <AddEditMW />
         </div>
     );
 }

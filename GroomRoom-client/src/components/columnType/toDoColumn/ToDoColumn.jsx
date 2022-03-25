@@ -3,7 +3,7 @@ import styles from './ToDoColumn.module.scss'
 import { Draggable } from "react-beautiful-dnd";
 import Card from '../../card/Card';
 import { useDispatch } from 'react-redux';
-import { setIsActiveAdd } from '../../store/ModalWindowSlice';
+import { setIsActiveAdd } from '../../store/AddEditMWSlice';
 import { IconButton, Typography } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 

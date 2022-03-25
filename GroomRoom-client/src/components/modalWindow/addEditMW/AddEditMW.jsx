@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { columnsState, setColumns } from '../store/ColumnsSlice';
-import styles from './ModalWindow.module.scss';
+import { columnsState, setColumns } from '../../store/ColumnsSlice';
+import styles from './AddEditMW.module.scss';
 import { v4 as uuid } from 'uuid';
-import { modalState, setIsActiveAdd } from '../store/ModalWindowSlice';
+import { addEditModalState, setIsActiveAdd } from '../../store/AddEditMWSlice';
 import { Button, TextField } from '@mui/material';
-import { socketSend } from '../helpers/socketSend';
+import { socketSend } from '../../helpers/socketSend';
 
 
 
-export const ModalWindow = () => {
+
+export const AddEditMW = () => {
 
     const dispatch = useDispatch();
     const { columns, socket, clientId } = useSelector(columnsState);
-    const { isActive, name, description, source, id, columnName } = useSelector(modalState);
+    const { isActive, name, description, source, id, columnName } = useSelector(addEditModalState);
 
     const [inputData, setInputData] = useState({
         taskName: '',
