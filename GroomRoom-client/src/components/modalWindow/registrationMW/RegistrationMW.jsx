@@ -13,9 +13,8 @@ const RegistrationMW = ({ isRegMWOpen, setRegMWOpen }) => {
 
     const onSubmit = async (data) => {
         reset()
-        console.log(JSON.stringify(data));
         const res = await Axios.post('/auth/registration', data)
-        
+        console.log(res);
     }
 
     return (

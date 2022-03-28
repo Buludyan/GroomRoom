@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const { columnsController } = require('./controllers/columnsController');
 
@@ -14,6 +15,7 @@ app.use(cors({
     origin: "http://localhost:3000",
     credentials: true,
 }));
+app.use(cookieParser());
 app.use('/auth', require('./routes/auth.route'));
 
 app.ws('/', (ws, req) => {
@@ -32,10 +34,9 @@ app.ws('/', (ws, req) => {
     })
 });
 
-
 async function start() {
     try {
-        await mongoose.connect('mongodb+srv://GroomRoom:GroomRoom@cluster0.6rbjg.mongodb.net/GroomRoom?retryWrites=true&w=majority', {
+        await mongoose.connect(process.env.DB_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })

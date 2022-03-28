@@ -16,10 +16,15 @@ const Login = () => {
     });
 
     const onSubmit = async (data) => {
-        console.log(JSON.stringify(data));
-        reset()
-        const res = await Axios.post('/auth/login', data)
-        console.log(res)
+        try {
+            console.log(JSON.stringify(data));
+            reset()
+            const res = await Axios.post('/auth/login', data)
+            console.log(res.data)
+        } catch(e) {
+            console.log(e)
+        }
+
     }
 
     return (
