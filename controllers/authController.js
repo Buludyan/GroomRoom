@@ -1,33 +1,32 @@
 const bcrypt = require('bcryptjs');
-const { validationResult } = require('express-validator');
+const ApiError = require('../exceptions/apiError');
 const userService = require('../service/userService');
+const { validationResult } = require('express-validator');
 
-class authController {
-    async registration(req, res) {
+class AuthController {
+    async registration(req, res, next) {
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return res.status(400).json({ message: "Ошибка при регистрации", errors })
+                return next(ApiError.BadRequest('Validation error', errors.array()));
             }
             const { email, password, name, surname } = req.body;
 
             const userData = await userService.registration(email, password, name, surname);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
 
-            return res.json({ ...userData })
+            return res.json(userData)
 
         } catch (e) {
-            console.log(e)
-            res.json({ message: 'Registration error' })
+            next(e);
         }
     }
 
-    async login(req, res) {
+    async login(req, res, next) {
         try {
             const { email, password } = req.body
             const user = await User.findOne({ email })
             if (!user) {
-                console.log(1)
                 return res.status(400).json({ message: `Пользователь не найден` })
             }
             const validPassword = bcrypt.compareSync(password, user.password)
@@ -36,7 +35,7 @@ class authController {
             }
             return res.json({ message: 'Вы удачно вошли в систему' })
         } catch (e) {
-            res.json({ message: 'Login error' })
+            next(e);
         }
     }
 
@@ -44,7 +43,7 @@ class authController {
         try {
 
         } catch (e) {
-
+            next(e);
         }
     }
 
@@ -55,7 +54,7 @@ class authController {
 
             return res.redirect('https://www.facebook.com/')
         } catch (e) {
-
+            next(e);
         }
     }
 
@@ -63,7 +62,7 @@ class authController {
         try {
 
         } catch (e) {
-
+            next(e);
         }
     }
 
@@ -73,10 +72,10 @@ class authController {
             res.json('Ответ')
 
         } catch (e) {
-
+            next(e);
         }
     }
 }
 
 
-module.exports = new authController()
+module.exports = new AuthController()

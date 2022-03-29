@@ -1,9 +1,11 @@
 require('dotenv').config();
-const express = require('express');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
+const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const errorMiddleware = require('./middlewares/errorMiddleware');
 const { columnsController } = require('./controllers/columnsController');
+
 
 const app = express();
 const WSServer = require('express-ws')(app);
@@ -17,6 +19,7 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use('/auth', require('./routes/auth.route'));
+app.use(errorMiddleware);
 
 app.ws('/', (ws, req) => {
     ws.on('message', async (msg) => {

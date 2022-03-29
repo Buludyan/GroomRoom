@@ -1,21 +1,21 @@
 const { Router } = require('express');
 const router = Router();
-const controller = require('../controllers/authController');
-const {check} = require("express-validator");
+const authController = require('../controllers/authController');
+const {body} = require("express-validator");
 
 router.post('/registration', [
-    check('email', "Wrong email").isEmail(),
-    check('password', "Wrong password length").isLength({min:4, max:10})
-], controller.registration)
+    body('email', "Wrong email").isEmail(),
+    body('password', "Wrong password length").isLength({min:4, max:10})
+], authController.registration)
 
-router.post('/login', controller.login);
+router.post('/login', authController.login);
 
-router.post('logout', controller.logout);
+router.post('logout', authController.logout);
 
-router.get('/activate/:link', controller.activate);
+router.get('/activate/:link', authController.activate);
 
-router.get('/refresh', controller.refresh);
+router.get('/refresh', authController.refresh);
 
-router.get('/users', controller.getUsers);
+router.get('/users', authController.getUsers);
 
 module.exports = router;
