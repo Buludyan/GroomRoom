@@ -13,9 +13,9 @@ class AuthController {
             const { email, password, name, surname } = req.body;
 
             const userData = await userService.registration(email, password, name, surname);
-            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
 
-            return res.json(userData)
+            return res.json(userData);
 
         } catch (e) {
             next(e);
@@ -24,16 +24,11 @@ class AuthController {
 
     async login(req, res, next) {
         try {
-            const { email, password } = req.body
-            const user = await User.findOne({ email })
-            if (!user) {
-                return res.status(400).json({ message: `Пользователь не найден` })
-            }
-            const validPassword = bcrypt.compareSync(password, user.password)
-            if (!validPassword) {
-                return res.json({ message: `Введен неверный пароль` })
-            }
-            return res.json({ message: 'Вы удачно вошли в систему' })
+            const { email, password } = req.body;
+            const userData = await userService.login(email, password)
+            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
+
+            return res.json(userData)
         } catch (e) {
             next(e);
         }
@@ -41,7 +36,11 @@ class AuthController {
 
     async logout(req, res, next) {
         try {
-
+            const {refreshToken} = req.cookies;
+            const token = await userService.logout(refreshToken);
+            res.clearCookie('refreshToken');
+            return res.json(token);
+            
         } catch (e) {
             next(e);
         }
