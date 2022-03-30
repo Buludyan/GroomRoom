@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const ApiError = require('../exceptions/apiError');
-const userService = require('../service/userService');
+const authService = require('../service/authService');
 const { validationResult } = require('express-validator');
 
 class AuthController {
@@ -12,7 +12,7 @@ class AuthController {
             }
             const { email, password, name, surname } = req.body;
 
-            const userData = await userService.registration(email, password, name, surname);
+            const userData = await authService.registration(email, password, name, surname);
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
 
             return res.json(userData);
@@ -25,7 +25,7 @@ class AuthController {
     async login(req, res, next) {
         try {
             const { email, password } = req.body;
-            const userData = await userService.login(email, password)
+            const userData = await authService.login(email, password)
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
 
             return res.json(userData)
@@ -36,11 +36,11 @@ class AuthController {
 
     async logout(req, res, next) {
         try {
-            const {refreshToken} = req.cookies;
-            const token = await userService.logout(refreshToken);
+            const { refreshToken } = req.cookies;
+            const token = await authService.logout(refreshToken);
             res.clearCookie('refreshToken');
             return res.json(token);
-            
+
         } catch (e) {
             next(e);
         }
@@ -49,9 +49,9 @@ class AuthController {
     async activate(req, res, next) {
         try {
             const activationLink = req.params.link;
-            await userService.activate(activationLink);
+            await authService.activate(activationLink);
 
-            return res.redirect('https://www.facebook.com/')
+            return res.redirect(process.env.CLIENT_URL)
         } catch (e) {
             next(e);
         }
@@ -59,7 +59,11 @@ class AuthController {
 
     async refresh(req, res, next) {
         try {
+            const { refreshToken } = req.cookies;
+            const userData = await authService.refresh(refreshToken);
+            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
 
+            return res.json(userData);
         } catch (e) {
             next(e);
         }
@@ -67,9 +71,8 @@ class AuthController {
 
     async getUsers(req, res, next) {
         try {
-
-            res.json('Ответ')
-
+            const users = await authService.getAllUsers();
+            res.json(users);
         } catch (e) {
             next(e);
         }
