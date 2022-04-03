@@ -33,9 +33,11 @@ const Columns = () => {
             let msg = JSON.parse(event.data)
             switch (msg.method) {
                 case "connection":
-                    const data = { '1': msg.columns[1], '2': msg.columns[2], '3': msg.columns[3] };
-                    dispatch(setClientId(msg.id))
-                    dispatch(setColumns(data));
+                    if(msg.columns) {
+                        const data = { '1': msg.columns[1], '2': msg.columns[2], '3': msg.columns[3] };
+                        dispatch(setClientId(msg.id))
+                        dispatch(setColumns(data));
+                    }
                     break
                 case "broadcast":
                     dispatch(setColumns(msg.columns))

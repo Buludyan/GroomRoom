@@ -51,7 +51,7 @@ export const columnsSlice = createSlice({
         },
         setColumns: (state, action) => {
             state.columns = { ...action.payload };
-            //Axios.put('column/task', {...action.payload})
+
         },
         setIsMobile: (state, action) => {
             state.isMobile = action.payload;

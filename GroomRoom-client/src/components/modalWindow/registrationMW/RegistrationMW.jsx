@@ -1,9 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import styles from './RegistrationMW.module.scss';
-import { Axios } from "../../axios/axiosCofing";
+import { registration } from '../../store/AuthSlice';
 
 const RegistrationMW = ({ isRegMWOpen, setRegMWOpen }) => {
+
+    const dispatch = useDispatch();
 
     const {
         register,
@@ -13,8 +16,7 @@ const RegistrationMW = ({ isRegMWOpen, setRegMWOpen }) => {
 
     const onSubmit = async (data) => {
         reset()
-        const res = await Axios.post('/auth/registration', data)
-        console.log(res);
+        dispatch(registration(data))
     }
 
     return (
@@ -26,7 +28,8 @@ const RegistrationMW = ({ isRegMWOpen, setRegMWOpen }) => {
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                 <form
                     className={styles.form}
-                    onSubmit={handleSubmit(onSubmit)}>
+                    onSubmit={handleSubmit(onSubmit)}
+                >
                     <input
                         placeholder='email'
                         {...register('email', {
@@ -40,13 +43,13 @@ const RegistrationMW = ({ isRegMWOpen, setRegMWOpen }) => {
                             required: true,
                         })}
                     />
-                     <input
-                        placeholder='name'    
+                    <input
+                        placeholder='name'
                         {...register('name', {
                             required: true,
                         })}
                     />
-                     <input
+                    <input
                         placeholder='surname'
                         {...register('surname', {
                             required: true,

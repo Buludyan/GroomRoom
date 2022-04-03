@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import RegistrationMW from '../modalWindow/registrationMW/RegistrationMW';
-import { Axios } from "../axios/axiosCofing";
+import { login } from '../store/AuthSlice';
 
 const Login = () => {
+
+    const dispatch = useDispatch();
 
     const [isRegMWOpen, setRegMWOpen] = useState(false);
 
@@ -17,10 +20,8 @@ const Login = () => {
 
     const onSubmit = async (data) => {
         try {
-            console.log(JSON.stringify(data));
             reset()
-            const res = await Axios.post('/auth/login', data)
-            console.log(res.data)
+            dispatch(login(data))
         } catch(e) {
             console.log(e)
         }

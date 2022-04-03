@@ -27,7 +27,7 @@ const columnsController = {
             clientId: clientId
         })
 
-        //data.save();
+        data.save();
 
     }
 }

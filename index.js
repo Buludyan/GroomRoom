@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 const { columnsController } = require('./controllers/columnsController');
 
-
 const app = express();
 const WSServer = require('express-ws')(app);
 const aWss = WSServer.getWss();
