@@ -6,6 +6,8 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Button, IconButton } from '@mui/material';
 import { socketSend } from '../../../helpers/socketSend';
+import { authState } from '../../../store/AuthSlice';
+
 
 
 const onButtonMove = (columns, dispatch, setColumns, dir, socket, clientId) => {
@@ -80,7 +82,12 @@ const onNextTask = (columns, dispatch, setColumns, socket, clientId) => {
 const MoveButtons = () => {
 
   const dispatch = useDispatch();
-  const { columns, socket, clientId } = useSelector(columnsState);
+  const { user } = useSelector(authState);
+  const { columns, socket, clientId, adminId } = useSelector(columnsState);
+
+  console.log(user.id, adminId)
+
+  if(user.id !== adminId) return (<div></div>)
 
   return (
     <div className={styles.buttons}>
@@ -92,7 +99,7 @@ const MoveButtons = () => {
       <Button
         onClick={() => onNextTask(columns, dispatch, setColumns, socket, clientId)}
         variant='contained'
-        sx={{backgroundColor: '#7D53DE'}}
+        sx={{ backgroundColor: '#7D53DE' }}
       >
         Next task
       </Button>

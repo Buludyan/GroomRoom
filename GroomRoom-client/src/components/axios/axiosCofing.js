@@ -13,7 +13,7 @@ Axios.interceptors.request.use((config) => {
     return config;
 })
 
-Axios.interceptors.request.use((config) => {
+Axios.interceptors.response.use((config) => {
     return config;
 },async (error) => {
     const originalRequest = error.config;

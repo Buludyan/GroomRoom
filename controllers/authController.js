@@ -1,4 +1,3 @@
-const bcrypt = require('bcryptjs');
 const ApiError = require('../exceptions/apiError');
 const authService = require('../service/authService');
 const { validationResult } = require('express-validator');

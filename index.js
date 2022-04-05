@@ -4,7 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const errorMiddleware = require('./middlewares/errorMiddleware');
-const { columnsController } = require('./controllers/columnsController');
+const roomController = require('./controllers/roomController');
 
 const app = express();
 const WSServer = require('express-ws')(app);
@@ -18,6 +18,7 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use('/auth', require('./routes/auth.route'));
+app.use('/room', require('./routes/room.route'));
 app.use(errorMiddleware);
 
 app.ws('/', (ws, req) => {
@@ -25,16 +26,31 @@ app.ws('/', (ws, req) => {
         msg = JSON.parse(msg)
         switch (msg.method) {
             case 'connection':
-                const columns = await columnsController.getColumns(msg.id);
-                connectionHandler(ws, columns, 'connection', msg.id);
+                const room = await roomController.connectRoom(msg.id);
+                connectionHandler(ws, room, 'connection', msg.id);
                 break
             case 'broadcast':
-                await columnsController.setColumns(msg.columns, msg.clientId);
-                broadcastConnection(ws, msg.columns, 'broadcast', msg.clientId);
+                await roomController.setColumns(msg.columns, msg.id);
+                broadcastConnection(ws, msg.columns, 'broadcast', msg.id);
                 break
         }
     })
 });
+
+
+const connectionHandler = (ws, columns, method, id) => {
+    ws.id = id
+    broadcastConnection(ws, columns, method, id)
+}
+
+const broadcastConnection = (ws, columns, method, id) => {
+    aWss.clients.forEach(client => {
+        if (client.id === id) {
+            const msg = { method: method, columns: columns, id: id }
+            client.send(JSON.stringify(msg));
+        }
+    })
+}
 
 async function start() {
     try {
@@ -51,18 +67,5 @@ async function start() {
     }
 }
 
-const connectionHandler = (ws, columns, method, id) => {
-    ws.id = id
-    broadcastConnection(ws, columns, method, id)
-}
-
-const broadcastConnection = (ws, columns, method, id) => {
-    aWss.clients.forEach(client => {
-        if (client.id === id) {
-            const msg = { method: method, columns: columns, id: id }
-            client.send(JSON.stringify(msg));
-        }
-    })
-}
 
 start();

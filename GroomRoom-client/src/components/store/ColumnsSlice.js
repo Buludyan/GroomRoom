@@ -1,23 +1,24 @@
-import { v4 as uuid } from 'uuid';
+//import { v4 as uuid } from 'uuid';
 import { createSlice } from "@reduxjs/toolkit";
 //import { Axios } from "../axios/axiosCofing";
 
 const initialState = {
     columns: {
-        [uuid()]: {
+        '1': {
             name: "To do",
             items: []
         },
-        [uuid()]: {
+        '2': {
             name: "In Progress",
             items: []
         },
-        [uuid()]: {
+        '3': {
             name: "Done",
             items: []
         }
     },
     socket: null,
+    adminId: null,
     clientId: null,
     isMobile: false,
     isLeftOpen: {
@@ -48,6 +49,9 @@ export const columnsSlice = createSlice({
         },
         setClientId: (state, action) => {
             state.clientId = action.payload;
+        },
+        setAdminId: (state, action) => {
+            state.adminId = action.payload;
         },
         setColumns: (state, action) => {
             state.columns = { ...action.payload };
@@ -80,7 +84,8 @@ export const {
     setIsMobile,
     setNewTask,
     setSocket,
-    setClientId
+    setClientId,
+    setAdminId
 } = columnsSlice.actions;
 
 export const columnsState = (state) => state.columns;

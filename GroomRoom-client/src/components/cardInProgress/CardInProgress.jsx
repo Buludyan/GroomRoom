@@ -6,8 +6,8 @@ const CardInProgress = ({ provided, item }) => {
     <div
       className={styles.cardInProgress}
       ref={provided.innerRef}
-    {...provided.draggableProps}
-    {...provided.dragHandleProps}
+    //{...provided.draggableProps}
+    //{...provided.dragHandleProps}
     >
       <h1>
         {item.content}

@@ -2,11 +2,13 @@ import React from 'react';
 import Column from './Column/Column';
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { columnsState, setClientId, setColumns, setSocket } from '../store/ColumnsSlice';
+import { columnsState, setAdminId, setClientId, setColumns, setSocket } from '../store/ColumnsSlice';
 import { useEffect } from 'react';
 import { socketSend } from '../helpers/socketSend';
 import { useParams } from 'react-router-dom';
 import { AddEditMW } from '../modalWindow/addEditMW/AddEditMW';
+import { roomService } from '../DAL/roomService';
+
 
 
 
@@ -19,6 +21,17 @@ const Columns = () => {
 
     const { columns, socket, clientId } = useSelector(columnsState);
 
+    useEffect(() => {
+        async function fetchData() {
+            const isRoom = await roomService.isRoom(params.id);
+            if(!isRoom.data) {
+                window.location.href = `http://localhost:3000`;
+            } 
+        }
+        fetchData();
+    }, [params.id])
+
+    
     useEffect(() => {
         const socket = new WebSocket(`ws://localhost:6060/`);
         dispatch(setSocket(socket));
@@ -33,8 +46,9 @@ const Columns = () => {
             let msg = JSON.parse(event.data)
             switch (msg.method) {
                 case "connection":
-                    if(msg.columns) {
+                    if (msg.columns) {
                         const data = { '1': msg.columns[1], '2': msg.columns[2], '3': msg.columns[3] };
+                        dispatch(setAdminId(msg.columns.adminId))
                         dispatch(setClientId(msg.id))
                         dispatch(setColumns(data));
                     }

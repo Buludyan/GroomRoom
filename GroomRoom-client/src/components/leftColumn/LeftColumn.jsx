@@ -34,7 +34,7 @@ const LeftColumn = ({ provided, snapshot, column, name }) => {
     >
       {isMobile &&
         <IconButton
-          onClick={() => dispatch(onCloseMobLeft())}
+          onClick={onCloseMobLeft}
           className={styles.mobCloseButton}
         >
           <CancelOutlinedIcon

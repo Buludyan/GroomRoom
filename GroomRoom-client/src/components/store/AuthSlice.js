@@ -58,7 +58,6 @@ export const checkAuth = createAsyncThunk(
     async function (_, { dispatch }) {
         try {
             const response = await axios.get(`http://localhost:6060/auth/refresh`, { withCredentials: true })
-            console.log(response);
             localStorage.setItem('token', response.data.accessToken);
             dispatch(setAuth(true));
             dispatch(setUser(response.data.user));

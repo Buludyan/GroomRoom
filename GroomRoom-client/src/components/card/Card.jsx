@@ -12,7 +12,7 @@ import { socketSend } from '../helpers/socketSend';
 const Card = ({ provided, snapshot, column, item }) => {
 
     const dispatch = useDispatch();
-    const { columns, socket } = useSelector(columnsState);
+    const { columns, socket, clientId } = useSelector(columnsState);
 
     const onItemDelete = () => {
         const todoId = Object.entries(columns).filter(column => column[1].name === 'To do')[0][0];
@@ -31,7 +31,7 @@ const Card = ({ provided, snapshot, column, item }) => {
         }
         
         dispatch(setColumns(updatedColumns));
-        socketSend(socket, updatedColumns);
+        socketSend(socket, updatedColumns, clientId);
     }
 
     const onItemEdit = () => {

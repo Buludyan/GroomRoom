@@ -4,7 +4,8 @@ const schema = new Schema({
     "1": { name: String, items: [Object] },
     "2": {name: String, items: [Object] },
     "3": {name: String, items: [Object] },
-    "clientId": {type: String, required: true}
+    "adminId": {type: String, required: true},
+    "roomId": {type: String, required: true},
 })
 
-module.exports = model('Colmun', schema);
+module.exports = model('Room', schema);
