@@ -1,6 +1,4 @@
-//import { v4 as uuid } from 'uuid';
 import { createSlice } from "@reduxjs/toolkit";
-//import { Axios } from "../axios/axiosCofing";
 
 const initialState = {
     columns: {
@@ -22,9 +20,7 @@ const initialState = {
     clientId: null,
     isMobile: false,
     isLeftOpen: true,
-    isToDoneOpen: true,
-    isMobLeftOpen: false,
-    isMobToDoneOpen: false,
+    isRightOpen: true,
 };
 
 
@@ -48,17 +44,11 @@ export const columnsSlice = createSlice({
         setIsMobile: (state, action) => {
             state.isMobile = action.payload;
         },
-        setIsMobLeftOpen: (state, action) => {
-            state.isMobLeftOpen = !state.isMobLeftOpen;
-        },
-        setIsMobToDoneOpen: (state, action) => {
-            state.isMobToDoneOpen = !state.isMobToDoneOpen;
-        },
         setLeftOpen: (state, action) => {
             state.isLeftOpen = !state.isLeftOpen;
         },
-        setToDoneOpen: (state, action) => {
-            state.isToDoneOpen = !state.isToDoneOpen;
+        setRightOpen: (state, action) => {
+            state.isRightOpen = !state.isRightOpen;
         },
     },
 });
@@ -66,9 +56,7 @@ export const columnsSlice = createSlice({
 export const {
     setColumns,
     setLeftOpen,
-    setToDoneOpen,
-    setIsMobLeftOpen,
-    setIsMobToDoneOpen,
+    setRightOpen,
     setIsMobile,
     setNewTask,
     setSocket,

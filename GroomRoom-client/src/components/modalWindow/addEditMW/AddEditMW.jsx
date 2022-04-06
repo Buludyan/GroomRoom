@@ -15,7 +15,7 @@ export const AddEditMW = () => {
     
     const dispatch = useDispatch();
     const { user } = useSelector(authState);
-    const { columns, socket, clientId } = useSelector(columnsState);
+    const { columns, socket } = useSelector(columnsState);
     const { isActive, name, description, source, id, columnName } = useSelector(addEditModalState);
 
     const [inputData, setInputData] = useState({
@@ -106,7 +106,7 @@ export const AddEditMW = () => {
         }
 
         dispatch(setColumns(updatedColumns));
-        socketSend(socket, updatedColumns, clientId);
+        socketSend(socket, updatedColumns, user.id);
     }
 
     return (

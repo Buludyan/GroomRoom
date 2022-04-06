@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './MoveButtons.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { columnsState, setColumns } from '../../../store/ColumnsSlice';
+import { columnsState, setColumns } from '../../../../store/ColumnsSlice';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Button, IconButton } from '@mui/material';
-import { socketSend } from '../../../helpers/socketSend';
-import { authState } from '../../../store/AuthSlice';
+import { socketSend } from '../../../../helpers/socketSend';
+import { authState } from '../../../../store/AuthSlice';
 
 
 
@@ -41,7 +41,6 @@ const onButtonMove = (columns, dispatch, setColumns, dir, socket, clientId) => {
 
 
 const onNextTask = (columns, dispatch, setColumns, socket, clientId) => {
-  console.log(columns)
   const keys = Object.entries(columns).map(el => el[0]);
   const toDoColumn = columns[keys[0]];
   const inProgressColumn = columns[keys[1]];
@@ -85,7 +84,6 @@ const MoveButtons = () => {
   const { user } = useSelector(authState);
   const { columns, socket, clientId, adminId } = useSelector(columnsState);
 
-  console.log(user.id, adminId)
 
   if(user.id !== adminId) return (<div></div>);
 

@@ -1,0 +1,13 @@
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.column::-webkit-scrollbar {     
+    display: none 
+}

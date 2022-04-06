@@ -1,5 +1,4 @@
 import React from 'react';
-import Column from './Column/Column';
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { columnsState, setAdminId, setClientId, setColumns, setSocket } from '../store/ColumnsSlice';
@@ -8,14 +7,13 @@ import { socketSend } from '../helpers/socketSend';
 import { useParams } from 'react-router-dom';
 import { AddEditMW } from '../modalWindow/addEditMW/AddEditMW';
 import { roomService } from '../DAL/roomService';
+import ColumnSeparator from './columnSeparator/ColumnSeparator';
 
 
-const Columns = () => {
+const Room = () => {
 
     const params = useParams();
-
     const dispatch = useDispatch();
-
     const { columns, socket, clientId } = useSelector(columnsState);
 
     useEffect(() => {
@@ -169,7 +167,7 @@ const Columns = () => {
                                 <Droppable droppableId={columnId} key={columnId}>
                                     {(provided, snapshot) => {
                                         return (
-                                            <Column
+                                            <ColumnSeparator
                                                 name={column.name}
                                                 provided={provided}
                                                 snapshot={snapshot}
@@ -188,4 +186,4 @@ const Columns = () => {
     );
 }
 
-export default Columns
+export default Room;

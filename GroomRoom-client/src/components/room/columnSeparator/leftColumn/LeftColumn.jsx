@@ -1,11 +1,12 @@
 import React from 'react';
-import ToDoColumn from '../columnType/toDoColumn/ToDoColumn';
 import { useDispatch, useSelector } from 'react-redux';
-import { columnsState, setLeftOpen } from "../store/ColumnsSlice";
+import { columnsState, setLeftOpen } from "../../../store/ColumnsSlice";
 import styles from './LeftColumn.module.scss'
-import { IconButton } from "@mui/material";
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
-
+import TodoList from './todoList/TodoList';
+import { setIsActiveAdd } from '../../../store/AddEditMWSlice';
+import { IconButton, Typography } from "@mui/material";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const LeftColumn = ({ provided, snapshot, column, name }) => {
 
@@ -15,14 +16,17 @@ const LeftColumn = ({ provided, snapshot, column, name }) => {
 
   const cls = [styles.column];
 
-  //cls.length = 1;
-
   if (!isLeftOpen) cls.push(styles.close);
   if (isLeftOpen && isMobile) cls[1] = styles.active;
 
   return (
     <div
       className={cls.join(' ')}
+      style={{
+        background: snapshot.isDraggingOver
+          ? "lightblue"
+          : "#D1F5FF",
+      }}
     >
       {isMobile &&
         <IconButton
@@ -36,14 +40,27 @@ const LeftColumn = ({ provided, snapshot, column, name }) => {
           />
         </IconButton>
       }
-
-      <ToDoColumn
+      <Typography
+        sx={{
+          fontWeight: 700,
+          fontSize: 30,
+          pb: 2,
+        }}
+      >
+        {name}
+      </Typography>
+      <IconButton
+        className={styles.addButton}
+        onClick={() => dispatch(setIsActiveAdd())}
+      >
+        <AddCircleOutlineIcon
+          sx={{ fontSize: 35 }}
+        />
+      </IconButton>
+      <TodoList
         provided={provided}
-        snapshot={snapshot}
         column={column}
-        name={name}
       />
-
     </div>
   )
 }

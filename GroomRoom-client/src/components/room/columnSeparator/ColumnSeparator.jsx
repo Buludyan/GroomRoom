@@ -1,10 +1,10 @@
 import React from 'react';
-import DoneColumn from '../../columnType/doneColumn/DoneColumn';
-import InProgressColumn from '../../columnType/inProgressColumn/InProgressColumn';
-import LeftColumn from '../../leftColumn/LeftColumn';
+import InProgress from './InProgress/InProgress';
+import LeftColumn from './leftColumn/LeftColumn';
+import RightColumn from './rightColumn/RightColumn';
 
 
-const Column = ({ provided,
+const ColumnSeparator = ({ provided,
   snapshot,
   column,
   name
@@ -13,7 +13,7 @@ const Column = ({ provided,
   return (
     <div>
       {column.name === 'In Progress' ?
-        <InProgressColumn
+        <InProgress
           provided={provided}
           snapshot={snapshot}
           column={column}
@@ -27,7 +27,7 @@ const Column = ({ provided,
             name={name}
           />
           :
-          <DoneColumn
+          <RightColumn
             provided={provided}
             snapshot={snapshot}
             column={column}
@@ -38,4 +38,4 @@ const Column = ({ provided,
   )
 }
 
-export default Column;
+export default ColumnSeparator;

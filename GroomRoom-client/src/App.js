@@ -1,17 +1,31 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import Columns from './components/columns/Columns';
+
 import Login from './components/login/Login';
 import ProfilePage from './components/profilePage/ProfilePage';
+import Room from './components/room/Room';
 import { authState, checkAuth } from './components/store/AuthSlice';
+import { setIsMobile } from './components/store/ColumnsSlice';
 
 
 function App() {
 
   const dispatch = useDispatch();
-  const { isAuth } = useSelector(authState)
+  const { isAuth } = useSelector(authState);
+
+  const checkIsMobile = useCallback(() => {
+    if (window.innerWidth <= 960) {
+      dispatch(setIsMobile(true));
+    } else {
+      dispatch(setIsMobile(false));
+    }
+  }, [dispatch])
+
+  useEffect(() => checkIsMobile, [checkIsMobile]);
+
+  window.addEventListener('resize', checkIsMobile);
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -19,7 +33,7 @@ function App() {
     }
   }, [dispatch])
 
-  if(!isAuth) {
+  if (!isAuth) {
     return (
       <Login />
     )
@@ -28,7 +42,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/:id' element={<Columns />} />
+        <Route path='/:id' element={<Room />} />
         <Route path='/' element={<ProfilePage />} />
       </Routes>
     </>
