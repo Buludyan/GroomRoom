@@ -87,7 +87,7 @@ const MoveButtons = () => {
 
   console.log(user.id, adminId)
 
-  if(user.id !== adminId) return (<div></div>)
+  if(user.id !== adminId) return (<div></div>);
 
   return (
     <div className={styles.buttons}>

@@ -13,7 +13,7 @@ import { IconButton, Typography } from "@mui/material";
 import CancelIcon from '@mui/icons-material/Cancel';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import MoveButtons from "./moveButtons/MoveButtons";
-import LeftNavBar from "../../leftColumn/leftNavBar/LeftNavBar";
+import LeftOpenCloseBtn from "../../leftColumn/leftOpenCloseBtn/LeftOpenCloseBtn";
 
 const InProgressColumn = ({
     provided,
@@ -61,7 +61,7 @@ const InProgressColumn = ({
             }}
         >
             <div className={styles.header}>
-                <LeftNavBar />
+                <LeftOpenCloseBtn />
                 <Typography
                     className={styles.columnName}
                     sx={{

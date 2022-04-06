@@ -21,23 +21,11 @@ const initialState = {
     adminId: null,
     clientId: null,
     isMobile: false,
-    isLeftOpen: {
-        status: true,
-        source: 'todos'
-    },
+    isLeftOpen: true,
     isToDoneOpen: true,
     isMobLeftOpen: false,
     isMobToDoneOpen: false,
 };
-
-
-/*export const getTasks = createAsyncThunk(
-    'columns/getTasks',
-    async function () {
-        const data = Axios.get('column/task/all')
-        return data;
-    }
-)*/
 
 
 export const columnsSlice = createSlice({
@@ -67,7 +55,7 @@ export const columnsSlice = createSlice({
             state.isMobToDoneOpen = !state.isMobToDoneOpen;
         },
         setLeftOpen: (state, action) => {
-            state.isLeftOpen = { ...action.payload };
+            state.isLeftOpen = !state.isLeftOpen;
         },
         setToDoneOpen: (state, action) => {
             state.isToDoneOpen = !state.isToDoneOpen;

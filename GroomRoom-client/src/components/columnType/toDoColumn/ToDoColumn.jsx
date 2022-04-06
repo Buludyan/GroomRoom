@@ -7,9 +7,6 @@ import { setIsActiveAdd } from '../../store/AddEditMWSlice';
 import { IconButton, Typography } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-
-
-
 const ToDoColumn = ({
     provided,
     snapshot,

@@ -17,16 +17,8 @@ const LeftColumn = ({ provided, snapshot, column, name }) => {
 
   //cls.length = 1;
 
-  if (!isLeftOpen.status) cls.push(styles.close);
-  if (isLeftOpen.status && isMobile) cls[1] = styles.active;
-
-  const onCloseMobLeft = () => {
-    const udtLeft = {
-      ...isLeftOpen,
-      status: false,
-  }
-    dispatch(setLeftOpen(udtLeft));
-  }
+  if (!isLeftOpen) cls.push(styles.close);
+  if (isLeftOpen && isMobile) cls[1] = styles.active;
 
   return (
     <div
@@ -34,7 +26,7 @@ const LeftColumn = ({ provided, snapshot, column, name }) => {
     >
       {isMobile &&
         <IconButton
-          onClick={onCloseMobLeft}
+          onClick={() => dispatch(setLeftOpen())}
           className={styles.mobCloseButton}
         >
           <CancelOutlinedIcon
@@ -44,39 +36,14 @@ const LeftColumn = ({ provided, snapshot, column, name }) => {
           />
         </IconButton>
       }
-      {
-        isLeftOpen.source === 'todos' ?
-          <ToDoColumn
-            provided={provided}
-            snapshot={snapshot}
-            column={column}
-            name={name}
-          />
-          : isLeftOpen.source === 'menu' ?
-            <h1
-              style={{
-                backgroundColor: '#D1F5FF',
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                justifyContent: 'center'
-              }}
-            >
-              Menu
-            </h1>
-            :
-            <h1
-              style={{
-                backgroundColor: '#D1F5FF',
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                justifyContent: 'center'
-              }}
-            >
-              Users
-            </h1>
-      }
+
+      <ToDoColumn
+        provided={provided}
+        snapshot={snapshot}
+        column={column}
+        name={name}
+      />
+
     </div>
   )
 }

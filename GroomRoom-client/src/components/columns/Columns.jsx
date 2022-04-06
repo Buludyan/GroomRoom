@@ -10,9 +10,6 @@ import { AddEditMW } from '../modalWindow/addEditMW/AddEditMW';
 import { roomService } from '../DAL/roomService';
 
 
-
-
-
 const Columns = () => {
 
     const params = useParams();
