@@ -1,4 +1,4 @@
-import { Axios } from "../axios/axiosCofing";
+import { Axios } from "../axiosCofing";
 
 export const roomService = {
     async isRoom(roomId) {

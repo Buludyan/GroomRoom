@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { roomService } from '../DAL/roomService';
+import { roomService } from '../axios/service/roomService';
 import { authState, logout } from '../store/AuthSlice';
 
 const ProfilePage = () => {

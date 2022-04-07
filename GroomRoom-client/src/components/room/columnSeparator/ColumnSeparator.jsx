@@ -4,11 +4,7 @@ import LeftColumn from './leftColumn/LeftColumn';
 import RightColumn from './rightColumn/RightColumn';
 
 
-const ColumnSeparator = ({ provided,
-  snapshot,
-  column,
-  name
-}) => {
+const ColumnSeparator = ({ provided, snapshot, column, name }) => {
 
   return (
     <div>

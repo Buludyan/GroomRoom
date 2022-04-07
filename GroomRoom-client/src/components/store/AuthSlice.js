@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { authService } from "../DAL/authService";
+import { authService } from "../axios/service/authService";
 
 const initialState = {
     user: {},

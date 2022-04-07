@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './CardInProgress.module.scss'
+import styles from './InProgressCard.module.scss'
 
-const CardInProgress = ({ provided, item }) => {
+const InProgressCard = ({ provided, item }) => {
   return (
     <div
       className={styles.cardInProgress}
@@ -28,4 +28,4 @@ const CardInProgress = ({ provided, item }) => {
   )
 }
 
-export default CardInProgress;
+export default InProgressCard;

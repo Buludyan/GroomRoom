@@ -1,7 +1,7 @@
 import { Draggable } from "react-beautiful-dnd";
 import React from 'react';
 import styles from './InProgress.module.scss';
-import CardInProgress from '../../../cardInProgress/CardInProgress';
+import InProgressCard from '../../../cards/inProgressCard/InProgressCard';
 import { useSelector } from "react-redux";
 import { columnsState } from "../../../store/ColumnsSlice";
 //import { Typography } from "@mui/material";
@@ -31,7 +31,7 @@ const InProgress = ({
                     ? "lightblue"
                     : "#fff",
                 right: isLeftOpen && isMobile && '-100%',
-                left:  isRightOpen && isMobile && '-100%'
+                left: isRightOpen && isMobile && '-100%'
             }}
         >
             <div className={styles.header}>
@@ -49,7 +49,7 @@ const InProgress = ({
                     >
                         {(provided, snapshot) => {
                             if (column.items.length > 0) {
-                                return <CardInProgress
+                                return <InProgressCard
                                     provided={provided}
                                     snapshot={snapshot}
                                     column={column}

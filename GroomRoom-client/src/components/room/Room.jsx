@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { socketSend } from '../helpers/socketSend';
 import { useParams } from 'react-router-dom';
 import { AddEditMW } from '../modalWindow/addEditMW/AddEditMW';
-import { roomService } from '../DAL/roomService';
+import { roomService } from '../axios/service/roomService';
 import ColumnSeparator from './columnSeparator/ColumnSeparator';
 
 

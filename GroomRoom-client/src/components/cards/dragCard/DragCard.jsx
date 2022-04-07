@@ -1,15 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { columnsState, setColumns } from '../store/ColumnsSlice';
-import styles from './Card.module.scss';
-import { setIsActiveEdit } from '../store/AddEditMWSlice';
+import { columnsState, setColumns } from '../../store/ColumnsSlice';
+import styles from './DragCard.module.scss';
+import { setIsActiveEdit } from '../../store/AddEditMWSlice';
 import { IconButton, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import LinkIcon from '@mui/icons-material/Link';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { socketSend } from '../helpers/socketSend';
+import { socketSend } from '../../helpers/socketSend';
 
-const Card = ({ provided, snapshot, column, item }) => {
+const DragCard = ({ provided, snapshot, column, item }) => {
 
     const dispatch = useDispatch();
     const { columns, socket, clientId } = useSelector(columnsState);
@@ -104,4 +104,4 @@ const Card = ({ provided, snapshot, column, item }) => {
     )
 }
 
-export default Card
+export default DragCard

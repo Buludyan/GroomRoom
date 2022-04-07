@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './DoneList.module.scss'
 import { Draggable } from "react-beautiful-dnd";
-import Card from '../../../../card/Card';
+import DragCard from '../../../../cards/dragCard/DragCard';
 
 const DoneList = ({ provided, column }) => {
 
@@ -20,7 +20,7 @@ const DoneList = ({ provided, column }) => {
                     >
                         {(provided, snapshot) => {
                             return (
-                                <Card
+                                <DragCard
                                     provided={provided}
                                     snapshot={snapshot}
                                     column={column}
