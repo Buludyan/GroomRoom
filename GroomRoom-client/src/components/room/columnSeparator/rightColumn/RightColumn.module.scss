@@ -1,7 +1,9 @@
+@import '../../../styles/variables.scss';
+
 .column {
     display: flex;
     flex-direction: column;
-    background-color: #D1F5FF;
+    background: $column-background-color;
     align-items: center;
     padding: 4;
     height: 100vh;

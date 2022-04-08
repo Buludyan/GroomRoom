@@ -12,18 +12,6 @@
   border-radius: 5px;
 }
 
-.inProgress {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  min-width: 918px;
-  padding: 16px;
-  margin: 0 0 8px 0;
-  color: white;
-  border-radius: 5px;
-}
-
 .card {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -32,13 +20,14 @@
   width: 80%;
   padding: 16px;
   margin: 0 0 8px 0;
-  color: white;
+  color: #000;
   border-radius: 5px;
+  background: #fff;
 }
 
 .link {
   position: relative;
-  left: 83%;
+  left: 87%;
   text-decoration: none;
 }
 
@@ -74,6 +63,6 @@
           align-items: center;
   font-size: 15px;
   height: 12px;
-  width: 90px;
+  width: 70px;
 }
-/*# sourceMappingURL=Card.module.css.map */
+/*# sourceMappingURL=DragCard.module.css.map */

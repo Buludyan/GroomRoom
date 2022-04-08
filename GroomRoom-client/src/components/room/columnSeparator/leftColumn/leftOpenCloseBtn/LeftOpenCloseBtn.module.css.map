@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "AAAA,AAAA,IAAI,CAAC;EACD,QAAQ,EAAE,QAAQ;EAClB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,KAAK,EAAE,CAAC;EACR,UAAU,EAAE,gBAAgB;CAC/B",
     "sources": [
-        "LeftNavBar.module.scss"
+        "LeftOpenCloseBtn.module.scss"
     ],
     "names": [],
-    "file": "LeftNavBar.module.css"
+    "file": "LeftOpenCloseBtn.module.css"
 }

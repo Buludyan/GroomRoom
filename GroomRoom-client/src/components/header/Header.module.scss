@@ -1,0 +1,23 @@
+@import '../styles/variables.scss';
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 63px;
+    bottom: 0;
+    background-color: $header-background-color;
+}
+
+.icon { 
+    position: absolute;
+    right: 15px;
+}
+
+
+@media screen and (max-width: 960px) {
+    .header {
+        display: none;
+    }
+}

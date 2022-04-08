@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-
+import Header from './components/header/Header';
 import Login from './components/login/Login';
 import ProfilePage from './components/profilePage/ProfilePage';
 import Room from './components/room/Room';
@@ -41,10 +41,14 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path='/:id' element={<Room />} />
-        <Route path='/' element={<ProfilePage />} />
-      </Routes>
+      <div className='app'>
+        <Header />
+        <Routes>
+          <Route path='/:id' element={<Room />} />
+          <Route path='/' element={<ProfilePage />} />
+        </Routes>
+      </div>
+
     </>
   )
 }

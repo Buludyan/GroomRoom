@@ -26,18 +26,13 @@
 }
 
 .column.close {
-  -webkit-transform: translateX(-20vw);
-          transform: translateX(-20vw);
-}
-
-.addButton {
-  position: relative;
-  bottom: 15px;
+  -webkit-transform: translateX(20vw);
+          transform: translateX(20vw);
 }
 
 .mobCloseButton {
   position: relative;
-  left: 45%;
+  right: 45%;
   top: 2%;
 }
 
@@ -53,7 +48,7 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    left: -200%;
+    right: -200%;
     opacity: 1;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
@@ -61,11 +56,11 @@
   .column.active {
     position: absolute;
     background: #D1F5FF;
-    left: 0;
+    right: 0;
     height: 100%;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     z-index: 1;
   }
 }
-/*# sourceMappingURL=LeftColumn.module.css.map */
+/*# sourceMappingURL=RightColumn.module.css.map */

@@ -4,9 +4,8 @@ import { columnsState, setLeftOpen } from "../../../store/ColumnsSlice";
 import styles from './LeftColumn.module.scss'
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import TodoList from './todoList/TodoList';
-import { setIsActiveAdd } from '../../../store/AddEditMWSlice';
+import NavBtns from './navBtns/NavBtns';
 import { IconButton, Typography } from "@mui/material";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const LeftColumn = ({ provided, snapshot, column, name }) => {
 
@@ -23,9 +22,7 @@ const LeftColumn = ({ provided, snapshot, column, name }) => {
     <div
       className={cls.join(' ')}
       style={{
-        background: snapshot.isDraggingOver
-          ? "lightblue"
-          : "#D1F5FF",
+        background: snapshot.isDraggingOver && "lightblue"
       }}
     >
       {isMobile &&
@@ -41,22 +38,13 @@ const LeftColumn = ({ provided, snapshot, column, name }) => {
         </IconButton>
       }
       <Typography
-        sx={{
-          fontWeight: 700,
-          fontSize: 30,
-          pb: 2,
-        }}
+        variant='h4'
       >
         {name}
       </Typography>
-      <IconButton
-        className={styles.addButton}
-        onClick={() => dispatch(setIsActiveAdd())}
-      >
-        <AddCircleOutlineIcon
-          sx={{ fontSize: 35 }}
-        />
-      </IconButton>
+      <div className={styles.nav}>
+        <NavBtns />
+      </div>
       <TodoList
         provided={provided}
         column={column}

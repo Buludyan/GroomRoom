@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import styles from './RegistrationMW.module.scss';
 import { registration } from '../../store/AuthSlice';
+import { Button, TextField } from '@mui/material';
 
 const RegistrationMW = ({ isRegMWOpen, setRegMWOpen }) => {
 
@@ -30,32 +31,36 @@ const RegistrationMW = ({ isRegMWOpen, setRegMWOpen }) => {
                     className={styles.form}
                     onSubmit={handleSubmit(onSubmit)}
                 >
-                    <input
-                        placeholder='email'
+                    <TextField
+                        label='Email'
                         {...register('email', {
                             required: true,
                         })}
                     />
-                    <input
-                        placeholder='password'
+                    <br/>
+                    <TextField
+                        label='Password'
                         type="password"
                         {...register('password', {
                             required: true,
                         })}
                     />
-                    <input
-                        placeholder='name'
+                    <br/>
+                    <TextField
+                        label='Name'
                         {...register('name', {
                             required: true,
                         })}
                     />
-                    <input
-                        placeholder='surname'
+                    <br/>
+                    <TextField
+                        label='Surname'
                         {...register('surname', {
                             required: true,
                         })}
                     />
-                    <button type='submit'>Registration</button>
+                    <br/>
+                    <Button variant='contained' type='submit'>Registration</Button>
                 </form>
             </div>
         </div>

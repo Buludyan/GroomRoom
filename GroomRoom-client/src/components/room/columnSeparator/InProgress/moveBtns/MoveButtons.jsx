@@ -85,27 +85,32 @@ const MoveButtons = () => {
   const { columns, socket, clientId, adminId } = useSelector(columnsState);
 
 
-  if(user.id !== adminId) return (<div></div>);
+  if (user.id !== adminId) return (<div></div>);
 
   return (
     <div className={styles.buttons}>
-      <IconButton
+      <Button
+        style={{ padding: '0', width: '140px', height: '30px' }}
+        variant='contained'
         onClick={() => onButtonMove(columns, dispatch, setColumns, 'todo', socket, clientId)}
       >
-        <ArrowBackIosNewIcon />
-      </IconButton>
+        Move to Todo
+      </Button>
       <Button
+        style={{ padding: '0', width: '100px', height: '30px' }}
         onClick={() => onNextTask(columns, dispatch, setColumns, socket, clientId)}
         variant='contained'
         sx={{ backgroundColor: '#7D53DE' }}
       >
         Next task
       </Button>
-      <IconButton
+      <Button
+        style={{ padding: '0', width: '140px', height: '30px' }}
+        variant='contained'
         onClick={() => onButtonMove(columns, dispatch, setColumns, 'todone', socket, clientId)}
       >
-        <ArrowForwardIosIcon />
-      </IconButton>
+        Move to Done
+      </Button>
     </div>
   )
 }

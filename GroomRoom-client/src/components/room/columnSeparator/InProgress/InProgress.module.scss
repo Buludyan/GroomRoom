@@ -16,6 +16,24 @@
     width: 100%;
 }
 
+.cardPlaceholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 40%;
+    border-radius: 10px;
+    background-color: #ddd;
+}
+
+.users {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 30%;
+    border: 1px solid black;
+}
 
 
 @media screen and (max-width: 960px) {

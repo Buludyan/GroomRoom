@@ -6,16 +6,12 @@ import { v4 as uuid } from 'uuid';
 import { addEditModalState, setIsActiveAdd } from '../../store/AddEditMWSlice';
 import { Button, TextField } from '@mui/material';
 import { socketSend } from '../../helpers/socketSend';
-import { authState } from '../../store/AuthSlice';
-
-
 
 
 export const AddEditMW = () => {
     
     const dispatch = useDispatch();
-    const { user } = useSelector(authState);
-    const { columns, socket } = useSelector(columnsState);
+    const { columns, socket, clientId } = useSelector(columnsState);
     const { isActive, name, description, source, id, columnName } = useSelector(addEditModalState);
 
     const [inputData, setInputData] = useState({
@@ -32,7 +28,7 @@ export const AddEditMW = () => {
     useEffect(() => setEditInputData({
         taskName: name,
         taskDes: description
-    }), [source])
+    }), [source, name, description])
 
     const onChange = (event) => {
         setInputData({
@@ -70,7 +66,7 @@ export const AddEditMW = () => {
         }
 
         dispatch(setColumns(updatedColumns));
-        socketSend(socket, updatedColumns, user.id);
+        socketSend(socket, updatedColumns, clientId);
 
         setInputData({
             taskName: '',
@@ -106,7 +102,7 @@ export const AddEditMW = () => {
         }
 
         dispatch(setColumns(updatedColumns));
-        socketSend(socket, updatedColumns, user.id);
+        socketSend(socket, updatedColumns, clientId);
     }
 
     return (

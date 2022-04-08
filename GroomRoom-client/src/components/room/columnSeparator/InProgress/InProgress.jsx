@@ -10,13 +10,14 @@ import { columnsState } from "../../../store/ColumnsSlice";
 import MoveButtons from "./moveBtns/MoveButtons";
 import LeftOpenCloseBtn from "../leftColumn/leftOpenCloseBtn/LeftOpenCloseBtn";
 import RightOpenCloseBtn from "../rightColumn/rightOpenCloseBtn/RightOpenCloseBtn";
+import { Typography } from "@mui/material";
 
 
 const InProgress = ({
     provided,
     snapshot,
     column,
-    name
+
 }) => {
 
     const { isMobile, isLeftOpen, isRightOpen } = useSelector(columnsState)
@@ -38,8 +39,6 @@ const InProgress = ({
                 <LeftOpenCloseBtn />
                 <RightOpenCloseBtn />
             </div>
-
-            <MoveButtons />
             {column.items.map((item, index) => {
                 return (
                     <Draggable
@@ -60,6 +59,19 @@ const InProgress = ({
                     </Draggable>
                 );
             })}
+            {!column.items.length &&
+                <div className={styles.cardPlaceholder}>
+                    {snapshot.isDraggingOver &&
+                        <Typography variant='h4'>
+                            Drop card here
+                        </Typography>}
+                </div>}
+            <div className={styles.users}>
+
+            </div>
+
+            <MoveButtons />
+
             {provided.placeholder}
         </div>
     )

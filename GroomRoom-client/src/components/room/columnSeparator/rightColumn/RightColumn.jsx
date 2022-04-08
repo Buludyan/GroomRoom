@@ -22,9 +22,7 @@ const RightColumn = ({ provided, snapshot, column, name }) => {
         <div
             className={cls.join(' ')}
             style={{
-                background: snapshot.isDraggingOver
-                    ? "lightblue"
-                    : "#D1F5FF",
+                background: snapshot.isDraggingOver && "lightblue"
             }}
         >
             {isMobile &&
@@ -38,11 +36,7 @@ const RightColumn = ({ provided, snapshot, column, name }) => {
                 </IconButton>
             }
             <Typography
-                sx={{
-                    fontWeight: 700,
-                    fontSize: 30,
-                    pb: 2,
-                }}
+                variant='h4'
             >
                 {name}
             </Typography>

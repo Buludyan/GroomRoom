@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Room.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { columnsState, setAdminId, setClientId, setColumns, setSocket } from '../store/ColumnsSlice';
@@ -19,14 +20,14 @@ const Room = () => {
     useEffect(() => {
         async function fetchData() {
             const isRoom = await roomService.isRoom(params.id);
-            if(!isRoom.data) {
+            if (!isRoom.data) {
                 window.location.href = `http://localhost:3000`;
-            } 
+            }
         }
         fetchData();
     }, [params.id])
 
-    
+
     useEffect(() => {
         const socket = new WebSocket(`ws://localhost:6060/`);
         dispatch(setSocket(socket));
@@ -152,35 +153,36 @@ const Room = () => {
     }
 
 
-
     return (
-        <div className='app'>
-            <DragDropContext
-                onDragEnd={result => onDragEnd(result)}
-            >
-                {Object.entries(columns).map(([columnId, column]) => {
-                    return (
-                        <div className='main'
-                            key={columnId}
-                        >
-                            <div>
-                                <Droppable droppableId={columnId} key={columnId}>
-                                    {(provided, snapshot) => {
-                                        return (
-                                            <ColumnSeparator
-                                                name={column.name}
-                                                provided={provided}
-                                                snapshot={snapshot}
-                                                column={column}
-                                            />
-                                        );
-                                    }}
-                                </Droppable>
+        <div className={styles.room}>
+            <div className={styles.columns}>
+                <DragDropContext
+                    onDragEnd={result => onDragEnd(result)}
+                >
+                    {Object.entries(columns).map(([columnId, column]) => {
+                        return (
+                            <div className='main'
+                                key={columnId}
+                            >
+                                <div>
+                                    <Droppable droppableId={columnId} key={columnId}>
+                                        {(provided, snapshot) => {
+                                            return (
+                                                <ColumnSeparator
+                                                    name={column.name}
+                                                    provided={provided}
+                                                    snapshot={snapshot}
+                                                    column={column}
+                                                />
+                                            );
+                                        }}
+                                    </Droppable>
+                                </div>
                             </div>
-                        </div>
-                    );
-                })}
-            </DragDropContext>
+                        );
+                    })}
+                </DragDropContext>
+            </div>
             <AddEditMW />
         </div>
     );

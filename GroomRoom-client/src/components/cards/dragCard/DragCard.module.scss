@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .draggingCard {
     user-select: none;
     max-width: 85%;
@@ -9,29 +11,21 @@
     border-radius: 5px;
 }
 
-.inProgress {
-    user-select: none;
-    min-width: 918px;
-    padding: 16px;
-    margin: 0 0 8px 0;
-    color: white;
-    border-radius: 5px;
-}
-
 
 .card {
     user-select: none;
     width: 80%;
     padding: 16px;
     margin: 0 0 8px 0;
-    color: white;
+    color: #000;
     border-radius: 5px;
+    background: $dragCard-bacgrond-color;
 }
 
 
 .link {
     position: relative;
-    left: 83%;
+    left: 87%;
     text-decoration: none;
 }
 
@@ -49,5 +43,5 @@
     align-items: center;
     font-size: 15px;
     height: 12px;
-    width: 90px;
+    width: 70px;
 }

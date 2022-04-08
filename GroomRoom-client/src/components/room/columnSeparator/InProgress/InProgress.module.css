@@ -29,20 +29,9 @@
   width: 100%;
 }
 
-.doneButton {
-  position: relative;
-  left: 0vw;
-  -webkit-transition: all .22s ease-in;
-  transition: all .22s ease-in;
-}
-
-.doneButton.doneClose {
-  left: 19.9vw;
-}
-
 @media screen and (max-width: 960px) {
   .column {
     width: 100vw;
   }
 }
-/*# sourceMappingURL=InProgressColumn.module.css.map */
+/*# sourceMappingURL=InProgress.module.css.map */

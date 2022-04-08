@@ -4,9 +4,9 @@ import { columnsState, setColumns } from '../../store/ColumnsSlice';
 import styles from './DragCard.module.scss';
 import { setIsActiveEdit } from '../../store/AddEditMWSlice';
 import { IconButton, Typography } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import LinkIcon from '@mui/icons-material/Link';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { socketSend } from '../../helpers/socketSend';
 
 const DragCard = ({ provided, snapshot, column, item }) => {
@@ -29,17 +29,17 @@ const DragCard = ({ provided, snapshot, column, item }) => {
                 items: items
             },
         }
-        
+
         dispatch(setColumns(updatedColumns));
         socketSend(socket, updatedColumns, clientId);
     }
 
     const onItemEdit = () => {
         dispatch(setIsActiveEdit({
-            columnName: column.name, 
-            name: item.content, 
-            description: item.description, 
-            id: item.id 
+            columnName: column.name,
+            name: item.content,
+            description: item.description,
+            id: item.id
         }))
     }
 
@@ -51,16 +51,13 @@ const DragCard = ({ provided, snapshot, column, item }) => {
             {...provided.dragHandleProps}
             className={
                 snapshot.isDragging ?
-                    styles.draggingCard :
-                    column.name === 'In Progress' ?
-                        styles.inProgress :
-                        styles.card
+                    styles.draggingCard
+                    :
+                    styles.card
             }
             style={{
                 ...provided.draggableProps.style,
-                backgroundColor: snapshot.isDragging
-                    ? "#263B4A"
-                    : "#456C86",
+                backgroundColor: snapshot.isDragging && "#263B4A"
             }}
         >
             <div className={styles.cardHeader}>
@@ -71,18 +68,18 @@ const DragCard = ({ provided, snapshot, column, item }) => {
                     {item.content}
                 </Typography>
                 <div className={styles.buttons}>
-                    <IconButton 
+                    <IconButton
                         onClick={() => onItemEdit()}
                     >
-                        <EditIcon  
-                            sx={{color: '#fff'}}
+                        <EditOutlinedIcon
+                            sx={{ color: '#000' }}
                         />
                     </IconButton>
                     <IconButton
                         onClick={() => onItemDelete()}
                     >
-                        <DeleteIcon 
-                            sx={{color: '#fff'}}
+                        <DeleteOutlinedIcon
+                            sx={{ color: '#000' }}
                         />
                     </IconButton>
                 </div>
@@ -99,7 +96,6 @@ const DragCard = ({ provided, snapshot, column, item }) => {
                 <LinkIcon
                 />
             </IconButton>
-
         </div>
     )
 }
