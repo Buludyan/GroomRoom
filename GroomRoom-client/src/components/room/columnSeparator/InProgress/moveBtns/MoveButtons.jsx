@@ -2,9 +2,7 @@ import React from 'react';
 import styles from './MoveButtons.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { columnsState, setColumns } from '../../../../store/ColumnsSlice';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Button, IconButton } from '@mui/material';
+import { Button } from '@mui/material';
 import { socketSend } from '../../../../helpers/socketSend';
 import { authState } from '../../../../store/AuthSlice';
 

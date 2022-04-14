@@ -15,7 +15,9 @@ const initialState = {
             items: []
         }
     },
+    users: [],
     socket: null,
+    roomId: null,
     adminId: null,
     clientId: null,
     isMobile: false,
@@ -37,8 +39,16 @@ export const columnsSlice = createSlice({
         setAdminId: (state, action) => {
             state.adminId = action.payload;
         },
+        setRoomId: (state, action) => {
+            state.roomId = action.payload;
+        },
         setColumns: (state, action) => {
             state.columns = { ...action.payload };
+
+        },
+        setUsers: (state, action) => {
+            console.log(action.payload)
+            state.users = [ ...action.payload ];
 
         },
         setIsMobile: (state, action) => {
@@ -61,7 +71,9 @@ export const {
     setNewTask,
     setSocket,
     setClientId,
-    setAdminId
+    setAdminId,
+    setRoomId,
+    setUsers
 } = columnsSlice.actions;
 
 export const columnsState = (state) => state.columns;

@@ -26,15 +26,28 @@ class RoomController {
         await roomService.deleteRoom(roomId);
     }
 
-    async connectRoom(id) {
+    async connectRoom(id, user) {
         const room = await roomService.findRoom(id);
+        if (user.id && user.id !== room.adminId) {
+            room.users.push(user)
+            await room.save();
+        }
 
+        
         return room;
     }
 
-    async setColumns(data, roomId) {
+    async updateRoom(data, roomId) {
         const updatedRoom = { '1': data[1], '2': data[2], '3': data[3] };
         await Room.updateOne({ roomId }, { $set: updatedRoom });
+    }
+
+    async closeRoom(roomId, user) {
+        const room = await roomService.findRoom(roomId);
+        room.users = room.users.filter(us => us.id !== user.id);
+        await room.save();
+
+        return room.users;
     }
 }
 

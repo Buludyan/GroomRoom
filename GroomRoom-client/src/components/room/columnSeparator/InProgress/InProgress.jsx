@@ -11,6 +11,7 @@ import MoveButtons from "./moveBtns/MoveButtons";
 import LeftOpenCloseBtn from "../leftColumn/leftOpenCloseBtn/LeftOpenCloseBtn";
 import RightOpenCloseBtn from "../rightColumn/rightOpenCloseBtn/RightOpenCloseBtn";
 import { Typography } from "@mui/material";
+import UserCard from "./userCard/UserCard";
 
 
 const InProgress = ({
@@ -20,7 +21,7 @@ const InProgress = ({
 
 }) => {
 
-    const { isMobile, isLeftOpen, isRightOpen } = useSelector(columnsState)
+    const { isMobile, isLeftOpen, isRightOpen, users } = useSelector(columnsState)
 
     return (
         <div
@@ -67,7 +68,13 @@ const InProgress = ({
                         </Typography>}
                 </div>}
             <div className={styles.users}>
-
+                {users.length && users.map(((user, idx) => {
+                    return (
+                        <UserCard
+                            key={idx}
+                            email={user.email}
+                        />)
+                }))}
             </div>
 
             <MoveButtons />

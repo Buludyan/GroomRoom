@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import RegistrationMW from '../modalWindow/registrationMW/RegistrationMW';
 import { login } from '../store/AuthSlice';
-import { Button, Divider, Paper, TextField, Typography } from '@mui/material';
+import { Button, Divider, Paper, TextField } from '@mui/material';
 
 const Login = () => {
 

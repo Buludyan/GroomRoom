@@ -34,19 +34,6 @@ class RoomService {
 
         return data;
     }
-
-    async getColumns() {
-
-    }
-
-    async defineRole() {
-
-    }
-
-    async updateColuns(payload) {
-
-    }
-
 }
 
 module.exports = new RoomService();

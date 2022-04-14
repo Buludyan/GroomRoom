@@ -3,7 +3,8 @@ import styles from './RightOpenCloseBtn.module.scss'
 import { IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { columnsState, setRightOpen } from '../../../../store/ColumnsSlice';
-import BallotIcon from '@mui/icons-material/Ballot';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
 const RightOpenCloseBtn = () => {
 
@@ -19,7 +20,11 @@ const RightOpenCloseBtn = () => {
             <IconButton
                 onClick={() => dispatch(setRightOpen())}
             >
-                <BallotIcon />
+                {isRightOpen ?
+                    <KeyboardDoubleArrowRightIcon />
+                    :
+                    <KeyboardDoubleArrowLeftIcon />
+                }
             </IconButton>
         </div>
     )

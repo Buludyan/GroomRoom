@@ -2,20 +2,39 @@ import React from 'react';
 import styles from './Room.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { columnsState, setAdminId, setClientId, setColumns, setSocket } from '../store/ColumnsSlice';
+import { columnsState, setAdminId, setClientId, setColumns, setRoomId, setSocket, setUsers } from '../store/ColumnsSlice';
 import { useEffect } from 'react';
 import { socketSend } from '../helpers/socketSend';
 import { useParams } from 'react-router-dom';
 import { AddEditMW } from '../modalWindow/addEditMW/AddEditMW';
 import { roomService } from '../axios/service/roomService';
 import ColumnSeparator from './columnSeparator/ColumnSeparator';
+import { authState } from '../store/AuthSlice';
+import { setWsHeartbeat } from "ws-heartbeat/client";
+
 
 
 const Room = () => {
 
     const params = useParams();
     const dispatch = useDispatch();
+    const { user } = useSelector(authState);
     const { columns, socket, clientId } = useSelector(columnsState);
+
+    /*useEffect(() => {
+        window.onunload = () => {
+            console.log(11111111111111111)
+            return (
+                socket.send(JSON.stringify({
+                    method: "close",
+                    user,
+                    roomId: params.id,
+                    id: clientId
+                }))
+            )
+        };
+    }, [socket, user, columns, params.id, clientId])*/
+
 
     useEffect(() => {
         async function fetchData() {
@@ -27,14 +46,20 @@ const Room = () => {
         fetchData();
     }, [params.id])
 
-
     useEffect(() => {
         const socket = new WebSocket(`ws://localhost:6060/`);
+
+        setWsHeartbeat(socket, '{"kind":"ping"}', {
+            pingTimeout: 60000, // in 60 seconds, if no message accepted from server, close the connection.
+            pingInterval: 10000, // every 10 seconds, send a ping message to the server.
+        });
+
         dispatch(setSocket(socket));
         socket.onopen = () => {
-            socket.send(JSON.stringify({
+            user.id && socket.send(JSON.stringify({
                 id: params.id,
-                method: "connection"
+                method: "connection",
+                user
             }))
         }
 
@@ -42,21 +67,26 @@ const Room = () => {
             let msg = JSON.parse(event.data)
             switch (msg.method) {
                 case "connection":
-                    if (msg.columns) {
-                        const data = { '1': msg.columns[1], '2': msg.columns[2], '3': msg.columns[3] };
-                        dispatch(setAdminId(msg.columns.adminId))
-                        dispatch(setClientId(msg.id))
+                    if (msg.data) {
+                        const data = { '1': msg.data[1], '2': msg.data[2], '3': msg.data[3] };
                         dispatch(setColumns(data));
+                        dispatch(setRoomId(msg.data.roomId));
+                        dispatch(setAdminId(msg.data.adminId));
+                        dispatch(setClientId(msg.id));
+                        dispatch(setUsers(msg.data.users));
+                        console.log(msg.data)
                     }
                     break
                 case "broadcast":
-                    dispatch(setColumns(msg.columns))
+                    dispatch(setColumns(msg.data))
+                    break
+                case "close":
+                    dispatch(setUsers(msg.data));
                     break
                 default: return;
             }
-
         }
-    }, [dispatch, params.id]);
+    }, [dispatch, params.id, user]);
 
 
 

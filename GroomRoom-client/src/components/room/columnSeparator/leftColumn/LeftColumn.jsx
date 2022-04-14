@@ -5,7 +5,7 @@ import styles from './LeftColumn.module.scss'
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import TodoList from './todoList/TodoList';
 import NavBtns from './navBtns/NavBtns';
-import { IconButton, Typography } from "@mui/material";
+import { Divider, IconButton, Typography } from "@mui/material";
 
 const LeftColumn = ({ provided, snapshot, column, name }) => {
 
@@ -45,6 +45,7 @@ const LeftColumn = ({ provided, snapshot, column, name }) => {
       <div className={styles.nav}>
         <NavBtns />
       </div>
+      <Divider style={{width:'90%', zIndex: '2', marginBottom: '12px'}}/>
       <TodoList
         provided={provided}
         column={column}
