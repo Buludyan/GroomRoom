@@ -31,31 +31,34 @@ app.ws('/', (ws, req) => {
             case 'connection':
                 const { id, user } = msg;
                 const room = await roomController.connectRoom(id, user);
-                connectionHandler(ws, room, 'connection', id);
+                connectionHandler(ws, room, 'connection', id, user);
                 break
             case 'broadcast':
                 await roomController.updateRoom(msg.columns, msg.id);
                 broadcastConnection(ws, msg.columns, 'broadcast', msg.id);
                 break
-            case 'close':
-                const users = await roomController.closeRoom(msg.roomId, msg.user);
-                broadcastConnection(ws, users, 'close', msg.id)
+            //case 'close':
+            //const users = await roomController.closeRoom(msg.roomId, msg.user);
+            //broadcastConnection(ws, users, 'close', msg.id);
         }
-        ws.on('close', () => console.log(1))
     })
+    ws.on('close', async () => { 
+        if (ws.id && ws.user) {
+            //console.log('close', ws.id, ws.user);
+            const users = await roomController.closeRoom(ws.id, ws.user);
+            broadcastConnection(ws, users, 'close', ws.id);
+        }
+    });
 });
 
 
-setWsHeartbeat(aWss, (ws, data, flag) => {
-    console.log(data);
-    if (data === '{"kind":"ping"}') {
-        ws.send('{"kind":"pong"}');
-    }
-}, 15000); // in 15 seconds, if no message accepted from client, close the connection.
 
+process.on('warning', e => console.warn(e.stack));
 
-const connectionHandler = (ws, columns, method, id) => {
-    ws.id = id
+const connectionHandler = (ws, columns, method, id, user, clientId) => {
+    ws.id = id;
+    ws.user = user;
+    ws.clientId = clientId;
     broadcastConnection(ws, columns, method, id)
 }
 
@@ -67,6 +70,12 @@ const broadcastConnection = (ws, data, method, id) => {
         }
     })
 }
+
+setWsHeartbeat(aWss, (ws, data, flag) => {
+    if (data === '{"kind":"ping"}') {
+        ws.send('{"kind":"pong"}');
+    }
+}, 15000); // in 15 seconds, if no message accepted from client, close the connection.
 
 async function start() {
     try {

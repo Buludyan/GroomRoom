@@ -46,13 +46,9 @@ const Room = () => {
         fetchData();
     }, [params.id])
 
+
     useEffect(() => {
         const socket = new WebSocket(`ws://localhost:6060/`);
-
-        setWsHeartbeat(socket, '{"kind":"ping"}', {
-            pingTimeout: 60000, // in 60 seconds, if no message accepted from server, close the connection.
-            pingInterval: 10000, // every 10 seconds, send a ping message to the server.
-        });
 
         dispatch(setSocket(socket));
         socket.onopen = () => {
@@ -61,6 +57,10 @@ const Room = () => {
                 method: "connection",
                 user
             }))
+            user.id && setWsHeartbeat(socket, '{"kind":"ping"}', {
+                pingTimeout: 60000, // in 60 seconds, if no message accepted from server, close the connection.
+                pingInterval: 5000, // every 5 seconds, send a ping message to the server.
+            });
         }
 
         socket.onmessage = (event) => {
@@ -74,18 +74,19 @@ const Room = () => {
                         dispatch(setAdminId(msg.data.adminId));
                         dispatch(setClientId(msg.id));
                         dispatch(setUsers(msg.data.users));
-                        console.log(msg.data)
                     }
                     break
                 case "broadcast":
                     dispatch(setColumns(msg.data))
                     break
                 case "close":
+                    console.log(msg.data)
                     dispatch(setUsers(msg.data));
                     break
                 default: return;
             }
         }
+        socket.onclose = (event) => console.log(event)
     }, [dispatch, params.id, user]);
 
 
@@ -181,7 +182,6 @@ const Room = () => {
         dispatch(setColumns(updatedColumns));
         socketSend(socket, updatedColumns, clientId);
     }
-
 
     return (
         <div className={styles.room}>

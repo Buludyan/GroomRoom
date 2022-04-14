@@ -43,6 +43,7 @@ class RoomController {
     }
 
     async closeRoom(roomId, user) {
+        console.log(user);
         const room = await roomService.findRoom(roomId);
         room.users = room.users.filter(us => us.id !== user.id);
         await room.save();
