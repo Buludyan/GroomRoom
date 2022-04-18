@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Room.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { columnsState, setAdminId, setClientId, setColumns, setRoomId, setSocket, setUsers } from '../store/ColumnsSlice';
+import { columnsState, setAdminId, setClientId, setColumns, setRoomId, setSocket, setUsers, setVotingData } from '../store/ColumnsSlice';
 import { useEffect } from 'react';
 import { socketSend } from '../helpers/socketSend';
 import { useParams } from 'react-router-dom';
@@ -20,21 +20,6 @@ const Room = () => {
     const dispatch = useDispatch();
     const { user } = useSelector(authState);
     const { columns, socket, clientId } = useSelector(columnsState);
-
-    /*useEffect(() => {
-        window.onunload = () => {
-            console.log(11111111111111111)
-            return (
-                socket.send(JSON.stringify({
-                    method: "close",
-                    user,
-                    roomId: params.id,
-                    id: clientId
-                }))
-            )
-        };
-    }, [socket, user, columns, params.id, clientId])*/
-
 
     useEffect(() => {
         async function fetchData() {
@@ -68,12 +53,14 @@ const Room = () => {
             switch (msg.method) {
                 case "connection":
                     if (msg.data) {
+                        console.log(msg.data.votingData)
                         const data = { '1': msg.data[1], '2': msg.data[2], '3': msg.data[3] };
                         dispatch(setColumns(data));
                         dispatch(setRoomId(msg.data.roomId));
                         dispatch(setAdminId(msg.data.adminId));
                         dispatch(setClientId(msg.id));
                         dispatch(setUsers(msg.data.users));
+                        dispatch(setVotingData(msg.data.votingData))
                     }
                     break
                 case "broadcast":
@@ -82,6 +69,10 @@ const Room = () => {
                 case "close":
                     console.log(msg.data)
                     dispatch(setUsers(msg.data));
+                    break
+                case "voting":
+                    console.log(msg.data)
+                    dispatch(setVotingData(msg.data))
                     break
                 default: return;
             }

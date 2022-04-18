@@ -1,6 +1,39 @@
-.user {
-    width: 50px;
-    height: 50px;
-    background-color: blueviolet;
-    margin: 20px;
+.userCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 8%;
+    height: 90%;
+    background-color: #ddd;
+    font-size: 75%;
+    border-radius: 5px;
+    box-shadow: 2px 2px #ccc;
+
+    .name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
+        p {
+            margin: 0;
+        }
+    }
+
+    .valueCard {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        bottom: -37%;
+        width: 45%;
+        height: 40%;
+        background-color: #7AB6E2;
+        border-radius: 3px;
+
+        p {
+            font-size: 30px;
+        }
+    }
 }
+

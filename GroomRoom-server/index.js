@@ -37,14 +37,15 @@ app.ws('/', (ws, req) => {
                 await roomController.updateRoom(msg.columns, msg.id);
                 broadcastConnection(ws, msg.columns, 'broadcast', msg.id);
                 break
-            //case 'close':
-            //const users = await roomController.closeRoom(msg.roomId, msg.user);
-            //broadcastConnection(ws, users, 'close', msg.id);
+            case 'voting':
+                const {userId, roomId, value} = msg;
+                const votingData = await roomController.vote(userId, roomId, value);
+                broadcastConnection(ws, votingData, 'voting', msg.id);
+                break
         }
     })
-    ws.on('close', async () => { 
+    ws.on('close', async () => {
         if (ws.id && ws.user) {
-            //console.log('close', ws.id, ws.user);
             const users = await roomController.closeRoom(ws.id, ws.user);
             broadcastConnection(ws, users, 'close', ws.id);
         }
@@ -65,7 +66,7 @@ const connectionHandler = (ws, columns, method, id, user, clientId) => {
 const broadcastConnection = (ws, data, method, id) => {
     aWss.clients.forEach(client => {
         if (client.id === id) {
-            const msg = { method, data, id }
+            const msg = { method, data, id };
             client.send(JSON.stringify(msg));
         }
     })

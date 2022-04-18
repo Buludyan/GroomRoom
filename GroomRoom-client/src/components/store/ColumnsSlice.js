@@ -16,6 +16,7 @@ const initialState = {
         }
     },
     users: [],
+    votingData: [],
     socket: null,
     roomId: null,
     adminId: null,
@@ -47,8 +48,12 @@ export const columnsSlice = createSlice({
 
         },
         setUsers: (state, action) => {
-            console.log(action.payload)
             state.users = [ ...action.payload ];
+
+        },
+        setVotingData: (state, action) => {
+            console.log(action.payload)
+            state.votingData = [ ...action.payload ];
 
         },
         setIsMobile: (state, action) => {
@@ -73,7 +78,8 @@ export const {
     setClientId,
     setAdminId,
     setRoomId,
-    setUsers
+    setUsers,
+    setVotingData
 } = columnsSlice.actions;
 
 export const columnsState = (state) => state.columns;

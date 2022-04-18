@@ -1,27 +1,36 @@
 import { Draggable } from "react-beautiful-dnd";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './InProgress.module.scss';
 import InProgressCard from '../../../cards/inProgressCard/InProgressCard';
 import { useSelector } from "react-redux";
 import { columnsState } from "../../../store/ColumnsSlice";
-//import { Typography } from "@mui/material";
-//import CancelIcon from '@mui/icons-material/Cancel';
-//import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
-import MoveButtons from "./moveBtns/MoveButtons";
 import LeftOpenCloseBtn from "../leftColumn/leftOpenCloseBtn/LeftOpenCloseBtn";
 import RightOpenCloseBtn from "../rightColumn/rightOpenCloseBtn/RightOpenCloseBtn";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import UserCard from "./userCard/UserCard";
+import VoteCard from "./voteCard/VoteCard";
 
 
-const InProgress = ({
-    provided,
-    snapshot,
-    column,
+const InProgress = ({ provided, snapshot, column }) => {
 
-}) => {
+    const { isMobile, isLeftOpen, isRightOpen, users } = useSelector(columnsState);
 
-    const { isMobile, isLeftOpen, isRightOpen, users } = useSelector(columnsState)
+    const [usersList, setUsersList] = useState({
+        firstRow: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
+        secondRow: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
+    });
+
+    const voteValues = [0.5, 1, 2, 3, 5, 8, 13, 21];
+
+    useEffect(() => {
+        const updatedUsers = [...users];
+        updatedUsers.length = 10;
+        updatedUsers.fill({}, users.length);
+        setUsersList({
+            firstRow: updatedUsers,
+            secondRow: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+        })
+    }, [users])
 
     return (
         <div
@@ -68,17 +77,49 @@ const InProgress = ({
                         </Typography>}
                 </div>}
             <div className={styles.users}>
-                {users.length && users.map(((user, idx) => {
-                    return (
-                        <UserCard
-                            key={idx}
-                            email={user.email}
-                        />)
-                }))}
+                <div className={styles.firstRow}>
+                    {usersList.firstRow.map(((user, idx) => {
+                        return (
+                            <UserCard
+                                key={idx}
+                                user={user}
+                            />)
+                    }))}
+                </div>
+                <div className={styles.secondRow}>
+                    {usersList.secondRow.map(((user, idx) => {
+                        return (
+                            <UserCard
+                                key={idx}
+                                user={user}
+                            />)
+                    }))}
+                </div>
             </div>
-
-            <MoveButtons />
-
+            <div className={styles.voteCards}>
+                {voteValues.map((value, idx) => {
+                    return (
+                        <VoteCard
+                            value={value}
+                            key={idx}
+                        />
+                    )
+                })}
+            </div>
+            <Button
+                variant='contained'
+                sx={{
+                    width: '16%',
+                    height: '6%',
+                    color: 'black',
+                    backgroundColor: '#7AB6E2',
+                    border: '2px solid #797979',
+                    fontSize: '12px'
+                }}
+                className={styles.reveal}
+            >
+                Reveal points
+            </Button>
             {provided.placeholder}
         </div>
     )

@@ -1,4 +1,5 @@
 import React from 'react';
+import MoveButtons from '../../room/columnSeparator/InProgress/moveBtns/MoveButtons';
 import styles from './InProgressCard.module.scss'
 
 const InProgressCard = ({ provided, item }) => {
@@ -9,9 +10,7 @@ const InProgressCard = ({ provided, item }) => {
     //{...provided.draggableProps}
     //{...provided.dragHandleProps}
     >
-      <h1>
-        {item.content}
-      </h1>
+      <MoveButtons name={item.content} />
       <h2>{item.description}</h2>
       <a
         href="https://www.abc.xyz"

@@ -32,13 +32,54 @@
     top: -12px;
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    width: 80%;
-    height: 25%;
-    border: 1px solid black;
+    justify-content: space-between;
+    width: 78%;
+    height: 27%;
+
+    .firstRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        height: 47%;
+    }
+    .secondRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        height: 47%;
+    }
 }
 
+.voteCards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    width: 55%;
+    height: 10%;
+    bottom: 8%;
+}
+
+.reveal {
+    position: absolute;
+    bottom: -10%;
+    right: -40%;
+    background-color: #7AB6E2;
+    border: 2px solid #797979;
+    font-size: 12px;
+}
+
+.reveal:hover {
+    background-color: #797979;
+    color: #fff;
+}
 
 @media screen and (max-width: 960px) {
     .column {

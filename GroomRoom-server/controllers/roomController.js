@@ -28,12 +28,11 @@ class RoomController {
 
     async connectRoom(id, user) {
         const room = await roomService.findRoom(id);
-        if (user.id && user.id !== room.adminId) {
+        if (user.id) {
             room.users.push(user)
             await room.save();
         }
 
-        
         return room;
     }
 
@@ -43,12 +42,25 @@ class RoomController {
     }
 
     async closeRoom(roomId, user) {
-        console.log(user);
         const room = await roomService.findRoom(roomId);
         room.users = room.users.filter(us => us.id !== user.id);
         await room.save();
 
         return room.users;
+    }
+
+    async vote(userId, roomId, value) {
+        const room = await roomService.findRoom(roomId);
+
+        room.votingData.push({
+            userId,
+            value
+        })
+
+        await room.save();
+
+        console.log(room)
+        return room.votingData;
     }
 }
 

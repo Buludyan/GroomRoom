@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './MoveButtons.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { columnsState, setColumns } from '../../../../store/ColumnsSlice';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { socketSend } from '../../../../helpers/socketSend';
 import { authState } from '../../../../store/AuthSlice';
 
@@ -76,7 +76,7 @@ const onNextTask = (columns, dispatch, setColumns, socket, clientId) => {
 
 
 
-const MoveButtons = () => {
+const MoveButtons = ({ name }) => {
 
   const dispatch = useDispatch();
   const { user } = useSelector(authState);
@@ -88,26 +88,27 @@ const MoveButtons = () => {
   return (
     <div className={styles.buttons}>
       <Button
-        style={{ padding: '0', width: '140px', height: '30px' }}
+        style={{ padding: '0', width: '110px', height: '35px' }}
         variant='contained'
         onClick={() => onButtonMove(columns, dispatch, setColumns, 'todo', socket, clientId)}
       >
-        Move to Todo
+        <Typography sx={{color: 'black', fontSize: '10px'}}>Move to ToDo</Typography>
       </Button>
-      <Button
+      <Typography variant='h4' >{name}</Typography>
+      {/*<Button
         style={{ padding: '0', width: '100px', height: '30px' }}
         onClick={() => onNextTask(columns, dispatch, setColumns, socket, clientId)}
         variant='contained'
         sx={{ backgroundColor: '#7D53DE' }}
       >
         Next task
-      </Button>
+      </Button>*/}
       <Button
-        style={{ padding: '0', width: '140px', height: '30px' }}
+        style={{ padding: '0', width: '110px', height: '35px' }}
         variant='contained'
         onClick={() => onButtonMove(columns, dispatch, setColumns, 'todone', socket, clientId)}
       >
-        Move to Done
+        <Typography sx={{color: 'black', fontSize: '10px'}}>Move To Done</Typography>
       </Button>
     </div>
   )
