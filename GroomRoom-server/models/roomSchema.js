@@ -7,7 +7,6 @@ const schema = new Schema({
     "adminId": {type: String, required: true},
     "roomId": {type: String, required: true},
     "users": [Object],
-    "votingData": [Object]
 })
 
 module.exports = model('Room', schema);

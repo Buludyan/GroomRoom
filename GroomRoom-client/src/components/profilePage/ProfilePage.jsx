@@ -10,6 +10,8 @@ const ProfilePage = () => {
     const dispatch = useDispatch();
     const { user } = useSelector(authState);
 
+    console.log(user)
+
     const createRoomHandler = async () => {
         const room = await roomService.createRoom(user.id);
         if(room) window.location.href = `http://localhost:3000/${user.id}`;

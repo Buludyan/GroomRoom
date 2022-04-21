@@ -2,24 +2,36 @@ import { Draggable } from "react-beautiful-dnd";
 import React, { useEffect, useState } from 'react';
 import styles from './InProgress.module.scss';
 import InProgressCard from '../../../cards/inProgressCard/InProgressCard';
-import { useSelector } from "react-redux";
-import { columnsState } from "../../../store/ColumnsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { columnsState, setUsers } from "../../../store/ColumnsSlice";
 import LeftOpenCloseBtn from "../leftColumn/leftOpenCloseBtn/LeftOpenCloseBtn";
 import RightOpenCloseBtn from "../rightColumn/rightOpenCloseBtn/RightOpenCloseBtn";
 import { Button, Typography } from "@mui/material";
 import UserCard from "./userCard/UserCard";
 import VoteCard from "./voteCard/VoteCard";
+import { authState } from "../../../store/AuthSlice";
 
 
 const InProgress = ({ provided, snapshot, column }) => {
 
-    const { isMobile, isLeftOpen, isRightOpen, users } = useSelector(columnsState);
+    const dispatch = useDispatch();
+    const {
+        isMobile,
+        isLeftOpen,
+        isRightOpen,
+        users,
+        socket,
+        clientId,
+        adminId,
+        roomId } = useSelector(columnsState);
+    const { user } = useSelector(authState);
 
     const [usersList, setUsersList] = useState({
         firstRow: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
         secondRow: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
-    });
+    })
 
+    const [isVoted, setVoted] = useState(false)
     const voteValues = [0.5, 1, 2, 3, 5, 8, 13, 21];
 
     useEffect(() => {
@@ -30,7 +42,26 @@ const InProgress = ({ provided, snapshot, column }) => {
             firstRow: updatedUsers,
             secondRow: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
         })
-    }, [users])
+    }, [users]);
+
+    const onVote = (value, state) => {
+        const updatedUsers = [...users];
+        const curUserIdx = updatedUsers.findIndex(us => us.id === user.id);
+        const curUser = { ...updatedUsers[curUserIdx] };
+        curUser.voteState = { value };
+        updatedUsers[curUserIdx] = curUser;
+
+        dispatch(setUsers(updatedUsers));
+
+        socket.send(JSON.stringify({
+            method: 'voting',
+            id: clientId,
+            roomId,
+            updatedUsers,
+        }))
+
+        setVoted(state);
+    }
 
     return (
         <div
@@ -78,48 +109,59 @@ const InProgress = ({ provided, snapshot, column }) => {
                 </div>}
             <div className={styles.users}>
                 <div className={styles.firstRow}>
-                    {usersList.firstRow.map(((user, idx) => {
+                    {usersList.firstRow.map(((cardUser, idx) => {
                         return (
                             <UserCard
                                 key={idx}
-                                user={user}
+                                cardUser={cardUser}
                             />)
                     }))}
                 </div>
                 <div className={styles.secondRow}>
-                    {usersList.secondRow.map(((user, idx) => {
+                    {usersList.secondRow.map(((cardUser, idx) => {
                         return (
                             <UserCard
                                 key={idx}
-                                user={user}
+                                cardUser={cardUser}
                             />)
                     }))}
                 </div>
             </div>
-            <div className={styles.voteCards}>
-                {voteValues.map((value, idx) => {
-                    return (
-                        <VoteCard
-                            value={value}
-                            key={idx}
-                        />
-                    )
-                })}
-            </div>
-            <Button
-                variant='contained'
-                sx={{
-                    width: '16%',
-                    height: '6%',
-                    color: 'black',
-                    backgroundColor: '#7AB6E2',
-                    border: '2px solid #797979',
-                    fontSize: '12px'
-                }}
-                className={styles.reveal}
-            >
-                Reveal points
-            </Button>
+            {isVoted ?
+                <div className={styles.revote}>
+                    <Button
+                        variant="contained"
+                        onClick={() => onVote(0, false)}
+                    >
+                        Revote
+                    </Button>
+                </div>
+
+                :
+                <div className={styles.voteCards}>
+                    {voteValues.map((value, idx) => {
+                        return (
+                            <VoteCard
+                                onVote={onVote}
+                                value={value}
+                                key={idx}
+                            />
+                        )
+                    })}
+                </div>
+            }
+            {
+                user.id === adminId &&
+                <div
+                    className={styles.reveal}
+                >
+                    <Button
+                        variant='contained'
+                    >
+                        Reveal points
+                    </Button>
+                </div>
+            }
             {provided.placeholder}
         </div>
     )

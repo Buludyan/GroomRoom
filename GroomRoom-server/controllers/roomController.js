@@ -49,18 +49,14 @@ class RoomController {
         return room.users;
     }
 
-    async vote(userId, roomId, value) {
+    async vote(roomId, updatedUsers) {
         const room = await roomService.findRoom(roomId);
 
-        room.votingData.push({
-            userId,
-            value
-        })
-
+        room.users = updatedUsers;
+        //const data = room.votingData.map(voteData => voteData.userId === userId ? voteData : voteData.userId);
         await room.save();
 
-        console.log(room)
-        return room.votingData;
+        return room.users;
     }
 }
 

@@ -28,6 +28,7 @@
     background-color: #ddd;
 }
 
+
 .users {
     top: -12px;
     position: relative;
@@ -56,6 +57,7 @@
     }
 }
 
+
 .voteCards {
     display: flex;
     flex-direction: row;
@@ -68,12 +70,11 @@
 }
 
 .reveal {
-    position: absolute;
-    bottom: -10%;
-    right: -40%;
-    background-color: #7AB6E2;
-    border: 2px solid #797979;
-    font-size: 12px;
+    position: relative;
+    left: 41%;
+    top: 5%;
+
+
 }
 
 .reveal:hover {

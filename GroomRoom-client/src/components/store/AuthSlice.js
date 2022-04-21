@@ -28,7 +28,6 @@ export const registration = createAsyncThunk(
     async function (data, { dispatch }) {
         try {
             const response = await authService.registration(data);
-            console.log(response)
             localStorage.setItem('token', response.data.accessToken);
             dispatch(setAuth(true));
             dispatch(setUser(response.data.user));

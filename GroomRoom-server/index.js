@@ -38,9 +38,9 @@ app.ws('/', (ws, req) => {
                 broadcastConnection(ws, msg.columns, 'broadcast', msg.id);
                 break
             case 'voting':
-                const {userId, roomId, value} = msg;
-                const votingData = await roomController.vote(userId, roomId, value);
-                broadcastConnection(ws, votingData, 'voting', msg.id);
+                const { roomId, updatedUsers, userId } = msg;
+                await roomController.vote(roomId, updatedUsers, userId);
+                broadcastConnection(ws, updatedUsers, 'voting', msg.id);
                 break
         }
     })
