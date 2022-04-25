@@ -1,5 +1,7 @@
 .buttons {
-  width: 100%;
+  position: relative;
+  top: 4%;
+  width: 90%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7,14 +9,21 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  margin: 30px 0 40px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 5%;
 }
 
-@media screen and (max-width: 960px) {
-  .buttons button {
-    margin-bottom: 5px;
-  }
+.buttons button {
+  background-color: #7AB6E2;
+  border: 2px solid #398AC5;
+}
+
+.buttons button:hover {
+  background-color: #398AC5;
 }
 /*# sourceMappingURL=MoveButtons.module.css.map */

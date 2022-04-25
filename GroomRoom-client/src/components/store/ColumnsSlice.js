@@ -21,9 +21,13 @@ const initialState = {
     roomId: null,
     adminId: null,
     clientId: null,
+    isVoted: false,
+    isAllVoted: false,
+    isReveal: false,
     isMobile: false,
     isLeftOpen: true,
     isRightOpen: true,
+    voteValues: [0.5, 1, 2, 3, 5, 8, 13, 21]
 };
 
 
@@ -50,6 +54,15 @@ export const columnsSlice = createSlice({
         setUsers: (state, action) => {
             state.users = [ ...action.payload ];
         },
+        setVoted: (state, action) => {
+            state.isVoted = action.payload;
+        },
+        setAllVoted: (state, action) => {
+            state.isAllVoted = !action.payload;
+        },
+        setReveal: (state, action) => {
+            state.isReveal = action.payload;
+        },
         setIsMobile: (state, action) => {
             state.isMobile = action.payload;
         },
@@ -73,6 +86,9 @@ export const {
     setAdminId,
     setRoomId,
     setUsers,
+    setAllVoted,
+    setReveal,
+    setVoted
 } = columnsSlice.actions;
 
 export const columnsState = (state) => state.columns;

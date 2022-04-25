@@ -52,7 +52,8 @@ export const AddEditMW = () => {
         const newTask = {
             id: uuid(),
             content: inputData.taskName,
-            description: inputData.taskDes
+            description: inputData.taskDes,
+            value: 0
         }
 
         todoItems.unshift(newTask);

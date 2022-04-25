@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACL,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,eAAe,EAAE,UAAU;EAC3B,WAAW,EAAE,MAAM;EACnB,QAAQ,EAAE,QAAQ;CACrB",
+    "sources": [
+        "NavBtns.module.scss"
+    ],
+    "names": [],
+    "file": "NavBtns.module.css"
+}

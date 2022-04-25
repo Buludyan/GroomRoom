@@ -1,15 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { authState } from '../../../../store/AuthSlice';
+import { columnsState } from '../../../../store/ColumnsSlice';
 import styles from './UserCard.module.scss';
 
 const UserCard = ({ cardUser }) => {
 
+  const { isReveal } = useSelector(columnsState);
   const { user } = useSelector(authState);
 
   if (!Object.keys(cardUser).length) {
     return (
-      <div className={styles.userCard}/>
+      <div className={styles.userCard} />
     )
   }
 
@@ -24,7 +26,17 @@ const UserCard = ({ cardUser }) => {
           className={styles.valueCard}
           style={{ visibility: 'visible' }}
         >
-          <p>{cardUser.id !== user.id && cardUser.voteState.value !== 0 ? '?' : cardUser.voteState.value}</p>
+          <p>
+            {
+              isReveal 
+              ? 
+              cardUser.voteState.value
+              :
+              cardUser.id !== user.id && cardUser.voteState.value !== 0 ? '?' 
+              : 
+              cardUser.voteState.value
+            }
+          </p>
         </div>
       }
     </div>

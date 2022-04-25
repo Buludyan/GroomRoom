@@ -23,11 +23,30 @@
     background: $dragCard-bacgrond-color;
 }
 
+.cardFooter {
+    position: relative;
+    width: 100%;    
+    bottom: 23%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #C4C4C4;
+    background-color: #C4C4C4;
+    border-radius: 180px;
+    width: 8%;
+    height: 12%;
+}
 
 .link {
     position: relative;
-    left: 87%;
-    bottom: 20%;
+    right: -4%;
     text-decoration: none;
 }
 

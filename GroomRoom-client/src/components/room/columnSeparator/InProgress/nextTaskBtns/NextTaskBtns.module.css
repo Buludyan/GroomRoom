@@ -1,4 +1,4 @@
-.room {
+.nextTaskBtns {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6,18 +6,16 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 89%;
-  background-color: #fff;
 }
 
-.columns {
+.counter {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -25,12 +23,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: #fff;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
-
-@media screen and (max-width: 960px) {
-  .room {
-    height: 100%;
-  }
-}
-/*# sourceMappingURL=Room.module.css.map */
+/*# sourceMappingURL=NextTaskBtns.module.css.map */

@@ -87,16 +87,27 @@ const DragCard = ({ provided, snapshot, column, item }) => {
             <p style={{ fontSize: '12px' }}>
                 {item.description}
             </p>
-            <IconButton
-                className={styles.link}
-                href="https://www.abc.xyz"
-                target="_blank"
-                rel="noreferrer"
-            >
-                <LinkIcon
-                />
-            </IconButton>
-        </div>
+            <div className={styles.cardFooter}>
+                {column.name === 'Done' ?
+                    <p
+                        className={styles.value}
+                    >
+                        {item.value}
+                    </p>
+                    :
+                    <p></p>
+                }
+                <IconButton
+                    className={styles.link}
+                    href="https://www.abc.xyz"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <LinkIcon
+                    />
+                </IconButton>
+            </div>
+        </div >
     )
 }
 

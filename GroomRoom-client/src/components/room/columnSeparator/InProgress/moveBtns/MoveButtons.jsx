@@ -5,74 +5,8 @@ import { columnsState, setColumns } from '../../../../store/ColumnsSlice';
 import { Button, Typography } from '@mui/material';
 import { socketSend } from '../../../../helpers/socketSend';
 import { authState } from '../../../../store/AuthSlice';
-
-
-
-const onButtonMove = (columns, dispatch, setColumns, dir, socket, clientId) => {
-  const keys = Object.entries(columns).map(el => el[0]);
-  let dirKeys = [];
-  dir === 'todo' ? dirKeys = [keys[1], keys[0]] : dirKeys = [keys[1], keys[2]];
-  const sourceColumn = columns[dirKeys[0]]
-  const destColumn = columns[dirKeys[1]]
-  if (sourceColumn.items.length === 1) {
-    const sourceItems = [...sourceColumn.items];
-    const destItems = [...destColumn.items];
-    destItems.unshift(sourceItems[0]);
-    sourceItems.length = 0;
-
-    const updatedColumns = {
-      ...columns,
-      [dirKeys[0]]: {
-        ...sourceColumn,
-        items: sourceItems
-      },
-      [dirKeys[1]]: {
-        ...destColumn,
-        items: destItems
-      },
-    }
-
-    dispatch(setColumns(updatedColumns));
-    socketSend(socket, updatedColumns, clientId);
-  }
-}
-
-
-const onNextTask = (columns, dispatch, setColumns, socket, clientId) => {
-  const keys = Object.entries(columns).map(el => el[0]);
-  const toDoColumn = columns[keys[0]];
-  const inProgressColumn = columns[keys[1]];
-  const doneColumn = columns[keys[2]];
-  const todoItems = [...toDoColumn.items];
-  if (!todoItems.length) return;
-  const inProgressItems = [...inProgressColumn.items];
-  const doneItems = [...doneColumn.items];
-  if (!inProgressItems.length) {
-    inProgressItems[0] = todoItems.shift();
-  } else {
-    doneItems.unshift(inProgressItems[0]);
-    inProgressItems[0] = todoItems.shift();
-  }
-
-  const updatedColumns = {
-    ...columns,
-    [keys[0]]: {
-      ...toDoColumn,
-      items: todoItems
-    },
-    [keys[1]]: {
-      ...inProgressColumn,
-      items: inProgressItems
-    },
-    [keys[2]]: {
-      ...doneColumn,
-      items: doneItems
-    },
-  }
-
-  dispatch(setColumns(updatedColumns));
-  socketSend(socket, updatedColumns, clientId);
-}
+import { zeroVoteState } from '../../../../helpers/zeroVoteState';
+import { onReveal } from '../../../../helpers/onReveal';
 
 
 
@@ -80,7 +14,38 @@ const MoveButtons = ({ name }) => {
 
   const dispatch = useDispatch();
   const { user } = useSelector(authState);
-  const { columns, socket, clientId, adminId } = useSelector(columnsState);
+  const { columns, socket, clientId, adminId, users, roomId, isReveal } = useSelector(columnsState);
+
+  const onButtonMove = (dir) => {
+    const keys = Object.entries(columns).map(el => el[0]);
+    let dirKeys = [];
+    dir === 'todo' ? dirKeys = [keys[1], keys[0]] : dirKeys = [keys[1], keys[2]];
+    const sourceColumn = columns[dirKeys[0]]
+    const destColumn = columns[dirKeys[1]]
+    if (sourceColumn.items.length === 1) {
+      const sourceItems = [...sourceColumn.items];
+      const destItems = [...destColumn.items];
+      destItems.unshift(sourceItems[0]);
+      sourceItems.length = 0;
+
+      const updatedColumns = {
+        ...columns,
+        [dirKeys[0]]: {
+          ...sourceColumn,
+          items: sourceItems
+        },
+        [dirKeys[1]]: {
+          ...destColumn,
+          items: destItems
+        },
+      }
+
+      isReveal && onReveal(socket, clientId, roomId);
+      zeroVoteState(users, socket, clientId, roomId);
+      dispatch(setColumns(updatedColumns));
+      socketSend(socket, updatedColumns, clientId);
+    }
+  }
 
 
   if (user.id !== adminId) return (<div></div>);
@@ -90,25 +55,17 @@ const MoveButtons = ({ name }) => {
       <Button
         style={{ padding: '0', width: '110px', height: '35px' }}
         variant='contained'
-        onClick={() => onButtonMove(columns, dispatch, setColumns, 'todo', socket, clientId)}
+        onClick={() => onButtonMove('todo')}
       >
-        <Typography sx={{color: 'black', fontSize: '10px'}}>Move to ToDo</Typography>
+        <Typography sx={{ color: 'black', fontSize: '10px' }}>Move to ToDo</Typography>
       </Button>
       <Typography variant='h4' >{name}</Typography>
-      {/*<Button
-        style={{ padding: '0', width: '100px', height: '30px' }}
-        onClick={() => onNextTask(columns, dispatch, setColumns, socket, clientId)}
-        variant='contained'
-        sx={{ backgroundColor: '#7D53DE' }}
-      >
-        Next task
-      </Button>*/}
       <Button
         style={{ padding: '0', width: '110px', height: '35px' }}
         variant='contained'
-        onClick={() => onButtonMove(columns, dispatch, setColumns, 'todone', socket, clientId)}
+        onClick={() => onButtonMove('todone')}
       >
-        <Typography sx={{color: 'black', fontSize: '10px'}}>Move To Done</Typography>
+        <Typography sx={{ color: 'black', fontSize: '10px' }}>Move To Done</Typography>
       </Button>
     </div>
   )

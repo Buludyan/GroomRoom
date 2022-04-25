@@ -42,6 +42,13 @@ app.ws('/', (ws, req) => {
                 await roomController.vote(roomId, updatedUsers, userId);
                 broadcastConnection(ws, updatedUsers, 'voting', msg.id);
                 break
+            case 'revoteAll':
+                broadcastConnection(ws, {}, 'revoteAll', msg.id);
+                break
+            case 'reveal':
+                const isReveal = await roomController.reveal(msg.roomId);
+                broadcastConnection(ws, isReveal, 'reveal', msg.id);
+                break
         }
     })
     ws.on('close', async () => {

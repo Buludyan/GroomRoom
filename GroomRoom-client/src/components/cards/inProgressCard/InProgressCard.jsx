@@ -7,8 +7,8 @@ const InProgressCard = ({ provided, item }) => {
     <div
       className={styles.cardInProgress}
       ref={provided.innerRef}
-    //{...provided.draggableProps}
-    //{...provided.dragHandleProps}
+      //{...provided.draggableProps}
+      //{...provided.dragHandleProps}
     >
       <MoveButtons name={item.content} />
       <h2>{item.description}</h2>

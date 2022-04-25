@@ -3,13 +3,16 @@ import React, { useEffect, useState } from 'react';
 import styles from './InProgress.module.scss';
 import InProgressCard from '../../../cards/inProgressCard/InProgressCard';
 import { useDispatch, useSelector } from "react-redux";
-import { columnsState, setUsers } from "../../../store/ColumnsSlice";
+import { columnsState, setAllVoted, setUsers, setVoted } from "../../../store/ColumnsSlice";
 import LeftOpenCloseBtn from "../leftColumn/leftOpenCloseBtn/LeftOpenCloseBtn";
 import RightOpenCloseBtn from "../rightColumn/rightOpenCloseBtn/RightOpenCloseBtn";
 import { Button, Typography } from "@mui/material";
 import UserCard from "./userCard/UserCard";
 import VoteCard from "./voteCard/VoteCard";
 import { authState } from "../../../store/AuthSlice";
+import NextTaskBtns from "./nextTaskBtns/NextTaskBtns";
+import { onReveal } from "../../../helpers/onReveal";
+import { zeroVoteState } from "../../../helpers/zeroVoteState";
 
 
 const InProgress = ({ provided, snapshot, column }) => {
@@ -23,7 +26,12 @@ const InProgress = ({ provided, snapshot, column }) => {
         socket,
         clientId,
         adminId,
-        roomId } = useSelector(columnsState);
+        roomId,
+        isReveal,
+        isVoted,
+        isAllVoted,
+        voteValues } = useSelector(columnsState);
+
     const { user } = useSelector(authState);
 
     const [usersList, setUsersList] = useState({
@@ -31,10 +39,10 @@ const InProgress = ({ provided, snapshot, column }) => {
         secondRow: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
     })
 
-    const [isVoted, setVoted] = useState(false)
-    const voteValues = [0.5, 1, 2, 3, 5, 8, 13, 21];
-
     useEffect(() => {
+        const check = users.find(user => user.voteState.value === 0 && user.id !== adminId)
+        dispatch(setAllVoted(!!check));
+
         const updatedUsers = [...users];
         updatedUsers.length = 10;
         updatedUsers.fill({}, users.length);
@@ -42,9 +50,10 @@ const InProgress = ({ provided, snapshot, column }) => {
             firstRow: updatedUsers,
             secondRow: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
         })
-    }, [users]);
+    }, [users, adminId, dispatch]);
 
     const onVote = (value, state) => {
+        if (!column.items.length) return;
         const updatedUsers = [...users];
         const curUserIdx = updatedUsers.findIndex(us => us.id === user.id);
         const curUser = { ...updatedUsers[curUserIdx] };
@@ -60,7 +69,12 @@ const InProgress = ({ provided, snapshot, column }) => {
             updatedUsers,
         }))
 
-        setVoted(state);
+        dispatch(setVoted(state));
+    }
+
+    const onRevoteAllHandler = () => {
+        onReveal(socket, clientId, roomId);
+        zeroVoteState(users, socket, clientId, roomId);
     }
 
     return (
@@ -127,40 +141,61 @@ const InProgress = ({ provided, snapshot, column }) => {
                     }))}
                 </div>
             </div>
-            {isVoted ?
-                <div className={styles.revote}>
-                    <Button
-                        variant="contained"
-                        onClick={() => onVote(0, false)}
+            {
+                isReveal ?
+                    user.id === adminId && <div
+                        className={styles.revoteAll}
                     >
-                        Revote
-                    </Button>
-                </div>
-
-                :
-                <div className={styles.voteCards}>
-                    {voteValues.map((value, idx) => {
-                        return (
-                            <VoteCard
-                                onVote={onVote}
-                                value={value}
-                                key={idx}
-                            />
-                        )
-                    })}
-                </div>
+                        <Button
+                            variant="contained"
+                            onClick={onRevoteAllHandler}
+                        >
+                            Revote all
+                        </Button>
+                    </div>
+                    :
+                    isVoted ?
+                        <div className={styles.revote}>
+                            <Button
+                                variant="contained"
+                                onClick={() => onVote(0, false)}
+                            >
+                                Revote
+                            </Button>
+                        </div>
+                        :
+                        <div className={styles.voteCards}>
+                            {voteValues.map((value, idx) => {
+                                return (
+                                    <VoteCard
+                                        onVote={onVote}
+                                        value={value}
+                                        key={idx}
+                                    />
+                                )
+                            })}
+                        </div>
             }
             {
-                user.id === adminId &&
-                <div
-                    className={styles.reveal}
-                >
-                    <Button
-                        variant='contained'
+                isReveal ?
+                    user.id === adminId && <div
+                        className={styles.nextTask}
                     >
-                        Reveal points
-                    </Button>
-                </div>
+                        <NextTaskBtns />
+                    </div>
+                    :
+                    user.id === adminId &&
+                    <div
+                        className={styles.reveal}
+                    >
+                        <Button
+                            disabled={!isAllVoted || !column.items.length}
+                            onClick={() => onReveal(socket, clientId, roomId)}
+                            variant='contained'
+                        >
+                            Reveal points
+                        </Button>
+                    </div>
             }
             {provided.placeholder}
         </div>

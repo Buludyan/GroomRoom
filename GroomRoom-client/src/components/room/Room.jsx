@@ -2,7 +2,16 @@ import React from 'react';
 import styles from './Room.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { columnsState, setAdminId, setClientId, setColumns, setRoomId, setSocket, setUsers } from '../store/ColumnsSlice';
+import { 
+    columnsState, 
+    setAdminId, 
+    setClientId, 
+    setColumns, 
+    setReveal, 
+    setRoomId, 
+    setSocket, 
+    setUsers, 
+    setVoted } from '../store/ColumnsSlice';
 import { useEffect } from 'react';
 import { socketSend } from '../helpers/socketSend';
 import { useParams } from 'react-router-dom';
@@ -11,7 +20,8 @@ import { roomService } from '../axios/service/roomService';
 import ColumnSeparator from './columnSeparator/ColumnSeparator';
 import { authState } from '../store/AuthSlice';
 import { setWsHeartbeat } from "ws-heartbeat/client";
-
+import { onReveal } from '../helpers/onReveal';
+import { zeroVoteState } from '../helpers/zeroVoteState';
 
 
 const Room = () => {
@@ -19,7 +29,7 @@ const Room = () => {
     const params = useParams();
     const dispatch = useDispatch();
     const { user } = useSelector(authState);
-    const { columns, socket, clientId } = useSelector(columnsState);
+    const { columns, socket, clientId, roomId, users, isReveal } = useSelector(columnsState);
 
     useEffect(() => {
         async function fetchData() {
@@ -40,7 +50,7 @@ const Room = () => {
             user.id && socket.send(JSON.stringify({
                 id: params.id,
                 method: "connection",
-                user: { ...user, voteState: { value: 0} }
+                user: { ...user, voteState: { value: 0 } }
             }))
             user.id && setWsHeartbeat(socket, '{"kind":"ping"}', {
                 pingTimeout: 60000, // in 60 seconds, if no message accepted from server, close the connection.
@@ -59,6 +69,7 @@ const Room = () => {
                         dispatch(setAdminId(msg.data.adminId));
                         dispatch(setClientId(msg.id));
                         dispatch(setUsers(msg.data.users));
+                        dispatch(setReveal(msg.data.isReveal))
                     }
                     break
                 case "broadcast":
@@ -68,8 +79,13 @@ const Room = () => {
                     dispatch(setUsers(msg.data));
                     break
                 case "voting":
-                    console.log(msg.data);
                     dispatch(setUsers(msg.data));
+                    break
+                case "revoteAll":
+                    dispatch(setVoted(false));
+                    break
+                case "reveal":
+                    dispatch(setReveal(msg.data));
                     break
                 default: return;
             }
@@ -167,6 +183,8 @@ const Room = () => {
             },
         }
 
+        isReveal && onReveal(socket, clientId, roomId);
+        zeroVoteState(users, socket, clientId, roomId)
         dispatch(setColumns(updatedColumns));
         socketSend(socket, updatedColumns, clientId);
     }
