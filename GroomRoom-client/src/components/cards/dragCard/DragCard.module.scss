@@ -25,7 +25,7 @@
 
 .cardFooter {
     position: relative;
-    width: 100%;    
+    width: 100%;
     bottom: 23%;
     display: flex;
     flex-direction: row;
@@ -34,6 +34,8 @@
 }
 
 .value {
+    position: relative;
+    top: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,6 +48,7 @@
 
 .link {
     position: relative;
+    top: 1vw;
     right: -4%;
     text-decoration: none;
 }
@@ -55,6 +58,34 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.descriptionBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-size: 15px;
+    height: 30%;
+    width: 100%;
+    overflow: hidden;
+
+    .description {
+        width: 40%;
+        word-break: break-all;
+        white-space: pre-wrap;
+    }
+
+    .more {
+        cursor: pointer;
+        position: relative;
+        bottom: -4px;
+        width: 90px;
+        z-index: 50;
+    }
+
+    .more:hover {
+        color: blue;
+    }
 }
 
 .buttons {

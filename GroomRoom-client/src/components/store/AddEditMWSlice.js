@@ -27,10 +27,13 @@ export const addEditMWSlice = createSlice({
             state.description = description;
             state.id = id;
             state.columnName = columnName;
+        },
+        closeEdit: (state, action) => {
+            state.isActive = false;
         }
     }
 })
 
 
-export const { setIsActiveAdd, setIsActiveEdit } = addEditMWSlice.actions;
+export const { setIsActiveAdd, setIsActiveEdit, closeEdit } = addEditMWSlice.actions;
 export const addEditModalState = (state) => state.addEditmodal;

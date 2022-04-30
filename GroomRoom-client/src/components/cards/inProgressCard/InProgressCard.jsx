@@ -1,28 +1,31 @@
+import { IconButton } from '@mui/material';
 import React from 'react';
 import MoveButtons from '../../room/columnSeparator/InProgress/moveBtns/MoveButtons';
-import styles from './InProgressCard.module.scss'
+import styles from './InProgressCard.module.scss';
+import LinkIcon from '@mui/icons-material/Link';
+import { Typography } from '@mui/material';
+
 
 const InProgressCard = ({ provided, item }) => {
   return (
     <div
       className={styles.cardInProgress}
       ref={provided.innerRef}
-      //{...provided.draggableProps}
-      //{...provided.dragHandleProps}
+    //{...provided.draggableProps}
+    //{...provided.dragHandleProps}
     >
-      <MoveButtons name={item.content} />
+      <MoveButtons />
+      <Typography variant='h4' className={styles.name}>{item.content}</Typography>
       <h2>{item.description}</h2>
-      <a
+      <IconButton
+        className={styles.link}
         href="https://www.abc.xyz"
         target="_blank"
         rel="noreferrer"
-        style={{
-          textDecoration: 'none',
-          fontSize: '30px',
-        }}
+        size='large'
       >
-        Link
-      </a>
+        <LinkIcon fontSize='large'/>
+      </IconButton>
     </div>
   )
 }

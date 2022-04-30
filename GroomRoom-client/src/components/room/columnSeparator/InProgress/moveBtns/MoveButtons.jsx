@@ -10,7 +10,7 @@ import { onReveal } from '../../../../helpers/onReveal';
 
 
 
-const MoveButtons = ({ name }) => {
+const MoveButtons = () => {
 
   const dispatch = useDispatch();
   const { user } = useSelector(authState);
@@ -59,7 +59,6 @@ const MoveButtons = ({ name }) => {
       >
         <Typography sx={{ color: 'black', fontSize: '10px' }}>Move to ToDo</Typography>
       </Button>
-      <Typography variant='h4' >{name}</Typography>
       <Button
         style={{ padding: '0', width: '110px', height: '35px' }}
         variant='contained'

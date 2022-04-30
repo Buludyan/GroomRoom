@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { columnsState, setColumns } from '../../store/ColumnsSlice';
 import styles from './AddEditMW.module.scss';
 import { v4 as uuid } from 'uuid';
-import { addEditModalState, setIsActiveAdd } from '../../store/AddEditMWSlice';
+import { addEditModalState, closeEdit, setIsActiveAdd } from '../../store/AddEditMWSlice';
 import { Button, TextField } from '@mui/material';
 import { socketSend } from '../../helpers/socketSend';
 
-
 export const AddEditMW = () => {
-    
+
     const dispatch = useDispatch();
     const { columns, socket, clientId } = useSelector(columnsState);
     const { isActive, name, description, source, id, columnName } = useSelector(addEditModalState);
@@ -24,11 +23,18 @@ export const AddEditMW = () => {
         taskDes: description
     })
 
-
     useEffect(() => setEditInputData({
         taskName: name,
         taskDes: description
     }), [source, name, description])
+
+    const onEditCancel = () => {
+        dispatch(closeEdit());
+        setEditInputData({
+            taskName: name,
+            taskDes: description
+        })
+    }
 
     const onChange = (event) => {
         setInputData({
@@ -66,6 +72,7 @@ export const AddEditMW = () => {
             },
         }
 
+        dispatch(setIsActiveAdd());
         dispatch(setColumns(updatedColumns));
         socketSend(socket, updatedColumns, clientId);
 
@@ -102,6 +109,7 @@ export const AddEditMW = () => {
             },
         }
 
+        dispatch(closeEdit());
         dispatch(setColumns(updatedColumns));
         socketSend(socket, updatedColumns, clientId);
     }
@@ -133,22 +141,26 @@ export const AddEditMW = () => {
                     {
 
                     }
-                    {source === 'Edit' ?
-                        <Button variant='contained' 
-                            sx={{backgroundColor: '#7D53DE'}} 
-                            onClick={() => onTaskEdit()}
-                        >
-                            Edit task
+                    <div className={styles.btns}>
+                        {source === 'Edit' ?
+                            <Button 
+                                variant='contained'
+                                onClick={() => onTaskEdit()}
+                            >
+                                Edit task
+                            </Button>
+                            :
+                            <Button
+                                variant='contained'
+                                onClick={() => onTaskAdd()}
+                            >
+                                Add task
+                            </Button>
+                        }
+                        <Button onClick={onEditCancel}>
+                            Cancel
                         </Button>
-                        :
-                        <Button 
-                            variant='contained' 
-                            onClick={() => onTaskAdd()}
-                            sx={{backgroundColor: '#7D53DE'}}
-                        > 
-                            Add task 
-                        </Button>
-                    }
+                    </div>
                 </div>
             </div>
         </div>

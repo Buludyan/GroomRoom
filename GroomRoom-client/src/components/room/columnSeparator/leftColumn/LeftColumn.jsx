@@ -6,12 +6,14 @@ import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import TodoList from './todoList/TodoList';
 import NavBtns from './navBtns/NavBtns';
 import { Divider, IconButton, Typography } from "@mui/material";
+import { authState } from '../../../store/AuthSlice';
 
 const LeftColumn = ({ provided, snapshot, column, name }) => {
 
 
   const dispatch = useDispatch();
-  const { isLeftOpen, isMobile } = useSelector(columnsState);
+  const { user } = useSelector(authState);
+  const { isLeftOpen, isMobile, adminId } = useSelector(columnsState);
 
   const cls = [styles.column];
 
@@ -43,7 +45,7 @@ const LeftColumn = ({ provided, snapshot, column, name }) => {
         {name}
       </Typography>
       <div className={styles.nav}>
-        <NavBtns />
+        {user.id === adminId && <NavBtns column={column}/>}
       </div>
       <Divider style={{width:'90%', zIndex: '2', marginBottom: '12px'}}/>
       <TodoList

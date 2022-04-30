@@ -1,37 +1,30 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { columnsState, setColumns } from '../../store/ColumnsSlice';
+import { columnsState } from '../../store/ColumnsSlice';
 import styles from './DragCard.module.scss';
 import { setIsActiveEdit } from '../../store/AddEditMWSlice';
 import { IconButton, Typography } from "@mui/material";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import LinkIcon from '@mui/icons-material/Link';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { socketSend } from '../../helpers/socketSend';
+import { authState } from '../../store/AuthSlice';
+import { setActive, setData } from '../../store/DeleteMWSlice';
+import { setDescMWActive, setDescription } from '../../store/DescriptionMWSlice';
 
 const DragCard = ({ provided, snapshot, column, item }) => {
 
     const dispatch = useDispatch();
-    const { columns, socket, clientId } = useSelector(columnsState);
+    const { user } = useSelector(authState);
+    const { adminId } = useSelector(columnsState);
 
-    const onItemDelete = () => {
-        const todoId = Object.entries(columns).filter(column => column[1].name === 'To do')[0][0];
-        const doneId = Object.entries(columns).filter(column => column[1].name === 'Done')[0][0];
+    const onDeleteHandler = () => {
+        dispatch(setData({ column, item }));
+        dispatch(setActive({ isActive: true, isAllActive: false }));
+    }
 
-        const curColumnId = column.name === 'To do' ? todoId : doneId;
-
-        const items = [...column.items].filter(it => it.id !== item.id);
-
-        const updatedColumns = {
-            ...columns,
-            [curColumnId]: {
-                ...column,
-                items: items
-            },
-        }
-
-        dispatch(setColumns(updatedColumns));
-        socketSend(socket, updatedColumns, clientId);
+    const onDescriptionHanler = () => {
+        dispatch(setDescMWActive(true));
+        dispatch(setDescription(item.description));
     }
 
     const onItemEdit = () => {
@@ -42,7 +35,6 @@ const DragCard = ({ provided, snapshot, column, item }) => {
             id: item.id
         }))
     }
-
 
     return (
         <div
@@ -67,26 +59,39 @@ const DragCard = ({ provided, snapshot, column, item }) => {
                 >
                     {item.content}
                 </Typography>
-                <div className={styles.buttons}>
-                    <IconButton
-                        onClick={() => onItemEdit()}
-                    >
-                        <EditOutlinedIcon
-                            sx={{ color: '#000' }}
-                        />
-                    </IconButton>
-                    <IconButton
-                        onClick={() => onItemDelete()}
-                    >
-                        <DeleteOutlinedIcon
-                            sx={{ color: '#000' }}
-                        />
-                    </IconButton>
-                </div>
+                {user.id === adminId &&
+                    <div className={styles.buttons}>
+                        <IconButton
+                            onClick={() => onItemEdit()}
+                        >
+                            <EditOutlinedIcon
+                                sx={{ color: '#000' }}
+                            />
+                        </IconButton>
+                        <IconButton
+                            onClick={onDeleteHandler}
+                        >
+                            <DeleteOutlinedIcon
+                                sx={{ color: '#000' }}
+                            />
+                        </IconButton>
+                    </div>
+                }
             </div>
-            <p style={{ fontSize: '12px' }}>
-                {item.description}
-            </p>
+            <div className={styles.descriptionBlock}>
+                <Typography
+                    className={styles.description}
+                >
+                    {item.description}
+                </Typography>
+                <Typography
+                    variant='p'
+                    className={styles.more}
+                    onClick={onDescriptionHanler}
+                >
+                    ...see more
+                </Typography>
+            </div>
             <div className={styles.cardFooter}>
                 {column.name === 'Done' ?
                     <p
@@ -103,8 +108,7 @@ const DragCard = ({ provided, snapshot, column, item }) => {
                     target="_blank"
                     rel="noreferrer"
                 >
-                    <LinkIcon
-                    />
+                    <LinkIcon />
                 </IconButton>
             </div>
         </div >

@@ -24,7 +24,7 @@ const Header = () => {
 
     return (
         <div className={styles.header}>
-            <Typography variant='h4'>
+            <Typography variant='h5'>
                 GroomRoom
             </Typography>
             <div 
@@ -36,7 +36,7 @@ const Header = () => {
                         sx={{ color: '#000' }}
                     >
                         <AccountCircleIcon
-                            sx={{ fontSize: '40px' }}
+                            sx={{ fontSize: '30px' }}
                         />
                     </IconButton>
 

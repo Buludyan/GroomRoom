@@ -1,4 +1,5 @@
 .userCard {
+    margin: 0 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +8,7 @@
     background-color: #ddd;
     font-size: 75%;
     border-radius: 5px;
-    box-shadow: 2px 2px #ccc;
+    box-shadow: 2px 2px 0px 0px #ccc;
 
     .name {
         display: flex;

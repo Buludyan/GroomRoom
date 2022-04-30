@@ -22,6 +22,8 @@ import { authState } from '../store/AuthSlice';
 import { setWsHeartbeat } from "ws-heartbeat/client";
 import { onReveal } from '../helpers/onReveal';
 import { zeroVoteState } from '../helpers/zeroVoteState';
+import DeleteMW from '../modalWindow/deleteMW/DeleteMW';
+import DescriptionMW from '../modalWindow/descriptionMW/DescriptionMW';
 
 
 const Room = () => {
@@ -92,7 +94,6 @@ const Room = () => {
         }
         socket.onclose = (event) => console.log(event)
     }, [dispatch, params.id, user]);
-
 
 
     const onDragEnd = (result) => {
@@ -220,6 +221,8 @@ const Room = () => {
                 </DragDropContext>
             </div>
             <AddEditMW />
+            <DeleteMW />
+            <DescriptionMW />
         </div>
     );
 }

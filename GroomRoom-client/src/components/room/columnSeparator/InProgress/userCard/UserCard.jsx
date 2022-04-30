@@ -9,12 +9,6 @@ const UserCard = ({ cardUser }) => {
   const { isReveal } = useSelector(columnsState);
   const { user } = useSelector(authState);
 
-  if (!Object.keys(cardUser).length) {
-    return (
-      <div className={styles.userCard} />
-    )
-  }
-
   return (
     <div className={styles.userCard}>
       <div className={styles.name}>

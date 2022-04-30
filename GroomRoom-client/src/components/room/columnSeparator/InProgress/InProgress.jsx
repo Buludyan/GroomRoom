@@ -1,5 +1,5 @@
 import { Draggable } from "react-beautiful-dnd";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './InProgress.module.scss';
 import InProgressCard from '../../../cards/inProgressCard/InProgressCard';
 import { useDispatch, useSelector } from "react-redux";
@@ -34,22 +34,10 @@ const InProgress = ({ provided, snapshot, column }) => {
 
     const { user } = useSelector(authState);
 
-    const [usersList, setUsersList] = useState({
-        firstRow: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
-        secondRow: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
-    })
-
     useEffect(() => {
         const check = users.find(user => user.voteState.value === 0 && user.id !== adminId)
         dispatch(setAllVoted(!!check));
 
-        const updatedUsers = [...users];
-        updatedUsers.length = 10;
-        updatedUsers.fill({}, users.length);
-        setUsersList({
-            firstRow: updatedUsers,
-            secondRow: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
-        })
     }, [users, adminId, dispatch]);
 
     const onVote = (value, state) => {
@@ -123,7 +111,7 @@ const InProgress = ({ provided, snapshot, column }) => {
                 </div>}
             <div className={styles.users}>
                 <div className={styles.firstRow}>
-                    {usersList.firstRow.map(((cardUser, idx) => {
+                    {users.map(((cardUser, idx) => {
                         return (
                             <UserCard
                                 key={idx}
@@ -131,7 +119,7 @@ const InProgress = ({ provided, snapshot, column }) => {
                             />)
                     }))}
                 </div>
-                <div className={styles.secondRow}>
+                {/*<div className={styles.secondRow}>
                     {usersList.secondRow.map(((cardUser, idx) => {
                         return (
                             <UserCard
@@ -139,7 +127,7 @@ const InProgress = ({ provided, snapshot, column }) => {
                                 cardUser={cardUser}
                             />)
                     }))}
-                </div>
+                </div>*/}
             </div>
             {
                 isReveal ?

@@ -7,6 +7,18 @@
     position: relative;
     width: 80%;
     height: 43%;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: #ddd;
+    box-shadow: 0 2px 2px 0px #ccc;
+}
+
+.name {
+    position: relative;
+    top: 4%;
+}
+
+.link {
+    position: relative;
+    bottom: -45%;
+    right: -45%;
 }

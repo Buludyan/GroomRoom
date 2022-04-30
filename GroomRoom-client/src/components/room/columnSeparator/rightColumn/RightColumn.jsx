@@ -7,16 +7,25 @@ import { Divider, IconButton } from '@mui/material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import DoneList from './doneList/DoneList';
 import { Typography } from "@mui/material";
+import { authState } from '../../../store/AuthSlice';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import { setActive, setData } from '../../../store/DeleteMWSlice';
 
 const RightColumn = ({ provided, snapshot, column, name }) => {
 
     const dispatch = useDispatch();
-    const { isRightOpen, isMobile } = useSelector(columnsState);
+    const { user } = useSelector(authState);
+    const { isRightOpen, isMobile, adminId } = useSelector(columnsState);
 
     const cls = [styles.column];
 
     if (!isRightOpen) cls.push(styles.close);
     if (isRightOpen && isMobile) cls[1] = styles.active;
+
+    const onDeleteAllItems = () => {
+        dispatch(setActive({ isActive: true, isAllDelete: true }));
+        dispatch(setData({ column, item: null }));
+    }
 
     return (
         <div
@@ -40,7 +49,23 @@ const RightColumn = ({ provided, snapshot, column, name }) => {
             >
                 {name}
             </Typography>
-            <Divider style={{width:'90%', zIndex: '2', marginTop: '50px', marginBottom: '12px'}} />
+            <div className={styles.nav}>
+                {user.id === adminId &&
+                    <IconButton
+                        onClick={onDeleteAllItems}
+                    >
+                        <DeleteSweepIcon
+                            sx={{ fontSize: 33 }}
+                        />
+                    </IconButton>
+                }
+            </div>
+            <Divider style={{
+                width: '90%',
+                zIndex: '2',
+                marginBottom: '12px'
+            }}
+            />
             <DoneList
                 provided={provided}
                 column={column}

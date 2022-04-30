@@ -12,13 +12,14 @@ const LeftOpenCloseBtn = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className={styles.nav}
+        <div className={styles.button}
             style={{
                 right: !isLeftOpen && !isMobile && '19.9vw'
             }}
         >
             <IconButton
                 onClick={() => dispatch(setLeftOpen())}
+                size='small'
             >
                 {isLeftOpen ?
                     <KeyboardDoubleArrowLeftIcon />
