@@ -2,16 +2,17 @@ import React from 'react';
 import styles from './Room.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { 
-    columnsState, 
-    setAdminId, 
-    setClientId, 
-    setColumns, 
-    setReveal, 
-    setRoomId, 
-    setSocket, 
-    setUsers, 
-    setVoted } from '../store/ColumnsSlice';
+import {
+    columnsState,
+    setAdminId,
+    setClientId,
+    setColumns,
+    setReveal,
+    setRoomId,
+    setSocket,
+    setUsers,
+    setVoted
+} from '../store/ColumnsSlice';
 import { useEffect } from 'react';
 import { socketSend } from '../helpers/socketSend';
 import { useParams } from 'react-router-dom';
@@ -88,6 +89,9 @@ const Room = () => {
                     break
                 case "reveal":
                     dispatch(setReveal(msg.data));
+                    break
+                case "sortUsers":
+                    dispatch(setUsers(msg.data));
                     break
                 default: return;
             }

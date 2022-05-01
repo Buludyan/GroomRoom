@@ -49,6 +49,10 @@ app.ws('/', (ws, req) => {
                 const isReveal = await roomController.reveal(msg.roomId);
                 broadcastConnection(ws, isReveal, 'reveal', msg.id);
                 break
+            case 'sortUsers':
+                await roomController.sortUsers(msg.roomId, msg.sortedUsers);
+                broadcastConnection(ws, msg.sortedUsers, 'sortUsers', msg.id);
+                break
         }
     })
     ws.on('close', async () => {

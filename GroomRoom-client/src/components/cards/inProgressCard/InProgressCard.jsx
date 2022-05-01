@@ -11,12 +11,16 @@ const InProgressCard = ({ provided, item }) => {
     <div
       className={styles.cardInProgress}
       ref={provided.innerRef}
-    //{...provided.draggableProps}
-    //{...provided.dragHandleProps}
+    {...provided.draggableProps}
+    {...provided.dragHandleProps}
     >
       <MoveButtons />
       <Typography variant='h4' className={styles.name}>{item.content}</Typography>
-      <h2>{item.description}</h2>
+      <Typography
+         className={styles.description}
+      >
+        {item.description}
+      </Typography>
       <IconButton
         className={styles.link}
         href="https://www.abc.xyz"

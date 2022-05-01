@@ -15,10 +15,16 @@
 .name {
     position: relative;
     top: 4%;
+    padding-bottom: 30px;
+}
+
+.description {
+    width: 80%;
+    height: 60%;
+    overflow: auto;
 }
 
 .link {
     position: relative;
-    bottom: -45%;
     right: -45%;
 }

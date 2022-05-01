@@ -13,6 +13,7 @@ import { authState } from "../../../store/AuthSlice";
 import NextTaskBtns from "./nextTaskBtns/NextTaskBtns";
 import { onReveal } from "../../../helpers/onReveal";
 import { zeroVoteState } from "../../../helpers/zeroVoteState";
+import { sortUsers } from "../../../helpers/sortUsers";
 
 
 const InProgress = ({ provided, snapshot, column }) => {
@@ -63,6 +64,11 @@ const InProgress = ({ provided, snapshot, column }) => {
     const onRevoteAllHandler = () => {
         onReveal(socket, clientId, roomId);
         zeroVoteState(users, socket, clientId, roomId);
+    }
+
+    const onRevealHandler = () => {
+        onReveal(socket, clientId, roomId);
+        sortUsers(socket, roomId, users, clientId);
     }
 
     return (
@@ -178,7 +184,7 @@ const InProgress = ({ provided, snapshot, column }) => {
                     >
                         <Button
                             disabled={!isAllVoted || !column.items.length}
-                            onClick={() => onReveal(socket, clientId, roomId)}
+                            onClick={onRevealHandler}
                             variant='contained'
                         >
                             Reveal points

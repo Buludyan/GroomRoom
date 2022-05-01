@@ -7,7 +7,6 @@ const DescriptionMW = () => {
 
     const dispatch = useDispatch();
     const { isDescMWActive, description } = useSelector(descriptionModalState);
-    console.log(description)
 
     return (
         <div

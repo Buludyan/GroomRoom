@@ -63,6 +63,12 @@ class RoomController {
 
         return room.isReveal;
     }
+
+    async sortUsers(roomId, sortedUsers) {
+        const room = await roomService.findRoom(roomId);
+        room.users = sortedUsers;
+        await room.save();;
+    }
 }
 
 module.exports = new RoomController()
