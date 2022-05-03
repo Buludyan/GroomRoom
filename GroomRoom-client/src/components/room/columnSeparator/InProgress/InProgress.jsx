@@ -7,14 +7,14 @@ import { columnsState, setAllVoted, setUsers, setVoted } from "../../../store/Co
 import LeftOpenCloseBtn from "../leftColumn/leftOpenCloseBtn/LeftOpenCloseBtn";
 import RightOpenCloseBtn from "../rightColumn/rightOpenCloseBtn/RightOpenCloseBtn";
 import { Button, Typography } from "@mui/material";
-import UserCard from "./userCard/UserCard";
-import VoteCard from "./voteCard/VoteCard";
 import { authState } from "../../../store/AuthSlice";
 import NextTaskBtns from "./nextTaskBtns/NextTaskBtns";
 import { onReveal } from "../../../helpers/onReveal";
 import { zeroVoteState } from "../../../helpers/zeroVoteState";
 import { sortUsers } from "../../../helpers/sortUsers";
-
+import VoteCards from "./voteCards/VoteCards";
+import CurtainsIcon from '@mui/icons-material/Curtains';
+import UserCards from "./userCards/UserCards";
 
 const InProgress = ({ provided, snapshot, column }) => {
 
@@ -31,7 +31,7 @@ const InProgress = ({ provided, snapshot, column }) => {
         isReveal,
         isVoted,
         isAllVoted,
-        voteValues } = useSelector(columnsState);
+    } = useSelector(columnsState);
 
     const { user } = useSelector(authState);
 
@@ -115,26 +115,9 @@ const InProgress = ({ provided, snapshot, column }) => {
                             Drop card here
                         </Typography>}
                 </div>}
-            <div className={styles.users}>
-                <div className={styles.firstRow}>
-                    {users.map(((cardUser, idx) => {
-                        return (
-                            <UserCard
-                                key={idx}
-                                cardUser={cardUser}
-                            />)
-                    }))}
-                </div>
-                {/*<div className={styles.secondRow}>
-                    {usersList.secondRow.map(((cardUser, idx) => {
-                        return (
-                            <UserCard
-                                key={idx}
-                                cardUser={cardUser}
-                            />)
-                    }))}
-                </div>*/}
-            </div>
+
+            <UserCards />
+
             {
                 isReveal ?
                     user.id === adminId && <div
@@ -158,17 +141,7 @@ const InProgress = ({ provided, snapshot, column }) => {
                             </Button>
                         </div>
                         :
-                        <div className={styles.voteCards}>
-                            {voteValues.map((value, idx) => {
-                                return (
-                                    <VoteCard
-                                        onVote={onVote}
-                                        value={value}
-                                        key={idx}
-                                    />
-                                )
-                            })}
-                        </div>
+                        <VoteCards onVote={onVote} />
             }
             {
                 isReveal ?
@@ -187,7 +160,11 @@ const InProgress = ({ provided, snapshot, column }) => {
                             onClick={onRevealHandler}
                             variant='contained'
                         >
-                            Reveal points
+                            {isMobile ?
+                                <CurtainsIcon fontSize="large" sx={{ height: '30px' }} />
+                                :
+                                'Reveal points'
+                            }
                         </Button>
                     </div>
             }

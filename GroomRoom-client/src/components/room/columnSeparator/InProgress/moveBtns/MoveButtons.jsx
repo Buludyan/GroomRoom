@@ -7,14 +7,14 @@ import { socketSend } from '../../../../helpers/socketSend';
 import { authState } from '../../../../store/AuthSlice';
 import { zeroVoteState } from '../../../../helpers/zeroVoteState';
 import { onReveal } from '../../../../helpers/onReveal';
-
-
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 const MoveButtons = () => {
 
   const dispatch = useDispatch();
   const { user } = useSelector(authState);
-  const { columns, socket, clientId, adminId, users, roomId, isReveal } = useSelector(columnsState);
+  const { columns, socket, clientId, adminId, users, roomId, isReveal, isMobile } = useSelector(columnsState);
 
   const onButtonMove = (dir) => {
     const keys = Object.entries(columns).map(el => el[0]);
@@ -53,18 +53,24 @@ const MoveButtons = () => {
   return (
     <div className={styles.buttons}>
       <Button
-        style={{ padding: '0', width: '110px', height: '35px' }}
         variant='contained'
         onClick={() => onButtonMove('todo')}
       >
-        <Typography sx={{ color: 'black', fontSize: '10px' }}>Move to ToDo</Typography>
+        {isMobile ?
+          <ArrowLeftIcon fontSize='large' />
+          :
+          <Typography sx={{ color: 'black', fontSize: '10px' }}>Move to ToDo</Typography>
+        }
       </Button>
       <Button
-        style={{ padding: '0', width: '110px', height: '35px' }}
         variant='contained'
         onClick={() => onButtonMove('todone')}
       >
-        <Typography sx={{ color: 'black', fontSize: '10px' }}>Move To Done</Typography>
+        {isMobile ?
+          <ArrowRightIcon fontSize='large' />
+          :
+          <Typography sx={{ color: 'black', fontSize: '10px' }}>Move To Done</Typography>
+        }
       </Button>
     </div>
   )

@@ -63,8 +63,6 @@ app.ws('/', (ws, req) => {
     });
 });
 
-
-
 process.on('warning', e => console.warn(e.stack));
 
 const connectionHandler = (ws, columns, method, id, user, clientId) => {

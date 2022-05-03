@@ -1,11 +1,12 @@
 import React from 'react';
-import { Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteModalState, setActive } from '../../store/DeleteMWSlice';
 import styles from './DeleteMW.module.scss';
 import { socketSend } from '../../helpers/socketSend';
 import { columnsState, setColumns } from '../../store/ColumnsSlice';
+import CloseIcon from '@mui/icons-material/Close';
 
 const DeleteMW = () => {
 
@@ -21,7 +22,7 @@ const DeleteMW = () => {
         const curColumnId = column.name === 'To do' ? todoId : doneId;
         let items;
 
-        if(isAllDelete) {
+        if (isAllDelete) {
             items = [];
         } else {
             items = [...column.items].filter(it => it.id !== item.id);
@@ -49,24 +50,25 @@ const DeleteMW = () => {
         >
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                 <Typography
+                    className={styles.header}
                     variant='h6'
                 >
                     {isAllDelete ? 'Delete all cards?' : 'Delete this card?'}
                 </Typography>
+                <IconButton
+                    onClick={() => dispatch(setActive({ isActive: false, isAllDelete: false }))}
+                    className={styles.close}
+                >
+                    <CloseIcon />
+                </IconButton>
                 <Button
+                    className={styles.delete}
                     onClick={onItemDelete}
                     variant='contained'
                     color='error'
                     sx={{ width: '60%' }}
                 >
-                     {isAllDelete ? 'Delete all' : 'Delete'}
-                </Button>
-
-                <Button
-                    onClick={() => dispatch(setActive({ isActive: false, isAllDelete: false }))}
-                    sx={{ width: '60%' }}
-                >
-                    Cancel
+                    {isAllDelete ? 'Delete all' : 'Delete'}
                 </Button>
             </div>
 

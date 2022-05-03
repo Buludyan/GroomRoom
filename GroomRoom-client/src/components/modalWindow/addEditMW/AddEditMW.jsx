@@ -4,8 +4,9 @@ import { columnsState, setColumns } from '../../store/ColumnsSlice';
 import styles from './AddEditMW.module.scss';
 import { v4 as uuid } from 'uuid';
 import { addEditModalState, closeEdit, setIsActiveAdd } from '../../store/AddEditMWSlice';
-import { Button, TextField } from '@mui/material';
+import { Button, IconButton, TextField } from '@mui/material';
 import { socketSend } from '../../helpers/socketSend';
+import CloseIcon from '@mui/icons-material/Close';
 
 export const AddEditMW = () => {
 
@@ -121,6 +122,12 @@ export const AddEditMW = () => {
                 : styles.modal}
             onClick={() => dispatch(setIsActiveAdd())}>
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                <IconButton
+                    onClick={onEditCancel}
+                    className={styles.close}
+                >
+                    <CloseIcon />
+                </IconButton>
                 <div className={styles.form}>
                     <TextField
                         variant='outlined'
@@ -131,6 +138,9 @@ export const AddEditMW = () => {
                     />
                     <br />
                     <TextField
+                        className={styles.description}
+                        multiline={true}
+                        rows={8}
                         variant='outlined'
                         label='Task description'
                         name='taskDes'
@@ -138,29 +148,23 @@ export const AddEditMW = () => {
                         value={source === 'Edit' ? editInputData.taskDes : inputData.taskDes}
                     />
                     <br />
-                    {
-
-                    }
-                    <div className={styles.btns}>
-                        {source === 'Edit' ?
-                            <Button 
-                                variant='contained'
-                                onClick={() => onTaskEdit()}
-                            >
-                                Edit task
-                            </Button>
-                            :
-                            <Button
-                                variant='contained'
-                                onClick={() => onTaskAdd()}
-                            >
-                                Add task
-                            </Button>
-                        }
-                        <Button onClick={onEditCancel}>
-                            Cancel
+                </div>
+                <div className={styles.commitBtn}>
+                    {source === 'Edit' ?
+                        <Button
+                            variant='contained'
+                            onClick={() => onTaskEdit()}
+                        >
+                            Edit task
                         </Button>
-                    </div>
+                        :
+                        <Button
+                            variant='contained'
+                            onClick={() => onTaskAdd()}
+                        >
+                            Add task
+                        </Button>
+                    }
                 </div>
             </div>
         </div>

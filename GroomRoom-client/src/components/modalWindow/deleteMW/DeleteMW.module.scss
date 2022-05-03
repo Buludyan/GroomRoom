@@ -36,6 +36,31 @@
     justify-content: space-around;
     border-radius: 15px;
     width: 20%;
-    height: 23%;
+    height: 20%;
     background-color: #fff;
+
+    .header {
+        position: relative;
+        top: 2%
+    }
+
+    .close {
+        position: relative;
+        left: 42%;
+        bottom: 32%;
+    }
+
+    .delete {
+        position: relative;
+        bottom: 10%;
+    }
+}
+
+
+@media screen and (max-width: 450px) {
+    .modalContent {
+        width: 90%;
+        height: 20%;
+    }
+
 }

@@ -31,30 +31,34 @@
 
 .modalContent {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 15px;
     transition: 0.4s all;
-    width: 30vw;
-    height: 40vh;
+    width: 25vw;
+    height: 60vh;
     background-color: #fff;
-}
 
-.btns {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    bottom: -10px;
-    justify-content: space-between;
-    height: 95px;
-}   
+    .close {
+        position: relative;
+        left: 40%;
+        top: -4%;
+    }
 
-.form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    .form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        top: -5%;
+    }
+
+    .commitBtn {
+        position: relative;
+    }
+
 }
 
 
@@ -70,7 +74,7 @@
 @media screen and (max-width: 450px) {
     .modalContent {
         width: 90%;
-        height: 38%;
+        height: 50%;
     }
 
 }

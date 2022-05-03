@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { authState } from '../../../../store/AuthSlice';
-import { columnsState } from '../../../../store/ColumnsSlice';
+import { authState } from '../../../../../store/AuthSlice';
+import { columnsState } from '../../../../../store/ColumnsSlice';
 import styles from './UserCard.module.scss';
 
 const UserCard = ({ cardUser }) => {

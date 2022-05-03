@@ -28,3 +28,11 @@
     position: relative;
     right: -45%;
 }
+
+
+@media screen and (max-width: 960px) {
+    .link {
+        right: -38%;
+        bottom: -5%;
+    }
+}
