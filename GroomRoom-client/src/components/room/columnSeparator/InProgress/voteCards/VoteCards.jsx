@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
-const VoteCards = ({ onVote }) => {
+const VoteCards = ({ onVote, isDisabled }) => {
 
     const { voteValues, isMobile } = useSelector(columnsState);
 
@@ -31,6 +31,7 @@ const VoteCards = ({ onVote }) => {
                         return (
                             <SwiperSlide key={idx}>
                                 <VoteCard
+                                    isDisabled={isDisabled}
                                     onVote={onVote}
                                     value={value}
                                 />
@@ -43,6 +44,7 @@ const VoteCards = ({ onVote }) => {
                     {voteValues.map((value, idx) => {
                         return (
                             <VoteCard
+                                isDisabled={isDisabled}
                                 onVote={onVote}
                                 value={value}
                                 key={idx}

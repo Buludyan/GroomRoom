@@ -12,6 +12,8 @@ import { setIsMobile } from './components/store/ColumnsSlice';
 
 function App() {
 
+ 
+
   const dispatch = useDispatch();
   const { isAuth } = useSelector(authState);
 

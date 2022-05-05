@@ -67,7 +67,7 @@ const RightColumn = ({ provided, snapshot, column, name }) => {
             }}
             />
             <DoneList
-                provided={provided}
+                provided={user.id === adminId ? provided : {}}
                 column={column}
             />
         </div>

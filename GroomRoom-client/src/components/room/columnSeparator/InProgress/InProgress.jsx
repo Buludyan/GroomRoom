@@ -36,7 +36,13 @@ const InProgress = ({ provided, snapshot, column }) => {
     const { user } = useSelector(authState);
 
     useEffect(() => {
-        const check = users.find(user => user.voteState.value === 0 && user.id !== adminId)
+        let check = users.find(user => user.voteState.value === 0 && user.id !== adminId);
+        if (
+            users.length === 1
+            && users[0].id === adminId
+            && users[0].voteState.value === 0
+        ) check = !check;
+
         dispatch(setAllVoted(!!check));
 
     }, [users, adminId, dispatch]);
@@ -141,7 +147,7 @@ const InProgress = ({ provided, snapshot, column }) => {
                             </Button>
                         </div>
                         :
-                        <VoteCards onVote={onVote} />
+                        <VoteCards onVote={onVote} isDisabled={!column.items.length} />
             }
             {
                 isReveal ?

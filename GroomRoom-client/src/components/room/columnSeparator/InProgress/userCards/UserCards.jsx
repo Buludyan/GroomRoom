@@ -13,12 +13,37 @@ const UserCards = () => {
 
     const { users, isMobile } = useSelector(columnsState);
 
+    const us = [{email: "omoemon97@gmail.com",
+    id: "625fedcc8fbbf93192b933ba",
+    isActivated: true,
+    name: "Арман",
+    surname: "Булудян",
+    voteState: {value: 0}}, 
+    {email: "omoemon97@gmail.com",
+    id: "625fedcc8fbbf93192b933ba",
+    isActivated: true,
+    name: "Арман",
+    surname: "Булудян",
+    voteState: {value: 0}}, 
+    {email: "omoemon97@gmail.com",
+    id: "625fedcc8fbbf93192b933ba",
+    isActivated: true,
+    name: "Арман",
+    surname: "Булудян",
+    voteState: {value: 0}},
+    {email: "omoemon97@gmail.com",
+    id: "625fedcc8fbbf93192b933ba",
+    isActivated: true,
+    name: "Арман",
+    surname: "Булудян",
+    voteState: {value: 0}}]
+
     return (
         <div className={styles.userCardsBlock}>
-            {isMobile ?
+            {isMobile && us.length > 3 ?
                 <Swiper
-                    slidesPerView={1}
-                    spaceBetween={5}
+                    slidesPerView={3}
+                    spaceBetween={25}
                     freeMode={true}
                     pagination={{
                         clickable: true,
@@ -26,9 +51,9 @@ const UserCards = () => {
                     modules={[FreeMode, Pagination]}
                     className={styles.mySwiper}
                 >
-                    {users.map((cardUser, idx) => {
+                    {us.map((cardUser, idx) => {
                         return (
-                            <SwiperSlide key={idx} className='slide'>
+                            <SwiperSlide key={idx}>
                                 <UserCard
                                     cardUser={cardUser}
                                 />

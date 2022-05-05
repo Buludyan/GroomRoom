@@ -49,7 +49,7 @@ const LeftColumn = ({ provided, snapshot, column, name }) => {
       </div>
       <Divider style={{width:'90%', zIndex: '2', marginBottom: '12px'}}/>
       <TodoList
-        provided={provided}
+        provided={user.id === adminId ? provided : {}}
         column={column}
       />
     </div>

@@ -16,8 +16,9 @@ const NextTaskBtns = () => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        const values = []
+        let values = []
         users.map((user) => values.push(user.voteState.value));
+        values = values.filter(value => value !== 0);
         const midValue = Math.floor(values.reduce((acc, value) => acc + value, 0) / values.length);
         const idx = voteValues.findIndex(value => midValue < value);
         let value;
@@ -72,19 +73,34 @@ const NextTaskBtns = () => {
         zeroVoteState(users, socket, clientId, roomId);
         dispatch(setColumns(updatedColumns));
         socketSend(socket, updatedColumns, clientId);
-    }
+    };
+
+    const onValueChange = (mark) => {
+        let valueIdx = voteValues.findIndex(value => value === count);
+        switch (mark) {
+            case '+':
+                if (valueIdx === voteValues.length - 1) valueIdx = -1;
+                setCount(voteValues[valueIdx + 1]);
+                break;
+            case '-':
+                if (valueIdx === 0) valueIdx = voteValues.length;
+                setCount(voteValues[valueIdx - 1]);
+                break;
+            default: return
+        }
+    };
 
     return (
         <div className={styles.nextTaskBtns}>
             <div className={styles.counter}>
                 <IconButton
-                    onClick={() => setCount(voteValues[voteValues.findIndex(value => value === count) - 1])}
+                    onClick={() => onValueChange('-')}
                 >
                     <KeyboardArrowLeftIcon />
                 </IconButton>
                 <p className={styles.count}>{count}</p>
                 <IconButton
-                    onClick={() => setCount(voteValues[voteValues.findIndex(value => value === count) + 1])}
+                    onClick={() => onValueChange('+')}
                 >
                     <KeyboardArrowRightIcon />
                 </IconButton>

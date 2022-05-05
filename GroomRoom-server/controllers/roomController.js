@@ -28,7 +28,9 @@ class RoomController {
 
     async connectRoom(id, user) {
         const room = await roomService.findRoom(id);
-        if (user.id) {
+        const isUserExist = room.users.find(us => us.id === user.id);
+
+        if (user.id && !isUserExist) {
             room.users.push(user)
             await room.save();
         }

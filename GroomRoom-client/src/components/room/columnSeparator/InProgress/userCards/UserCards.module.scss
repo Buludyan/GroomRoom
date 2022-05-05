@@ -8,13 +8,6 @@
     width: 77%;
     height: 27%;
 
-    .mobileUsers {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-    }
-
     .firstRow {
         display: flex;
         flex-direction: row;
@@ -28,13 +21,14 @@
 
 @media screen and (max-width: 960px) {
     .userCardsBlock {
-        top: -5px;
+        top: 15px;
         position: relative;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        width: 77%;
-        height: 15%;
+        justify-content: center;
+        flex-direction: row;
+        width: 77%; 
+        height: 17%;
 
         .swiper {
             width: 100%;

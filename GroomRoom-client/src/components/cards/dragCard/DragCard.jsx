@@ -9,7 +9,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { authState } from '../../store/AuthSlice';
 import { setActive, setData } from '../../store/DeleteMWSlice';
-import { setDescMWActive, setDescription } from '../../store/DescriptionMWSlice';
+import { setDescData, setDescMWActive } from '../../store/DescriptionMWSlice';
 
 const DragCard = ({ provided, snapshot, column, item }) => {
 
@@ -24,7 +24,7 @@ const DragCard = ({ provided, snapshot, column, item }) => {
 
     const onDescriptionHanler = () => {
         dispatch(setDescMWActive(true));
-        dispatch(setDescription(item.description));
+        dispatch(setDescData({ description: item.description, name: item.content }));
     }
 
     const onItemEdit = () => {
