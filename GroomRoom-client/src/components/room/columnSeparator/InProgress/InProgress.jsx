@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { columnsState, setAllVoted, setUsers, setVoted } from "../../../store/ColumnsSlice";
 import LeftOpenCloseBtn from "../leftColumn/leftOpenCloseBtn/LeftOpenCloseBtn";
 import RightOpenCloseBtn from "../rightColumn/rightOpenCloseBtn/RightOpenCloseBtn";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { authState } from "../../../store/AuthSlice";
 import NextTaskBtns from "./nextTaskBtns/NextTaskBtns";
 import { onReveal } from "../../../helpers/onReveal";
@@ -15,8 +15,11 @@ import { sortUsers } from "../../../helpers/sortUsers";
 import VoteCards from "./voteCards/VoteCards";
 import CurtainsIcon from '@mui/icons-material/Curtains';
 import UserCards from "./userCards/UserCards";
+import PlaceholderCard from "../../../cards/placeholderCard/PlaceholderCard";
 
 const InProgress = ({ provided, snapshot, column }) => {
+
+
 
     const dispatch = useDispatch();
     const {
@@ -78,14 +81,8 @@ const InProgress = ({ provided, snapshot, column }) => {
     }
 
     return (
-        <div
-            className={styles.column}
-            {...provided.droppableProps}
-            ref={provided.innerRef}
+        <div className={styles.inProgress}
             style={{
-                background: snapshot.isDraggingOver
-                    ? "lightblue"
-                    : "#fff",
                 right: isLeftOpen && isMobile && '-100%',
                 left: isRightOpen && isMobile && '-100%'
             }}
@@ -94,34 +91,44 @@ const InProgress = ({ provided, snapshot, column }) => {
                 <LeftOpenCloseBtn />
                 <RightOpenCloseBtn />
             </div>
-            {column.items.map((item, index) => {
-                return (
-                    <Draggable
-                        key={item.id}
-                        draggableId={item.id}
-                        index={index}
-                    >
-                        {(provided, snapshot) => {
-                            if (column.items.length > 0) {
-                                return <InProgressCard
-                                    provided={provided}
-                                    snapshot={snapshot}
-                                    column={column}
-                                    item={item}
-                                />
-                            }
-                        }}
-                    </Draggable>
-                );
-            })}
-            {!column.items.length &&
-                <div className={styles.cardPlaceholder}>
-                    {snapshot.isDraggingOver &&
-                        <Typography variant='h4'>
-                            Drop card here
-                        </Typography>}
-                </div>}
-
+            <div
+                className={styles.column}
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                style={{
+                    background: snapshot.isDraggingOver
+                        ? "lightblue"
+                        : "#fff",
+                }}
+            >
+                {column.items.map((item, index) => {
+                    return (
+                        <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
+                        >
+                            {(provided, snapshot) => {
+                                if (column.items.length > 0) {
+                                    return <InProgressCard
+                                        provided={provided}
+                                        snapshot={snapshot}
+                                        column={column}
+                                        item={item}
+                                    />
+                                }
+                            }}
+                        </Draggable>
+                    );
+                })}
+                {!column.items.length &&
+                    <div className={styles.cardPlaceholder}>
+                        {snapshot.isDraggingOver &&
+                            <PlaceholderCard 
+                            />}
+                    </div>}
+                {provided.placeholder}
+            </div>
             <UserCards />
 
             {
@@ -174,7 +181,6 @@ const InProgress = ({ provided, snapshot, column }) => {
                         </Button>
                     </div>
             }
-            {provided.placeholder}
         </div>
     )
 }

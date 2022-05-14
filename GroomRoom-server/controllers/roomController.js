@@ -44,11 +44,16 @@ class RoomController {
     }
 
     async closeRoom(roomId, user) {
-        const room = await roomService.findRoom(roomId);
-        room.users = room.users.filter(us => us.id !== user.id);
-        await room.save();
-
-        return room.users;
+        try {
+            console.log(roomId);
+            const room = await roomService.findRoom(roomId);
+            room.users = room.users.filter(us => us.id !== user.id);
+            await room.save();
+    
+            return room.users;
+        } catch(e) {
+            console.log(e);
+        }
     }
 
     async vote(roomId, updatedUsers) {

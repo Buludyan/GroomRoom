@@ -59,7 +59,7 @@ const MoveButtons = () => {
         {isMobile ?
           <ArrowLeftIcon fontSize='large' />
           :
-          <Typography sx={{ color: 'black', fontSize: '10px' }}>Move to ToDo</Typography>
+          <Typography sx={{ fontSize: '15px' }}>Move to ToDo</Typography>
         }
       </Button>
       <Button
@@ -69,7 +69,7 @@ const MoveButtons = () => {
         {isMobile ?
           <ArrowRightIcon fontSize='large' />
           :
-          <Typography sx={{ color: 'black', fontSize: '10px' }}>Move To Done</Typography>
+          <Typography sx={{ fontSize: '15px' }}>Move To Done</Typography>
         }
       </Button>
     </div>

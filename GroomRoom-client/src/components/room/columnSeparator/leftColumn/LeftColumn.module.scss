@@ -6,16 +6,12 @@
     background: $column-background-color;
     align-items: center;
     padding: 4;
-    height: 100vh;
+    height: 96vh;
     width: 20vw;
     z-index: 90;
     transition: transform .22s ease-in;
-    overflow: auto;
 }
 
-.column::-webkit-scrollbar {     
-    display: none 
-}
 
 .column.close {
     transform: translateX(-20vw);
@@ -28,7 +24,7 @@
 .mobCloseButton {
     position: relative;
     left: 45%;
-    top: 2%
+    top: 5%
 }
 
 @media screen and (max-width: 960px) {

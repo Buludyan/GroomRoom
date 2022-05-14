@@ -1,5 +1,5 @@
 .userCardsBlock {
-    top: -15px;
+    top: -10px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -8,20 +8,34 @@
     width: 77%;
     height: 27%;
 
-    .firstRow {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
+    .rows {
+        height: 100%;
         width: 100%;
-        height: 47%;
+
+        .firstRow {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 50%;
+        }
+
+        .secondRow {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 50%;
+        }
     }
 }
 
 
 @media screen and (max-width: 960px) {
     .userCardsBlock {
-        top: 15px;
+        top: 15%;
         position: relative;
         display: flex;
         align-items: center;
@@ -40,7 +54,6 @@
             font-size: 18px;
             background: #fff;
 
-            /* Center slide text vertically */
             display: -webkit-box;
             display: -ms-flexbox;
             display: -webkit-flex;
@@ -53,6 +66,11 @@
             -ms-flex-align: center;
             -webkit-align-items: center;
             align-items: center;
+        }
+
+        .mySwiper {
+            top: -25%;
+            position: relative;
         }
     }
 }

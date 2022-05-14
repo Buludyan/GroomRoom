@@ -101,7 +101,6 @@ const Room = () => {
 
 
     const onDragEnd = (result) => {
-
         if (!result.destination) return;
 
         const { source, destination } = result;

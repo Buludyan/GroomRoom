@@ -18,11 +18,13 @@ const DescriptionMW = () => {
             onClick={() => dispatch(setDescMWActive(false))}
         >
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                <Typography
-                    variant='h5'
-                >
-                    {name}
-                </Typography>
+                <div className={styles.name}>
+                    <Typography
+                        variant='h5'
+                    >
+                        {name}
+                    </Typography>
+                </div>
                 <div className={styles.description}>
                     {description}
                 </div>

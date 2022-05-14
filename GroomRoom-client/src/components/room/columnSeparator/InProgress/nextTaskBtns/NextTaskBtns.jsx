@@ -19,7 +19,9 @@ const NextTaskBtns = () => {
         let values = []
         users.map((user) => values.push(user.voteState.value));
         values = values.filter(value => value !== 0);
-        const midValue = Math.floor(values.reduce((acc, value) => acc + value, 0) / values.length);
+        let midValue = values.reduce((acc, value) => acc + value, 0) / values.length;
+        midValue = midValue === 0.5 ? midValue : Math.floor(midValue);
+        console.log(midValue)
         const idx = voteValues.findIndex(value => midValue < value);
         let value;
         if (idx < 1) {
@@ -29,7 +31,6 @@ const NextTaskBtns = () => {
                 ? voteValues[idx]
                 : voteValues[idx - 1];
         }
-
         setCount(value);
     }, [users, voteValues]);
 

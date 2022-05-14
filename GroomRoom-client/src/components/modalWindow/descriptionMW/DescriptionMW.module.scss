@@ -36,8 +36,13 @@
     justify-content: space-around;
     border-radius: 15px;
     width: 40%;
-    height: 35%;
+    min-height: 7em;
+    max-height: 30em;
     background-color: #fff;
+
+    .name {
+        margin: 5px 0;
+    }
     
     .description {
         width: 90%;
@@ -55,7 +60,8 @@
 @media screen and (max-width: 450px) {
     .modalContent {
         width: 90%;
-        height: 35%;
+        min-height: 7em;
+        max-height: 30em;
 
         .link {
             position: relative;

@@ -6,18 +6,19 @@ import LinkIcon from '@mui/icons-material/Link';
 import { Typography } from '@mui/material';
 
 
-const InProgressCard = ({ provided, item }) => {
+const InProgressCard = ({ provided, item, snapshot }) => {
+
   return (
     <div
       className={styles.cardInProgress}
       ref={provided.innerRef}
-    {...provided.draggableProps}
-    {...provided.dragHandleProps}
+    //{...provided.draggableProps}
+    //{...provided.dragHandleProps}
     >
       <MoveButtons />
       <Typography variant='h4' className={styles.name}>{item.content}</Typography>
       <Typography
-         className={styles.description}
+        className={styles.description}
       >
         {item.description}
       </Typography>
@@ -28,7 +29,7 @@ const InProgressCard = ({ provided, item }) => {
         rel="noreferrer"
         size='large'
       >
-        <LinkIcon fontSize='large'/>
+        <LinkIcon fontSize='large' />
       </IconButton>
     </div>
   )

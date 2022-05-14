@@ -36,6 +36,17 @@ const DragCard = ({ provided, snapshot, column, item }) => {
         }))
     }
 
+    const getStyle = (style, snapshot) => {
+        if (!snapshot.isDropAnimating || snapshot.draggingOver !== '2') {
+            return style;
+        }
+
+        return {
+            ...style,
+            transitionDuration: `0.001s`,
+        };
+    }
+
     return (
         <div
             ref={provided.innerRef}
@@ -48,17 +59,19 @@ const DragCard = ({ provided, snapshot, column, item }) => {
                     styles.card
             }
             style={{
-                ...provided.draggableProps.style,
-                backgroundColor: snapshot.isDragging && "#263B4A"
+                ...getStyle(provided.draggableProps.style, snapshot),
+                backgroundColor: snapshot.isDragging && "#263B4A",
             }}
         >
             <div className={styles.cardHeader}>
-                <Typography
-                    component='p'
-                    sx={{ fontSize: 20 }}
-                >
-                    {item.content}
-                </Typography>
+                <div className={styles.name}>
+                    <Typography
+                        component='p'
+                        sx={{ fontSize: 20 }}
+                    >
+                        {item.content}
+                    </Typography>
+                </div>
                 {user.id === adminId &&
                     <div className={styles.buttons}>
                         <IconButton

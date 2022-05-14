@@ -20,23 +20,25 @@ const NavBtns = ({ column }) => {
 
     return (
         <div className={styles.navBtns}>
-            <IconButton
-                onClick={() => dispatch(setIsActiveAdd())}
-            >
-                <AddCircleOutlineIcon
-                    sx={{ fontSize: 33 }}
-                />
-            </IconButton>
-            <IconButton>
-                <InsertDriveFileIcon
-                    sx={{ fontSize: 33 }}
-                />
-            </IconButton>
-            <IconButton>
-                <DoubleArrowIcon
-                    sx={{ fontSize: 33 }}
-                />
-            </IconButton>
+            <div>
+                <IconButton
+                    onClick={() => dispatch(setIsActiveAdd())}
+                >
+                    <AddCircleOutlineIcon
+                        sx={{ fontSize: 33 }}
+                    />
+                </IconButton>
+                <IconButton>
+                    <InsertDriveFileIcon
+                        sx={{ fontSize: 33 }}
+                    />
+                </IconButton>
+                <IconButton>
+                    <DoubleArrowIcon
+                        sx={{ fontSize: 33 }}
+                    />
+                </IconButton>
+            </div>
             <IconButton
                 onClick={onDeleteAllItems}
             >

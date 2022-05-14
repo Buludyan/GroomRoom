@@ -6,7 +6,7 @@
     background: $column-background-color;
     align-items: center;
     padding: 4;
-    height: 100vh;
+    height: 96vh;
     width: 20vw;
     z-index: 90;
     transition: transform .22s ease-in;
@@ -22,13 +22,16 @@
 }
 
 .nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     width: 95%;
 }
 
 .mobCloseButton {
     position: relative;
     right: 45%;
-    top: 2%
+    top: 5%
 }
 
 @media screen and (max-width: 960px) {

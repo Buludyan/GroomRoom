@@ -13,7 +13,6 @@ const WSServer = require('express-ws')(app);
 const aWss = WSServer.getWss();
 const PORT = process.env.PORT || 6060;
 
-
 app.use(express.json({ extended: true }));
 app.use(cors({
     origin: "http://localhost:3000",

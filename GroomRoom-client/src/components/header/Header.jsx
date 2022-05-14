@@ -24,24 +24,28 @@ const Header = () => {
 
     return (
         <div className={styles.header}>
-            <Typography variant='h5'>
+            <Typography variant='h5' sx={{ color: '#fff', ml: '10px' }}>
                 GroomRoom
             </Typography>
-            <div 
-                className={styles.icon}
-                onClick={onBackHandler}
-            >
-                <NavLink to='/'>
-                    <IconButton
-                        sx={{ color: '#000' }}
-                    >
-                        <AccountCircleIcon
-                            sx={{ fontSize: '30px' }}
-                        />
-                    </IconButton>
+            <div className={styles.info}>
+                <Typography variant='p' sx={{ color: '#fff' }}>
+                    {user.name} {user.surname}
+                </Typography>
+                <div
+                    onClick={onBackHandler}
+                >
+                    <NavLink to='/'>
+                        <IconButton
+                        >
+                            <AccountCircleIcon
+                                sx={{ fontSize: '30px', color: '#fff' }}
+                            />
+                        </IconButton>
 
-                </NavLink>
+                    </NavLink>
+                </div>
             </div>
+
         </div>
     )
 }

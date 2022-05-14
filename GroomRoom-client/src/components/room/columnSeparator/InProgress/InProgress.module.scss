@@ -1,4 +1,4 @@
-.column {
+.inProgress {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -9,6 +9,18 @@
     z-index: 0;
 }
 
+.column {
+    position: relative;
+    top: -2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 43%;
+    width: 80%;
+    z-index: 0;
+    border-radius: 5px;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -17,45 +29,15 @@
 }
 
 .cardPlaceholder {
-    top: -20px;
-    position: relative;
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80%;
-    height: 43%;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     background-color: #ddd;
-}
-
-
-.users {
-    top: -15px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 77%;
-    height: 27%;
-
-    .firstRow {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        width: 100%;
-        height: 47%;
-    }
-
-    .secondRow {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-        width: 100%;
-        height: 47%;
-    }
+    box-shadow: 0 2px 2px 0px #ccc;
 }
 
 
@@ -64,7 +46,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    position: absolute;
     width: 55%;
     height: 10%;
     bottom: 8%;
@@ -94,8 +75,18 @@
 }
 
 @media screen and (max-width: 960px) {
-    .column {
+    .inProgress {
         width: 100vw;
+
+        .header {
+            position: relative;
+            top: 5%;
+        }
+
+        .column {
+            top: 7%;
+        }
+
     }
-    
+
 }
