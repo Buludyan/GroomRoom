@@ -49,32 +49,46 @@ class RoomController {
             const room = await roomService.findRoom(roomId);
             room.users = room.users.filter(us => us.id !== user.id);
             await room.save();
-    
+
             return room.users;
-        } catch(e) {
+        } catch (e) {
             console.log(e);
         }
     }
 
     async vote(roomId, updatedUsers) {
-        const room = await roomService.findRoom(roomId);
-        room.users = updatedUsers;
-        await room.save();
+        try {
+            const room = await roomService.findRoom(roomId);
+            room.users = updatedUsers;
+            await room.save();
+
+        } catch (e) {
+            console.log(e);
+        }
 
     }
 
     async reveal(roomId) {
-        const room = await roomService.findRoom(roomId);
-        room.isReveal = !room.isReveal;
-        await room.save();
+        try {
+            const room = await roomService.findRoom(roomId);
+            room.isReveal = !room.isReveal;
+            await room.save();
 
-        return room.isReveal;
+            return room.isReveal;
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     async sortUsers(roomId, sortedUsers) {
-        const room = await roomService.findRoom(roomId);
-        room.users = sortedUsers;
-        await room.save();;
+        try {
+            const room = await roomService.findRoom(roomId);
+            room.users = sortedUsers;
+            await room.save();
+
+        } catch (e) {
+            console.log(e);
+        }
     }
 }
 

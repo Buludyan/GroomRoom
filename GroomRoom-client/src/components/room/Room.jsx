@@ -31,14 +31,14 @@ const Room = () => {
 
     const params = useParams();
     const dispatch = useDispatch();
-    const { user } = useSelector(authState);
+    const { user, isAuth } = useSelector(authState);
     const { columns, socket, clientId, roomId, users, isReveal } = useSelector(columnsState);
 
     useEffect(() => {
         async function fetchData() {
             const isRoom = await roomService.isRoom(params.id);
             if (!isRoom.data) {
-                window.location.href = `http://localhost:3000`;
+                window.location.href = `http://localhost:3000/`;
             }
         }
         fetchData();

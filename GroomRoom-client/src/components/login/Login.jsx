@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Login.module.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import RegistrationMW from '../modalWindow/registrationMW/RegistrationMW';
-import { login } from '../store/AuthSlice';
+import { authState, login } from '../store/AuthSlice';
 import { Button, Divider, Paper, TextField } from '@mui/material';
 
 const Login = () => {
-
+    
     const dispatch = useDispatch();
+    const { isAuth } = useSelector(authState);
 
     const [isRegMWOpen, setRegMWOpen] = useState(false);
 
@@ -29,6 +30,10 @@ const Login = () => {
         }
 
     }
+
+    useEffect(() => {
+        if(isAuth)  window.location.href = `http://localhost:3000/`;
+    }, [isAuth])
 
     return (
         <div className={styles.login}>

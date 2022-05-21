@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ProfilePage.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { roomService } from '../axios/service/roomService';
-import { authState, logout } from '../store/AuthSlice';
+import { authState } from '../store/AuthSlice';
 import { columnsState } from '../store/ColumnsSlice';
 import { Button, Divider, TextField } from '@mui/material';
 
 const ProfilePage = () => {
 
     const [id, setId] = useState('');
+    const { user, isAuth } = useSelector(authState);
+    const { roomId, clientId, socket } = useSelector(columnsState);
 
-
-
-    const dispatch = useDispatch();
-    const { user } = useSelector(authState);
-    const { roomId, clientId, socket } = useSelector(columnsState)
+    console.log(isAuth)
 
     const createRoomHandler = async () => {
+        if (!isAuth) return window.location.href = `http://localhost:3000/login`;
         const room = await roomService.createRoom(user.id);
         if (room) window.location.href = `http://localhost:3000/${user.id}`;
     }
 
     const joinRoomHandler = async () => {
+        if (!isAuth) return window.location.href = `http://localhost:3000/login`;
         const isRoom = await roomService.isRoom(id);
         if (!isRoom.data) {
             console.log('Нет комнаты')
@@ -42,7 +42,7 @@ const ProfilePage = () => {
 
     return (
         <div className={styles.profilePage}>
-            {!user.isActivated && <p>Пользователь не подтвердил аккаунт</p>}
+            {!user.isActivated && isAuth && <p>Пользователь не подтвердил аккаунт</p>}
             <div className={styles.roomEntry}>
                 <Button
                     variant='contained'
@@ -55,7 +55,7 @@ const ProfilePage = () => {
                 <div className={styles.join}>
                     <Button variant='contained' onClick={joinRoomHandler}>Join room</Button>
                     <TextField
-                        placeholder='Past here room ID'
+                        placeholder='Paste here room ID'
                         value={id}
                         onChange={(e) =>
                             setId(e.target.value)}
@@ -63,17 +63,6 @@ const ProfilePage = () => {
                     />
                 </div>
             </div>
-            <br />
-            <Divider sx={{ width: '25%' }} />
-            <br />
-            <Button
-                onClick={() => dispatch(logout())}
-                variant='contained'
-                sx={{ width: '25%' }}
-                color='secondary'
-            >
-                Logout
-            </Button>
         </div>
     )
 }

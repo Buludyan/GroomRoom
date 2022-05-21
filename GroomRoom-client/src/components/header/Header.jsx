@@ -1,26 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Header.module.scss';
 import { IconButton, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { columnsState } from '../store/ColumnsSlice';
 import { authState } from '../store/AuthSlice';
+import UserMW from '../modalWindow/userMW/UserMW';
 
 const Header = () => {
 
-    const { user } = useSelector(authState);
-    const { socket, roomId, clientId } = useSelector(columnsState);
-
-    const onBackHandler = () => {
-        socket && socket.send(JSON.stringify({
-            method: "close",
-            user,
-            roomId,
-            id: clientId
-        }))
-        socket.close();
-    }
+    const { user, isAuth } = useSelector(authState);
+    const [isUserMWOpen, setUserMWOpen] = useState(false);
 
     return (
         <div className={styles.header}>
@@ -28,24 +18,33 @@ const Header = () => {
                 GroomRoom
             </Typography>
             <div className={styles.info}>
-                <Typography variant='p' sx={{ color: '#fff' }}>
-                    {user.name} {user.surname}
-                </Typography>
+                {
+                    isAuth ?
+                        <Typography variant='p' sx={{ color: '#fff' }}>
+                            {user.name} {user.surname}
+                        </Typography>
+                        :
+                        <NavLink to='/login'>
+                            <Typography >
+                                Login
+                            </Typography>
+                        </NavLink>
+                }
                 <div
-                    onClick={onBackHandler}
+                    onClick={() => setUserMWOpen(true)}
                 >
-                    <NavLink to='/'>
-                        <IconButton
-                        >
-                            <AccountCircleIcon
-                                sx={{ fontSize: '30px', color: '#fff' }}
-                            />
-                        </IconButton>
-
-                    </NavLink>
+                    <IconButton
+                    >
+                        <AccountCircleIcon
+                            sx={{ fontSize: '30px', color: '#fff' }}
+                        />
+                    </IconButton>
                 </div>
             </div>
-
+            <UserMW
+                isUserMWOpen={isUserMWOpen}
+                setUserMWOpen={setUserMWOpen}
+            />
         </div>
     )
 }

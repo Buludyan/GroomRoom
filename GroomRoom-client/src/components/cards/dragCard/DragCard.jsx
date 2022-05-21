@@ -61,6 +61,7 @@ const DragCard = ({ provided, snapshot, column, item }) => {
             style={{
                 ...getStyle(provided.draggableProps.style, snapshot),
                 backgroundColor: snapshot.isDragging && "#263B4A",
+                direction: snapshot.isDragging && column.name === 'Done' && "ltr"
             }}
         >
             <div className={styles.cardHeader}>
