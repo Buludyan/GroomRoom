@@ -4,9 +4,9 @@
   "description": "Groomroom App",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon index.js",
-    "client": "cd ../GroomRoom-client && npm run start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {

@@ -12,7 +12,7 @@ const UserMW = ({ isUserMWOpen, setUserMWOpen }) => {
     const { socket, roomId, clientId } = useSelector(columnsState);
 
     const onLeaveHandler = () => {
-        window.location.href = `http://localhost:3000/`;
+        window.location.href = `http://68.183.7.78:3000/`;
         socket && socket.send(JSON.stringify({
             method: "close",
             user,
@@ -23,7 +23,7 @@ const UserMW = ({ isUserMWOpen, setUserMWOpen }) => {
     }
 
     const onLogoutHandler = () => {
-        window.location.href = `http://localhost:3000/login`;
+        window.location.href = `http://68.183.7.78:3000/login`;
         dispatch(logout());
     }
 

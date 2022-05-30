@@ -35,7 +35,7 @@ function App() {
   return (
     <>
       <div className='app'>
-        {window.location.href !== 'http://localhost:3000/login' && <Header />}
+        {window.location.href !== 'http://68.183.7.78:3000/login' && <Header />}
         <Routes>
           <Route path='/' element={<ProfilePage />} />
           <Route path='/login' element={<Login />} />

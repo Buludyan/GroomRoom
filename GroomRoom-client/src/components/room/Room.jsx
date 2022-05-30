@@ -1,4 +1,4 @@
-    import React from 'react';
+import React from 'react';
 import styles from './Room.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
@@ -31,14 +31,14 @@ const Room = () => {
 
     const params = useParams();
     const dispatch = useDispatch();
-    const { user, isAuth } = useSelector(authState);
+    const { user } = useSelector(authState);
     const { columns, socket, clientId, roomId, users, isReveal } = useSelector(columnsState);
 
     useEffect(() => {
         async function fetchData() {
             const isRoom = await roomService.isRoom(params.id);
             if (!isRoom.data) {
-                window.location.href = `http://localhost:3000/`;
+                window.location.href = `http://68.183.7.78:3000/`;
             }
         }
         fetchData();
@@ -46,7 +46,7 @@ const Room = () => {
 
 
     useEffect(() => {
-        const socket = new WebSocket(`ws://localhost:6060/`);
+        const socket = new WebSocket(`ws://68.183.7.78:6060/`);
 
         dispatch(setSocket(socket));
         socket.onopen = () => {
