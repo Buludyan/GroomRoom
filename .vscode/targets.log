@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon May 30 10:48:05 2022
+# Make data base, printed on Tue May 31 12:44:44 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ USERPROFILE = C:\Users\arman
 # environment
 LOCALAPPDATA = C:\Users\arman\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-5a5021e5-7f7e-4f24-a266-8f0ec4e6a775-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-ef85682f-1082-4eb2-bbf2-d75b55779376-sock
 # environment
 VSCODE_CWD = C:\Users\arman\AppData\Local\Programs\Microsoft VS Code
 # environment
@@ -41,7 +41,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_21376_SVMDCQDVYNGNIRWK
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_16880_AQUAEPJGVERWDVUS
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -101,7 +101,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 21376
+VSCODE_PID = 16880
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -243,7 +243,8 @@ build-production:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 20):
-	cd GroomRoom-client && $(MAKE) build-production
+	cd GroomRoom-client && $(MAKE) 
+ build-production
 	cd GroomRoom-server && $(MAKE) build
 
 # Not a target:
@@ -300,8 +301,7 @@ build-dev:
 # Load=10/1024=1%, Rehash=0, Collisions=0/20=0%
 # VPATH Search Paths
 
-# No 'v 
-path' search paths.
+# No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
@@ -311,6 +311,6 @@ path' search paths.
 # strcache performance: lookups = 30 / hit rate = 33%
 # hash-table stats:
 # Load=20/8192=0%, Rehash=0, Collisions=1/30=3%
-# Finished Make data base on Mon May 30 10:48:05 2022
+# Finished Make data base on Tue May 31 12:44:44 2022
 
  

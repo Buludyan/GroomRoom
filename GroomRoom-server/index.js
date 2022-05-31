@@ -7,7 +7,6 @@ const errorMiddleware = require('./middlewares/errorMiddleware');
 const roomController = require('./controllers/roomController');
 const { setWsHeartbeat } = require('./node_modules/ws-heartbeat/server');
 
-
 const app = express();
 const WSServer = require('express-ws')(app);
 const aWss = WSServer.getWss();
@@ -15,7 +14,7 @@ const PORT = process.env.PORT || 6060;
 
 app.use(express.json({ extended: true }));
 app.use(cors({
-    origin: "http://68.183.7.78:3000",
+    origin: process.env.CLIENT_URL,
     credentials: true,
 }));
 app.use(cookieParser());

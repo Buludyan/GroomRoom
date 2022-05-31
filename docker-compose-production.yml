@@ -14,7 +14,6 @@ services:
   api-server:
     image: api-server
     restart: unless-stopped
-    env_file: ./GroomRoom-server/config/production.env
     ports:
       - "6060:6060"
     networks:

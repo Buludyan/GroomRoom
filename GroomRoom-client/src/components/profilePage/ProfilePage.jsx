@@ -12,21 +12,20 @@ const ProfilePage = () => {
     const { user, isAuth } = useSelector(authState);
     const { roomId, clientId, socket } = useSelector(columnsState);
 
-    console.log(isAuth)
 
     const createRoomHandler = async () => {
-        if (!isAuth) return window.location.href = `http://68.183.7.78:3000/login`;
+        if (!isAuth) return window.location.href = `${process.env.REACT_APP_BASE_DOMEN}/login`;
         const room = await roomService.createRoom(user.id);
-        if (room) window.location.href = `http://68.183.7.78:3000/${user.id}`;
+        if (room) window.location.href = `${process.env.REACT_APP_BASE_DOMEN}/${user.id}`;
     }
 
     const joinRoomHandler = async () => {
-        if (!isAuth) return window.location.href = `http://68.183.7.78:3000/login`;
+        if (!isAuth) return window.location.href = `${process.env.REACT_APP_BASE_DOMEN}/login`;
         const isRoom = await roomService.isRoom(id);
         if (!isRoom.data) {
             console.log('Нет комнаты')
         } else {
-            return window.location.href = `http://68.183.7.78:3000/${id}`;
+            return window.location.href = `${process.env.REACT_APP_BASE_DOMEN}/${id}`;
         }
     }
 

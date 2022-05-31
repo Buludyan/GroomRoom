@@ -38,7 +38,7 @@ const Room = () => {
         async function fetchData() {
             const isRoom = await roomService.isRoom(params.id);
             if (!isRoom.data) {
-                window.location.href = `http://68.183.7.78:3000/`;
+                window.location.href = process.env.REACT_APP_BASE_DOMEN;
             }
         }
         fetchData();
@@ -46,7 +46,7 @@ const Room = () => {
 
 
     useEffect(() => {
-        const socket = new WebSocket(`ws://68.183.7.78:6060/`);
+        const socket = new WebSocket(process.env.REACT_APP_WS_URL);
 
         dispatch(setSocket(socket));
         socket.onopen = () => {

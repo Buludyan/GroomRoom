@@ -32,7 +32,7 @@ const Login = () => {
     }
 
     useEffect(() => {
-        if(isAuth)  window.location.href = `http://68.183.7.78:3000/`;
+        if(isAuth)  window.location.href = process.env.REACT_APP_BASE_DOMEN;
     }, [isAuth])
 
     return (
