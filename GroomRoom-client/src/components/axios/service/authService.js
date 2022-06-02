@@ -6,7 +6,7 @@ export const authService = {
     },
 
     async registration(data) {
-        return Axios.post('/auth/registration', data);
+        return Axios.post('/auth/registration', data, {headers:{"Content-Type" : "application/json"}});
     },
 
     async logout() {

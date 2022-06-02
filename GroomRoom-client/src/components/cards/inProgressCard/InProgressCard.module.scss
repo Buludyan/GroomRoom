@@ -26,6 +26,8 @@
 }
 
 .description {
+    word-break: break-all;
+    white-space: pre-wrap;
     width: 80%;
     height: 29vh;
     position: relative;

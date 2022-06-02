@@ -1,9 +1,11 @@
 make.exe --dry-run --always-make --keep-going --print-directory
 make: Entering directory 'c:/Users/arman/Desktop/GroomRoom'
-cd GroomRoom-client && C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe build-dev
+cd GroomRoom-client && C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe build-production
  
 make[1]: Entering directory 'c:/Users/arman/Desktop/GroomRoom/GroomRoom-client'
-docker build -t react-app .
+docker build \
+	-t react-app-production:production \
+	-f Dockerfile.production .
 make[1]: Leaving directory 'c:/Users/arman/Desktop/GroomRoom/GroomRoom-client'
  
 cd GroomRoom-server && C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe build
@@ -11,5 +13,6 @@ cd GroomRoom-server && C:/ProgramData/chocolatey/lib/make/tools/install/bin/make
 make[1]: Entering directory 'c:/Users/arman/Desktop/GroomRoom/GroomRoom-server'
 docker build -t api-server .
 make[1]: Leaving directory 'c:/Users/arman/Desktop/GroomRoom/GroomRoom-server'
+ 
 make: Leaving directory 'c:/Users/arman/Desktop/GroomRoom'
  

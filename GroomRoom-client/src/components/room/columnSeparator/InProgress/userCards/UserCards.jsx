@@ -176,7 +176,7 @@ const UserCards = () => {
 
     return (
         <div className={styles.userCardsBlock}>
-            {isMobile && users.length > 3 ?
+            {isMobile && us.length > 3 ?
                 <Swiper
                     slidesPerView={3}
                     spaceBetween={25}
@@ -187,7 +187,7 @@ const UserCards = () => {
                     modules={[FreeMode, Pagination]}
                     className={styles.mySwiper}
                 >
-                    {users.map((cardUser, idx) => {
+                    {us.map((cardUser, idx) => {
                         return (
                             <SwiperSlide key={idx}>
                                 <UserCard
@@ -200,7 +200,7 @@ const UserCards = () => {
                 :
                 <div className={styles.rows}>
                     <div className={styles.firstRow}>
-                        {[...users.slice(0, 10)].map(((cardUser, idx) => {
+                        {[...us.slice(0, 10)].map(((cardUser, idx) => {
                             return (
                                 <UserCard
                                     key={idx}
@@ -209,7 +209,7 @@ const UserCards = () => {
                         }))}
                     </div>
                     <div className={styles.secondRow}>
-                        {users.length > 10 && [...users.splice(10)].map(((cardUser, idx) => {
+                        {us.length > 10 && [...us.splice(10)].map(((cardUser, idx) => {
                             return (
                                 <UserCard
                                     key={idx}

@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue May 31 12:44:44 2022
+# Make data base, printed on Fri Jun 03 00:31:51 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ USERPROFILE = C:\Users\arman
 # environment
 LOCALAPPDATA = C:\Users\arman\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-ef85682f-1082-4eb2-bbf2-d75b55779376-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-2b309364-8990-4d9d-9e69-4a477333189d-sock
 # environment
 VSCODE_CWD = C:\Users\arman\AppData\Local\Programs\Microsoft VS Code
 # environment
@@ -41,7 +41,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_16880_AQUAEPJGVERWDVUS
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_31740_PKQBZWXRPSSLOIBC
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -101,7 +101,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 16880
+VSCODE_PID = 31740
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -169,7 +169,7 @@ GNUMAKEFLAGS :=
 # environment
 OS = Windows_NT
 # makefile
-.DEFAULT_GOAL := build-dev
+.DEFAULT_GOAL := build-production
 # default
 MAKE_VERSION := 4.3
 # environment
@@ -221,9 +221,9 @@ PROCESSOR_IDENTIFIER = AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD
 
 # Directories
 
-# . (key c:/Users/arman/Desktop/GroomRoom, mtime 1653463793): 11 files, no impossibilities.
+# . (key c:/Users/arman/Desktop/GroomRoom, mtime 1653989402): 8 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 8 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -231,42 +231,26 @@ PROCESSOR_IDENTIFIER = AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD
 
 # Files
 
-run-dev:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 6):
-	docker-compose -f docker-compose-dev.yml up
-
 build-production:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 20):
-	cd GroomRoom-client && $(MAKE) 
- build-production
+#  recipe to execute (from 'Makefile', line 2):
+	cd GroomRoom-client && $(MAKE) build-production
 	cd GroomRoom-server && $(MAKE) build
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-27 11:59:07
+#  Last modified 2022-05-31 22:27:59
 #  File has been updated.
 #  Successfully updated.
-
-build-local:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 11):
-	cd GroomRoom-client && $(MAKE) build-local
-	cd GroomRoom-server && $(MAKE) build
 
 run-production:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 24):
+#  recipe to execute (from 'Makefile', line 6):
 	docker-compose -f docker-compose-production.yml up
 
 # Not a target:
@@ -282,35 +266,20 @@ all:
 #  File does not exist.
 #  File has not been updated.
 
-run-local:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 15):
-	docker-compose -f docker-compose-local.yml up
-
-build-dev:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 2):
-	cd GroomRoom-client && $(MAKE) build-dev
-	cd GroomRoom-server && $(MAKE) build
-
 # files hash-table stats:
-# Load=10/1024=1%, Rehash=0, Collisions=0/20=0%
+# Load=6/1024=1%, Rehash=0, Collisions=0/16=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 20 / storage = 253 B / avg = 12 B
-# current buf: size = 8174 B / used = 253 B / count = 20 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 13 / storage = 146 B / avg = 11 B
+# current buf: size = 8174 B / used = 146 B / count = 13 / avg = 11 B
 
-# strcache performance: lookups = 30 / hit rate = 33%
+# strcache performance: lookups = 19 / hit rate = 31%
 # hash-table stats:
-# Load=20/8192=0%, Rehash=0, Collisions=1/30=3%
-# Finished Make data base on Tue May 31 12:44:44 2022
+# Load=13/8192=0%, Rehash=0, Collisions=1/19=5%
+# Finished Make data base on Fri Jun 03 00:31:51 2022
 
  

@@ -39,6 +39,8 @@
     min-height: 7em;
     max-height: 30em;
     background-color: #fff;
+    word-break: break-all;
+    white-space: pre-wrap;
 
     .name {
         margin: 5px 0;

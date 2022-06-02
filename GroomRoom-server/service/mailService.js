@@ -1,16 +1,22 @@
 const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
 
 class MailService {
     constructor() {
-        this.transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
+        this.transporter = nodemailer.createTransport(smtpTransport({
+            service: 'gmail',
+            type: "SMTP",
+            host: 'smtp.gmail.com',
             port: process.env.SMTP_PORT,
             secure: false,
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD
+            },
+            tls: {
+                rejectUnauthorized: false
             }
-        })
+        }))
     }
 
     async sendActivationMail(to, link) {

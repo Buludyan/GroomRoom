@@ -24,9 +24,9 @@ const initialState = {
     isVoted: false,
     isAllVoted: false,
     isReveal: false,
-    isMobile: false,
-    isLeftOpen: true,
-    isRightOpen: true,
+    isMobile: true,
+    isLeftOpen: false,
+    isRightOpen: false,
     voteValues: [0.5, 1, 2, 3, 5, 8, 13, 21, 40, 100]
 };
 
