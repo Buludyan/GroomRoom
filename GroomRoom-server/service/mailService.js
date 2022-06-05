@@ -1,37 +1,28 @@
-const nodemailer = require('nodemailer');
-const smtpTransport = require('nodemailer-smtp-transport');
+const sgMail = require('@sendgrid/mail');
+
+sgMail.setApiKey(process.env.API_KEY);
 
 class MailService {
     constructor() {
-        this.transporter = nodemailer.createTransport(smtpTransport({
-            service: 'gmail',
-            type: "SMTP",
-            host: 'smtp.gmail.com',
-            port: process.env.SMTP_PORT,
-            secure: false,
-            auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASSWORD
-            },
-            tls: {
-                rejectUnauthorized: false
-            }
-        }))
     }
 
-    async sendActivationMail(to, link) {
-        await this.transporter.sendMail({
-            from: process.env.SMTP_USER,
-            to,
+    async sendActivationMail(email, link) {
+        await sgMail.send({
+            to: email,
+            from: 'groomroomtest@gmail.com',
             subject: 'Активация аккаунта на ' + process.env.API_URL,
-            text: '',
-            html:
-                `
-                    <div>
-                        <h1>Для активации перейдите по ссылке</h1>
-                        <a href="${link}">${link}</a>
-                    </div>
-                `
+            content: [
+                {
+                    "type": "text/html",
+                    "value":
+                        `
+                            <div>
+                                <h1>Для активации перейдите по ссылке</h1>
+                                <a href="${link}">${link}</a>
+                            </div>
+                        `
+                }
+            ]
         })
     }
 }
