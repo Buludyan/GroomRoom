@@ -12,6 +12,7 @@ const ProfilePage = () => {
     const { user, isAuth } = useSelector(authState);
     const { roomId, clientId, socket } = useSelector(columnsState);
 
+    console.log(isAuth)
 
     const createRoomHandler = async () => {
         if (!isAuth) return window.location.href = `${process.env.REACT_APP_BASE_DOMEN}/login`;

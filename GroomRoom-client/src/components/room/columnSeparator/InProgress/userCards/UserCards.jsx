@@ -19,7 +19,7 @@ const UserCards = () => {
         isActivated: true,
         name: "1",
         surname: "Булудян",
-        voteState: { value: 0 }
+        voteState: { value: 5 }
     },
     {
         email: "omoemon97@gmail.com",
@@ -27,7 +27,7 @@ const UserCards = () => {
         isActivated: true,
         name: "2",
         surname: "Булудян",
-        voteState: { value: 0 }
+        voteState: { value: 5 }
     },
     {
         email: "omoemon97@gmail.com",
@@ -35,7 +35,7 @@ const UserCards = () => {
         isActivated: true,
         name: "3",
         surname: "Булудян",
-        voteState: { value: 0 }
+        voteState: { value: 5 }
     },
     {
         email: "omoemon97@gmail.com",
@@ -43,7 +43,7 @@ const UserCards = () => {
         isActivated: true,
         name: "4",
         surname: "Булудян",
-        voteState: { value: 0 }
+        voteState: { value: 5 }
     },
     {
         email: "omoemon97@gmail.com",
@@ -176,9 +176,9 @@ const UserCards = () => {
 
     return (
         <div className={styles.userCardsBlock}>
-            {isMobile && us.length > 3 ?
+            {isMobile && users.length > 3 ?
                 <Swiper
-                    slidesPerView={3}
+                    slidesPerView={(window.innerWidth >= 768 && window.innerWidth <= 991) ? 4 : 3}
                     spaceBetween={25}
                     freeMode={true}
                     pagination={{
@@ -187,7 +187,7 @@ const UserCards = () => {
                     modules={[FreeMode, Pagination]}
                     className={styles.mySwiper}
                 >
-                    {us.map((cardUser, idx) => {
+                    {users.map((cardUser, idx) => {
                         return (
                             <SwiperSlide key={idx}>
                                 <UserCard
@@ -198,9 +198,9 @@ const UserCards = () => {
                     })}
                 </Swiper>
                 :
-                <div className={styles.rows}>
-                    <div className={styles.firstRow}>
-                        {[...us.slice(0, 10)].map(((cardUser, idx) => {
+                <div className={styles.userCardsBlock__rows}>
+                    <div className={styles.userCardsBlock__firstRow}>
+                        {[...users.slice(0, 10)].map(((cardUser, idx) => {
                             return (
                                 <UserCard
                                     key={idx}
@@ -208,8 +208,8 @@ const UserCards = () => {
                                 />)
                         }))}
                     </div>
-                    <div className={styles.secondRow}>
-                        {us.length > 10 && [...us.splice(10)].map(((cardUser, idx) => {
+                    <div className={styles.userCardsBlock__secondRow}>
+                        {users.length > 10 && [...users.splice(10)].map(((cardUser, idx) => {
                             return (
                                 <UserCard
                                     key={idx}

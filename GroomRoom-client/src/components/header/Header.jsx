@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { authState } from '../store/AuthSlice';
 import UserMW from '../modalWindow/userMW/UserMW';
+import logo from '../images/logo.png';
 
 const Header = () => {
 
@@ -13,39 +14,40 @@ const Header = () => {
     const [isUserMWOpen, setUserMWOpen] = useState(false);
 
     return (
-        <div className={styles.header}>
-            <Typography variant='h5' sx={{ color: '#fff', ml: '10px' }}>
-                GroomRoom
-            </Typography>
-            <div className={styles.info}>
-                {
-                    isAuth ?
-                        <Typography variant='p' sx={{ color: '#fff' }}>
-                            {user.name} {user.surname}
-                        </Typography>
-                        :
-                        <NavLink to='/login'>
-                            <Typography >
-                                Login
+        <section className={styles.header}>
+            <div className={styles.header__inner}>
+                    <a className={styles.logo} href={process.env.REACT_APP_BASE_DOMEN} />
+                <div className={styles.header__userMenu}>
+                    {
+                        isAuth ?
+                            <Typography variant='p' sx={{ color: '#fff' }}>
+                                {user.name} {user.surname}
                             </Typography>
-                        </NavLink>
-                }
-                <div
-                    onClick={() => setUserMWOpen(true)}
-                >
-                    <IconButton
+                            :
+                            <NavLink to='/login'>
+                                <Typography >
+                                    Login
+                                </Typography>
+                            </NavLink>
+                    }
+                    <div
+                        onClick={() => setUserMWOpen(true)}
                     >
-                        <AccountCircleIcon
-                            sx={{ fontSize: '30px', color: '#fff' }}
-                        />
-                    </IconButton>
+                        <IconButton
+                        >
+                            <AccountCircleIcon
+                                sx={{ fontSize: '30px', color: '#fff' }}
+                            />
+                        </IconButton>
+                    </div>
                 </div>
+                <UserMW
+                    isUserMWOpen={isUserMWOpen}
+                    setUserMWOpen={setUserMWOpen}
+                />
             </div>
-            <UserMW
-                isUserMWOpen={isUserMWOpen}
-                setUserMWOpen={setUserMWOpen}
-            />
-        </div>
+
+        </section>
     )
 }
 

@@ -1,5 +1,5 @@
 .placeholderCard {
-    position: absolute;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,22 +9,22 @@
     border-radius: 5px;
     background-color: #ddd;
     box-shadow: 0 2px 2px 0px #ccc;
-    .head {
+    
+    &__head {
         display: flex;
         flex-direction: row;
     }
 
-    .skeleton {
+    &__desc {
+        display: flex;
+        justify-content: center;
+        font-size: 25px;
+    }
+
+    &__skeleton {
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        .desc {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 25px;
-        }
     }
 
 }

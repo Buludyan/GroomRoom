@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,OAAO,CAAC;EACJ,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,WAAW,EAAE,MAAM;EACnB,OAAO,EAAE,CAAC;EACV,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,IAAI;EACX,QAAQ,EAAE,IAAI;CACjB;;AAED,AAAA,OAAO,AAAA,mBAAmB,CAAC;EACvB,OAAO,EAAE,IACb;CAAC",
-    "sources": [
-        "DoneList.module.scss"
-    ],
-    "names": [],
-    "file": "DoneList.module.css"
-}

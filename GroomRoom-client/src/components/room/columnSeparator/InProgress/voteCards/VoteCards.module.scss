@@ -2,10 +2,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60%;
-    height: 10%;
-    position: absolute;
+    width: 70%;
+    height: 80%;
     bottom: 8%;
+    z-index: 0;
 
     .mobileVoteCards {
         display: flex;
@@ -33,7 +33,7 @@
         width: 60%;
         height: 10%;
         position: absolute;
-        bottom: 2em;
+        bottom: 4em;
 
         .swiper {
             width: 100%;

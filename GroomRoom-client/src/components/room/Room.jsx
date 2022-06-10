@@ -25,6 +25,7 @@ import { onReveal } from '../helpers/onReveal';
 import { zeroVoteState } from '../helpers/zeroVoteState';
 import DeleteMW from '../modalWindow/deleteMW/DeleteMW';
 import DescriptionMW from '../modalWindow/descriptionMW/DescriptionMW';
+import Header from '../header/Header';
 
 
 const Room = () => {
@@ -195,33 +196,30 @@ const Room = () => {
 
     return (
         <div className={styles.room}>
-            <div className={styles.columns}>
-                <DragDropContext
-                    onDragEnd={result => onDragEnd(result)}
-                >
-                    {Object.entries(columns).map(([columnId, column]) => {
-                        return (
-                            <div className='main'
-                                key={columnId}
-                            >
-                                <div>
-                                    <Droppable droppableId={columnId} key={columnId}>
-                                        {(provided, snapshot) => {
-                                            return (
-                                                <ColumnSeparator
-                                                    name={column.name}
-                                                    provided={provided}
-                                                    snapshot={snapshot}
-                                                    column={column}
-                                                />
-                                            );
-                                        }}
-                                    </Droppable>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </DragDropContext>
+            <div className={styles.room__inner}>
+                <Header />
+                <div className={styles.room__columns}>
+                    <DragDropContext
+                        onDragEnd={result => onDragEnd(result)}
+                    >
+                        {Object.entries(columns).map(([columnId, column]) => {
+                            return (
+                                <Droppable droppableId={columnId} key={columnId}>
+                                    {(provided, snapshot) => {
+                                        return (
+                                            <ColumnSeparator
+                                                name={column.name}
+                                                provided={provided}
+                                                snapshot={snapshot}
+                                                column={column}
+                                            />
+                                        );
+                                    }}
+                                </Droppable>
+                            );
+                        })}
+                    </DragDropContext>
+                </div>
             </div>
             <AddEditMW />
             <DeleteMW />

@@ -5,17 +5,15 @@ import styles from './VoteCard.module.scss';
 const VoteCard = ({ value, onVote, isDisabled }) => {
 
     return (
-        <div 
+        <button 
             className={styles.voteCard}
-            onClick={isDisabled ? null : () => onVote(value, true)}
-            style={{
-                color: isDisabled ? 'rgba(21, 22, 30, 0.5)' : '#000'
-            }}
+            disabled={isDisabled}
+            onClick={() => onVote(value, true)}
         >
-            <div className={styles.value}>
+            <div className={styles.voteCard__value}>
                 {value}
             </div>
-        </div>
+        </button>
     )
 }
 

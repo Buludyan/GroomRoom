@@ -1,26 +1,56 @@
 @import '../styles/variables.scss';
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    bottom: 0;
-    height: 4.3vh;
+    height: 4vh;
     background-color: $header-background-color;
+
+    &__inner {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__userMenu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: absolute;
+        right: 15px;
+    }
+
+    .logo {
+        background-image: url('../images/logo.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 90px;
+        width: 140px;
+        height: 30px;
+        cursor: pointer;
+    }
+
 }
 
-.info { 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    position: absolute;
-    right: 10px;
-}
+
 
 
 @media screen and (max-width: 960px) {
+
+}
+
+@media screen and (max-width: 320px) {
     .header {
-        z-index: 1;
+        &__userMenu {
+            right: 0px;
+        }
+    
+        .logo {
+            background-size: 80px;
+            width: 110px;
+            height: 30px;
+        }
     }
 }

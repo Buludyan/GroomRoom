@@ -19,8 +19,6 @@ import PlaceholderCard from "../../../cards/placeholderCard/PlaceholderCard";
 
 const InProgress = ({ provided, snapshot, column }) => {
 
-
-
     const dispatch = useDispatch();
     const {
         isMobile,
@@ -87,100 +85,108 @@ const InProgress = ({ provided, snapshot, column }) => {
                 left: isRightOpen && isMobile && '-100%'
             }}
         >
-            <div className={styles.header}>
-                <LeftOpenCloseBtn />
-                <RightOpenCloseBtn />
-            </div>
-            <div
-                className={styles.column}
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                style={{
-                    background: snapshot.isDraggingOver
-                        ? "lightblue"
-                        : "#fff",
-                }}
-            >
-                {column.items.map((item, index) => {
-                    return (
-                        <Draggable
-                            key={item.id}
-                            draggableId={item.id}
-                            index={index}
-                        >
-                            {(provided, snapshot) => {
-                                if (column.items.length > 0) {
-                                    return <InProgressCard
-                                        provided={provided}
-                                        snapshot={snapshot}
-                                        column={column}
-                                        item={item}
-                                    />
-                                }
-                            }}
-                        </Draggable>
-                    );
-                })}
-                {!column.items.length &&
-                    <div className={styles.cardPlaceholder}>
-                        {snapshot.isDraggingOver &&
-                            <PlaceholderCard 
-                            />}
-                    </div>}
-                {provided.placeholder}
-            </div>
-            <UserCards />
+            <div className={styles.inProgress__inner}>
+                <div className={styles.inProgress__openCloseBtns}>
+                    <LeftOpenCloseBtn />
+                    <RightOpenCloseBtn />
+                </div>
+                <div
+                    className={styles.inProgress__card}
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    style={{
+                        background: snapshot.isDraggingOver
+                            ? "lightblue"
+                            : "#fff",
+                    }}
+                >
+                    {
+                        column.items.length
+                            ?
+                            column.items.map((item, index) => {
+                                return (
+                                    <Draggable
+                                        key={item.id}
+                                        draggableId={item.id}
+                                        index={index}
+                                    >
+                                        {(provided, snapshot) => {
+                                            if (column.items.length > 0) {
+                                                return <InProgressCard
+                                                    provided={provided}
+                                                    snapshot={snapshot}
+                                                    column={column}
+                                                    item={item}
+                                                />
+                                            }
+                                        }}
+                                    </Draggable>
+                                )
 
-            {
-                isReveal ?
-                    user.id === adminId && <div
-                        className={styles.revoteAll}
-                    >
-                        <Button
-                            variant="contained"
-                            onClick={onRevoteAllHandler}
+                            })
+
+                            :
+                            <PlaceholderCard snapshot={snapshot} />
+                    }
+                </div>
+                <UserCards />
+                <div className={styles.inProgress__footer}
+                    style={{
+                        justifyContent: ((isReveal || isVoted) && isMobile) && 'space-between'
+                    }}
+                >
+                    {isReveal ?
+                        user.id === adminId && <div
+                            className={styles.inProgress__revoteAll}
                         >
-                            Revote all
-                        </Button>
-                    </div>
-                    :
-                    isVoted ?
-                        <div className={styles.revote}>
                             <Button
                                 variant="contained"
-                                onClick={() => onVote(0, false)}
+                                onClick={onRevoteAllHandler}
                             >
-                                Revote
+                                Revote all
                             </Button>
                         </div>
                         :
-                        <VoteCards onVote={onVote} isDisabled={!column.items.length} />
-            }
-            {
-                isReveal ?
-                    user.id === adminId && <div
-                        className={styles.nextTask}
-                    >
-                        <NextTaskBtns />
+                        isVoted ?
+                            <div className={styles.inProgress__revote}>
+                                <Button
+                                    variant="contained"
+                                    onClick={() => onVote(0, false)}
+                                >
+                                    Revote
+                                </Button>
+                            </div>
+                            :
+                            <VoteCards onVote={onVote} isDisabled={!column.items.length} />
+                    }
+                    <div className={styles.inProgress__right}>
+                        {isReveal ?
+                            user.id === adminId && <div
+                                className={styles.inProgress__nextTask}
+                            >
+                                <NextTaskBtns />
+                            </div>
+                            :
+                            user.id === adminId &&
+                            <div
+                                className={styles.inProgress__reveal}
+                            >
+                                <Button
+                                    disabled={!isAllVoted || !column.items.length}
+                                    onClick={onRevealHandler}
+                                    variant='contained'
+                                >
+                                    {isMobile ?
+                                        <CurtainsIcon fontSize="large" sx={{ height: '30px' }} />
+                                        :
+                                        'Reveal points'
+                                    }
+                                </Button>
+                            </div>
+                        }
                     </div>
-                    :
-                    user.id === adminId &&
-                    <div
-                        className={styles.reveal}
-                    >
-                        <Button
-                            disabled={!isAllVoted || !column.items.length}
-                            onClick={onRevealHandler}
-                            variant='contained'
-                        >
-                            {isMobile ?
-                                <CurtainsIcon fontSize="large" sx={{ height: '30px' }} />
-                                :
-                                'Reveal points'
-                            }
-                        </Button>
-                    </div>
-            }
+                </div>
+            </div>
         </div>
     )
 }

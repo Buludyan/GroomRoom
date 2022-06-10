@@ -1,4 +1,6 @@
 .voteCard {
+    outline: none;
+    border: none;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,29 +13,54 @@
     box-shadow: 2px 2px #ccc;
     cursor: pointer;
 
-    .value {
+    &__value {
         font-size: 18px;
     }
 }
 
 @media screen and (max-width: 960px) {
     .voteCard {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
         position: relative;
         margin-bottom: 40px;
         width: 60%;
         height: 60px;
-        background-color: #ddd;
-        font-size: 75%;
-        border-radius: 5px;
-        box-shadow: 2px 2px #ccc;
-        cursor: pointer;
 
-        .value {
+        &__value {
             font-size: 25px;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .voteCard {
+        width: 6em;
+        height: 7em;
+
+        &__value {
+            font-size: 40px;
+        }
+    }
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+    .voteCard {
+        width: 4em;
+        height: 5em;
+
+        &__value {
+            font-size: 18px;
+        }
+    }
+}
+
+@media (max-width: 320px) {
+    .voteCard {
+        width: 3em;
+        height: 4em;
+
+        &__value {
+            font-size: 15px;
         }
     }
 }

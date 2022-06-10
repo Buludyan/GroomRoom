@@ -1,16 +1,21 @@
 .userCard {
     margin: 0 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 8%;
-    height: 90%;
+    width: 3.8vw;
+    height: 11.5vh;
     background-color: #ddd;
     font-size: 75%;
     border-radius: 5px;
     box-shadow: 2px 2px 0px 0px #ccc;
 
-    .name {
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__name {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -21,7 +26,7 @@
         }
     }
 
-    .valueCard {
+    &__valueCard {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -38,42 +43,43 @@
     }
 }
 
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+
+}
+
 @media screen and (max-width: 960px) {
     .userCard {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         width: 5em;
         height: 7em;
-        background-color: #ddd;
         font-size: 16px;
-        border-radius: 5px;
         margin-bottom: 40px;
-        box-shadow: 2px 2px 0px 0px #ccc;
 
-        .name {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 5px;
-        }
+    }
+}
 
-        .valueCard {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            bottom: -40%;
-            width: 45%;
-            height: 40%;
-            background-color: #7AB6E2;
-            border-radius: 3px;
-    
-            p {
-                font-size: 30px;
-            }
-        }
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .userCard {
+        width: 4.5em;
+        height: 7em;
+        font-size: 28px;
+        margin-bottom: 65px;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+    .userCard {
+        width: 6em;
+        height: 8em;
+        font-size: 12px;
+        margin-bottom: 45px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .userCard {
+        width: 5em;
+        height: 9em;
+        font-size: 9px;
+        margin-bottom: 60px;
     }
 }

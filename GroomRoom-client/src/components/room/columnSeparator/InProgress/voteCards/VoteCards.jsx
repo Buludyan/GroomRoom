@@ -17,7 +17,7 @@ const VoteCards = ({ onVote, isDisabled }) => {
         <div className={styles.voteCardsBlock}>
             {isMobile ?
                 <Swiper
-                    slidesPerView={3}
+                    slidesPerView={(window.innerWidth >= 768 && window.innerWidth <= 991) ? 5 : 4}
                     spaceBetween={5}
                     freeMode={true}
                     pagination={{

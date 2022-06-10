@@ -25,7 +25,6 @@ function App() {
   return (
     <>
       <div className='app'>
-        {window.location.href !== `${process.env.REACT_APP_BASE_DOMEN}/login` && <Header />}
         <Routes>
           <Route path='/' element={<ProfilePage />} />
           <Route path='/login' element={<Login />} />

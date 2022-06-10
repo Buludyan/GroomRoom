@@ -1,5 +1,9 @@
 .app {
     background-color: #fff;
+    width: 100wv;
     height: 100vh;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 
