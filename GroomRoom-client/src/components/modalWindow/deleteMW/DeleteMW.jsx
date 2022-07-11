@@ -49,18 +49,18 @@ const DeleteMW = () => {
             onClick={() => dispatch(setActive({ isActive: false, isAllDelete: false }))}
         >
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                <Typography
-                    className={styles.header}
-                    variant='h6'
-                >
-                    {isAllDelete ? 'Delete all cards?' : 'Delete this card?'}
-                </Typography>
                 <IconButton
                     onClick={() => dispatch(setActive({ isActive: false, isAllDelete: false }))}
                     className={styles.close}
                 >
                     <CloseIcon />
                 </IconButton>
+                <Typography
+                    className={styles.header}
+                    variant='h6'
+                >
+                    {isAllDelete ? 'Delete all cards?' : 'Delete this card?'}
+                </Typography>
                 <Button
                     className={styles.delete}
                     onClick={onItemDelete}

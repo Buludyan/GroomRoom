@@ -14,7 +14,7 @@ const Header = () => {
     const [isUserMWOpen, setUserMWOpen] = useState(false);
 
     return (
-        <section className={styles.header}>
+        <header className={styles.header}>
             <div className={styles.header__inner}>
                     <a className={styles.logo} href={process.env.REACT_APP_BASE_DOMEN} />
                 <div className={styles.header__userMenu}>
@@ -46,8 +46,7 @@ const Header = () => {
                     setUserMWOpen={setUserMWOpen}
                 />
             </div>
-
-        </section>
+        </header>
     )
 }
 

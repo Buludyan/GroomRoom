@@ -14,7 +14,9 @@ function App() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(setIsMobile(isMobile)), [dispatch]);
+  useEffect(() => {
+    dispatch(setIsMobile(isMobile))
+  }, [dispatch]);
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -24,7 +26,10 @@ function App() {
 
   return (
     <>
-      <div className='app'>
+      <div 
+        className='app'
+      >
+        {window.location.href !== `${process.env.REACT_APP_BASE_DOMEN}/login` && <Header />}
         <Routes>
           <Route path='/' element={<ProfilePage />} />
           <Route path='/login' element={<Login />} />

@@ -59,6 +59,20 @@
 }
 
 
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .modalContent {
+        width: 90%;
+        min-height: 7em;
+        max-height: 30em;
+
+        .link {
+            position: relative;
+            left: 43%;
+        }
+    }
+}
+
+
 @media screen and (max-width: 450px) {
     .modalContent {
         width: 90%;

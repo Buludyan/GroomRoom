@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jul 11 13:58:12 2022
+# Make data base, printed on Fri Jul 08 16:52:53 2022
 
 # Variables
 
@@ -39,7 +39,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_14352_PAGQJWNJZONXQAJG
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_4148_YZISDQHINQBTIWMR
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -71,7 +71,7 @@ ONEDRIVE = C:\Users\arman\OneDrive
 # environment
 POWERSHELL_DISTRIBUTION_CHANNEL = MSI:Windows 10 Home
 # makefile
-CURDIR := c:/Users/arman/Desktop/GroomRoom
+CURDIR := c:/Users/arman/Desktop/GroomRoom/GroomRoom-client
 # environment
 PATHTOSSHPRIVATEKEY = C:\Users\arman\.ssh
 # environment
@@ -93,7 +93,7 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 14352
+VSCODE_PID = 4148
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -143,7 +143,8 @@ USERNAME = arman
 # environment
 COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
 # automatic
-?F = $(notdir $?)
+?F = $ 
+(notdir $?)
 # environment
 PROGRAMW6432 = C:\Program Files
 # environment
@@ -211,9 +212,9 @@ PROCESSOR_IDENTIFIER = AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD
 
 # Directories
 
-# . (key c:/Users/arman/Desktop/GroomRoom, mtime 1653989402): 8 files, no impossibilities.
+# . (key c:/Users/arman/Desktop/GroomRoom/GroomRoom-client, mtime 1655294820): 14 files, no impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 14 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -226,22 +227,16 @@ build-production:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 2):
-	cd GroomRoom-client && $(MAKE) build-production
-	cd GroomRoom-server && $(MAKE) build
+	docker build \
+		-t react-app-production:production \
+		-f Dockerfile.production .
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-31 22:27:59
+#  Last modified 2022-05-31 22:30:18
 #  File has been updated.
 #  Successfully updated.
-
-run-production:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 6):
-	docker-compose -f docker-compose-production.yml up
 
 # Not a target:
 .DEFAULT:
@@ -257,19 +252,19 @@ all:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/16=0%
+# Load=5/1024=0%, Rehash=0, Collisions=0/15=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 13 / storage = 146 B / avg = 11 B
-# current buf: size = 8174 B / used = 146 B / count = 13 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 18 / storage = 179 B / avg = 9 B
+# current buf: size = 8174 B / used = 179 B / count = 18 / avg = 9 B
 
-# strcache performance: lookups = 19 / hit rate = 31%
+# strcache performance: lookups = 23 / hit rate = 21%
 # hash-table stats:
-# Load=13/8192=0%, Rehash=0, Collisions=1/19=5%
-# Finished Make data base on Mon Jul 11 13:58:12 2022
+# Load=18/8192=0%, Rehash=0, Collisions=0/23=0%
+# Finished Make data base on Fri Jul 08 16:52:53 2022
 
  

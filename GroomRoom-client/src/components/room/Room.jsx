@@ -25,7 +25,6 @@ import { onReveal } from '../helpers/onReveal';
 import { zeroVoteState } from '../helpers/zeroVoteState';
 import DeleteMW from '../modalWindow/deleteMW/DeleteMW';
 import DescriptionMW from '../modalWindow/descriptionMW/DescriptionMW';
-import Header from '../header/Header';
 
 
 const Room = () => {
@@ -197,7 +196,6 @@ const Room = () => {
     return (
         <div className={styles.room}>
             <div className={styles.room__inner}>
-                <Header />
                 <div className={styles.room__columns}>
                     <DragDropContext
                         onDragEnd={result => onDragEnd(result)}

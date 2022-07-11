@@ -1,18 +1,21 @@
-require('dotenv').config();
-const cors = require('cors');
-const express = require('express');
-const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
-const errorMiddleware = require('./middlewares/errorMiddleware');
-const roomController = require('./controllers/roomController');
-const { setWsHeartbeat } = require('./node_modules/ws-heartbeat/server');
+import express from 'express';
+import { setWsHeartbeat } from './node_modules/ws-heartbeat/server';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import errorMiddleware from './middlewares/errorMiddleware';
+import roomController from './controllers/roomController';
+import mongoose, { ConnectOptions, Error } from "mongoose";
+import { Request, Response, NextFunction } from 'express';
+import expressWs from 'express-ws'
 
-const app = express();
-const WSServer = require('express-ws')(app);
-const aWss = WSServer.getWss();
+dotenv.config();
+const { app, getWss } = expressWs(express())
+const aWss = getWss();
+
 const PORT = process.env.PORT || 6060;
 
-app.use(express.json({ extended: true }));
+app.use(express.json());
 app.use(cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
@@ -22,14 +25,14 @@ app.use('/auth', require('./routes/auth.route'));
 app.use('/room', require('./routes/room.route'));
 app.use(errorMiddleware);
 
-app.ws('/', (ws, req) => {
-    ws.on('message', async (msg) => {
+app.ws('/', (ws: any, req: any) => {
+    ws.on('message', async (msg: any) => {
         msg = JSON.parse(msg)
         switch (msg.method) {
             case 'connection':
                 const { id, user } = msg;
                 const room = await roomController.connectRoom(id, user);
-                connectionHandler(ws, room, 'connection', id, user);
+                connectionHandler(ws, room, 'connection', id, user, id);
                 break
             case 'broadcast':
                 await roomController.updateRoom(msg.columns, msg.id);
@@ -37,7 +40,7 @@ app.ws('/', (ws, req) => {
                 break
             case 'voting':
                 const { roomId, updatedUsers, userId } = msg;
-                await roomController.vote(roomId, updatedUsers, userId);
+                await roomController.vote(roomId, updatedUsers);
                 broadcastConnection(ws, updatedUsers, 'voting', msg.id);
                 break
             case 'revoteAll':
@@ -63,15 +66,24 @@ app.ws('/', (ws, req) => {
 
 process.on('warning', e => console.warn(e.stack));
 
-const connectionHandler = (ws, columns, method, id, user, clientId) => {
+const connectionHandler = (
+    ws: any, 
+    columns: Object,
+    method: string,
+    id: string,
+    user: Object,
+    clientId: string
+) => {
+
     ws.id = id;
     ws.user = user;
     ws.clientId = clientId;
+
     broadcastConnection(ws, columns, method, id)
 }
 
-const broadcastConnection = (ws, data, method, id) => {
-    aWss.clients.forEach(client => {
+const broadcastConnection = (ws: any, data: any, method: string, id: string) => {
+    aWss.clients.forEach((client: any) => {
         if (client.id === id) {
             const msg = { method, data, id };
             client.send(JSON.stringify(msg));
@@ -79,7 +91,7 @@ const broadcastConnection = (ws, data, method, id) => {
     })
 }
 
-setWsHeartbeat(aWss, (ws, data, flag) => {
+setWsHeartbeat(aWss, (ws: any, data: any) => {
     if (data === '{"kind":"ping"}') {
         ws.send('{"kind":"pong"}');
     }
@@ -87,10 +99,10 @@ setWsHeartbeat(aWss, (ws, data, flag) => {
 
 async function start() {
     try {
-        await mongoose.connect(process.env.DB_URL, {
+        await mongoose.connect(process.env.DB_URL!, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-        })
+        } as ConnectOptions)
 
         app.listen(PORT, () => {
             console.log(`Server started on port ${PORT}`);

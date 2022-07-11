@@ -35,24 +35,29 @@
     align-items: center;
     justify-content: space-around;
     border-radius: 15px;
-    width: 20%;
-    height: 20%;
+    min-width: 20vw;
+    min-height: 20vh;
     background-color: #fff;
 
     .header {
         position: relative;
-        top: 2%
+        top: -10px;
     }
 
     .close {
         position: relative;
         left: 42%;
-        bottom: 32%;
     }
 
     .delete {
         position: relative;
-        bottom: 10%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .modalContent {
+        min-width: 450px;
+        min-height: 150px;
     }
 }
 

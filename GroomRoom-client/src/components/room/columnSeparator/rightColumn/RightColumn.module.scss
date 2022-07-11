@@ -51,17 +51,7 @@
     }
 }
 
-.column {
-    display: flex;
-    flex-direction: column;
-    background: $column-background-color;
-    align-items: center;
-    height: 96vh;
-    width: 20vw;
-    z-index: 90;
-    transition: transform .22s ease-in;
-    overflow: auto;
-}
+
 
 .done.close {
     transform: translateX(20vw);
