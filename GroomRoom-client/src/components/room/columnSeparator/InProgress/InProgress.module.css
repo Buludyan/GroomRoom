@@ -1,5 +1,13 @@
-.column {
+.inProgress {
   position: relative;
+  height: 96vh;
+  width: 60vw;
+  z-index: 0;
+}
+
+.inProgress__inner {
+  width: 100%;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,13 +18,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 4;
-  height: 100vh;
-  width: 60vw;
-  z-index: 0;
 }
 
-.header {
+.inProgress__openCloseBtns {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -29,9 +33,25 @@
   width: 100%;
 }
 
-.cardPlaceholder {
-  top: -20px;
+.inProgress__card {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 43%;
+  width: 80%;
+  z-index: 0;
+  border-radius: 5px;
+}
+
+.inProgress__cardPlaceholder {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -41,33 +61,17 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 80%;
-  height: 43%;
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
   background-color: #ddd;
+  -webkit-box-shadow: 0 2px 2px 0px #ccc;
+          box-shadow: 0 2px 2px 0px #ccc;
 }
 
-.users {
-  top: -12px;
+.inProgress__footer {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  width: 78%;
-  height: 27%;
-}
-
-.users .firstRow {
+  bottom: -6%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -75,78 +79,49 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  width: 100%;
-  height: 47%;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 80%;
+  height: 12vh;
 }
 
-.users .secondRow {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  width: 100%;
-  height: 47%;
-}
-
-.voteCards {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+.inProgress__right {
   position: absolute;
-  width: 55%;
-  height: 10%;
-  bottom: 8%;
-}
-
-.revote {
-  position: absolute;
-  bottom: 8.5%;
-}
-
-.revoteAll {
-  position: absolute;
-  bottom: 8.5%;
-}
-
-.reveal {
-  position: absolute;
-  right: 2%;
-  bottom: 8.5%;
-  width: 15.3%;
-}
-
-.nextTask {
-  position: absolute;
-  right: 2%;
-  bottom: 8.5%;
+  right: -4vw;
+  bottom: 0;
 }
 
 @media screen and (max-width: 960px) {
-  .column {
+  .inProgress {
     width: 100vw;
+    height: 96vh;
+  }
+  .inProgress__footer {
+    right: 0;
+    width: 100%;
+    height: 20vh;
+    bottom: -12%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .inProgress__revote {
+    padding-bottom: 5vh;
+  }
+  .inProgress__right {
+    position: relative;
+    right: 0;
   }
 }
 /*# sourceMappingURL=InProgress.module.css.map */

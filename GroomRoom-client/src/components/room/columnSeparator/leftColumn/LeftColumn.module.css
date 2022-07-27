@@ -1,4 +1,15 @@
-.column {
+.todo {
+  background: #E8E8E8;
+  height: 96vh;
+  width: 20vw;
+  z-index: 90;
+  -webkit-transition: -webkit-transform .22s ease-in;
+  transition: -webkit-transform .22s ease-in;
+  transition: transform .22s ease-in;
+  transition: transform .22s ease-in, -webkit-transform .22s ease-in;
+}
+
+.todo__inner {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6,42 +17,57 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: #E8E8E8;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 4;
-  height: 100vh;
-  width: 20vw;
-  z-index: 90;
-  -webkit-transition: -webkit-transform .22s ease-in;
-  transition: -webkit-transform .22s ease-in;
-  transition: transform .22s ease-in;
-  transition: transform .22s ease-in, -webkit-transform .22s ease-in;
-  overflow: auto;
+  width: 100%;
+  height: 100%;
 }
 
-.column::-webkit-scrollbar {
-  display: none;
-}
-
-.column.close {
-  -webkit-transform: translateX(-20vw);
-          transform: translateX(-20vw);
-}
-
-.nav {
-  width: 95%;
-}
-
-.mobCloseButton {
+.todo__mobCloseButton {
   position: relative;
   left: 45%;
   top: 2%;
 }
 
+.todo__nav {
+  width: 95%;
+}
+
+.todo__todoList {
+  height: 92%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: auto;
+}
+
+.todo__todoList::-webkit-scrollbar {
+  width: .5em;
+}
+
+.todo__todoList::-webkit-scrollbar-thumb {
+  background-color: #cbcbcb;
+  border-radius: 20px;
+  border: 3px solid #cbcbcb;
+  height: 5px;
+}
+
+.todo.close {
+  -webkit-transform: translateX(-20vw);
+          transform: translateX(-20vw);
+}
+
 @media screen and (max-width: 960px) {
-  .column {
+  .todo {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -50,18 +76,18 @@
         -ms-flex-direction: column;
             flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: 96vh;
     position: absolute;
     left: -200%;
     opacity: 1;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
   }
-  .column.active {
+  .todo.active {
     position: absolute;
     background: #D1F5FF;
     left: 0;
-    height: 100%;
+    height: 96vh;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     z-index: 1;

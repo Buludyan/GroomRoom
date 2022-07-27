@@ -1,5 +1,6 @@
-.nav {
+.button {
   position: relative;
+  top: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,5 +11,7 @@
   left: 0;
   -webkit-transition: all .22s ease-in;
   transition: all .22s ease-in;
+  border-radius: 5px 0 0 5px;
+  background-color: #E8E8E8;
 }
 /*# sourceMappingURL=RightOpenCloseBtn.module.css.map */

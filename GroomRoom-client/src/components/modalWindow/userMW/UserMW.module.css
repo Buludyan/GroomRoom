@@ -52,44 +52,18 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   border-radius: 15px;
-  min-width: 30%;
-  min-height: 65%;
+  width: 20%;
+  height: 30%;
   background-color: #fff;
-}
-
-.form {
-  width: 70%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
 }
 
 @media screen and (max-width: 960px) {
   .modalContent {
-    min-width: 350px;
-    min-height: 500px;
+    width: 70%;
+    height: 30%;
   }
 }
-
-@media screen and (min-width: 768px) and (max-width: 991px) {
-  .modalContent {
-    min-width: 450px;
-    min-height: 500px;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .modalContent {
-    width: 90%;
-    height: 38%;
-  }
-}
-/*# sourceMappingURL=RegistrationMW.module.css.map */
+/*# sourceMappingURL=UserMW.module.css.map */

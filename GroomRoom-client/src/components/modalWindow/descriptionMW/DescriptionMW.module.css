@@ -38,7 +38,7 @@
   transition: 0.4s;
   pointer-events: all;
   opacity: 1;
-  z-index: 15;
+  z-index: 2;
 }
 
 .modalContent {
@@ -52,44 +52,53 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   border-radius: 15px;
-  min-width: 30%;
-  min-height: 65%;
+  width: 40%;
+  min-height: 7em;
+  max-height: 30em;
   background-color: #fff;
+  word-break: break-all;
+  white-space: pre-wrap;
 }
 
-.form {
-  width: 70%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+.modalContent .name {
+  margin: 5px 0;
 }
 
-@media screen and (max-width: 960px) {
-  .modalContent {
-    min-width: 350px;
-    min-height: 500px;
-  }
+.modalContent .description {
+  width: 90%;
+  height: 50%;
+  overflow: auto;
+}
+
+.modalContent .link {
+  position: relative;
+  left: 45%;
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .modalContent {
-    min-width: 450px;
-    min-height: 500px;
+    width: 90%;
+    min-height: 7em;
+    max-height: 30em;
+  }
+  .modalContent .link {
+    position: relative;
+    left: 43%;
   }
 }
 
 @media screen and (max-width: 450px) {
   .modalContent {
     width: 90%;
-    height: 38%;
+    min-height: 7em;
+    max-height: 30em;
+  }
+  .modalContent .link {
+    position: relative;
+    left: 43%;
   }
 }
-/*# sourceMappingURL=RegistrationMW.module.css.map */
+/*# sourceMappingURL=DescriptionMW.module.css.map */

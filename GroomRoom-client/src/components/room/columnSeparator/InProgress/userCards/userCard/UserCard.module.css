@@ -1,4 +1,15 @@
 .userCard {
+  margin: 0 5px;
+  width: 3.8vw;
+  height: 11.5vh;
+  background-color: #ddd;
+  font-size: 75%;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 0px 0px #ccc;
+          box-shadow: 2px 2px 0px 0px #ccc;
+}
+
+.userCard__inner {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -9,16 +20,11 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 8%;
-  height: 90%;
-  background-color: #ddd;
-  font-size: 75%;
-  border-radius: 5px;
-  -webkit-box-shadow: 2px 2px #ccc;
-          box-shadow: 2px 2px #ccc;
+  width: 100%;
+  height: 100%;
 }
 
-.userCard .name {
+.userCard__name {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -35,11 +41,11 @@
   margin-top: 5px;
 }
 
-.userCard .name p {
+.userCard__name p {
   margin: 0;
 }
 
-.userCard .valueCard {
+.userCard__valueCard {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -57,7 +63,43 @@
   border-radius: 3px;
 }
 
-.userCard .valueCard p {
+.userCard__valueCard p {
   font-size: 30px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .userCard {
+    width: 4em;
+    height: 5em;
+    font-size: 22px;
+    margin-bottom: 65px;
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  .userCard {
+    width: 4.5em;
+    height: 6em;
+    font-size: 22px;
+    margin-bottom: 65px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .userCard {
+    width: 6em;
+    height: 8em;
+    font-size: 12px;
+    margin-bottom: 45px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .userCard {
+    width: 5em;
+    height: 9em;
+    font-size: 9px;
+    margin-bottom: 60px;
+  }
 }
 /*# sourceMappingURL=UserCard.module.css.map */

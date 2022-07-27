@@ -1,5 +1,5 @@
 .buttons {
-  position: relative;
+  position: absolute;
   top: 4%;
   width: 90%;
   display: -webkit-box;
@@ -15,15 +15,15 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 5%;
 }
 
-.buttons button {
-  background-color: #7AB6E2;
-  border: 2px solid #398AC5;
-}
-
-.buttons button:hover {
-  background-color: #398AC5;
+@media screen and (max-width: 960px) {
+  .buttons {
+    top: 5%;
+  }
+  .buttons button {
+    width: 0px;
+    height: 30px;
+  }
 }
 /*# sourceMappingURL=MoveButtons.module.css.map */

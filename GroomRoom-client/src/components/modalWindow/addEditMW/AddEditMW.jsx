@@ -12,28 +12,32 @@ export const AddEditMW = () => {
 
     const dispatch = useDispatch();
     const { columns, socket, clientId } = useSelector(columnsState);
-    const { isActive, name, description, source, id, columnName } = useSelector(addEditModalState);
+    const { isActive, name, description, link, source, id, columnName } = useSelector(addEditModalState);
 
     const [inputData, setInputData] = useState({
         taskName: '',
-        taskDes: ''
+        taskDes: '',
+        taskLink: ''
     })
 
     const [editInputData, setEditInputData] = useState({
         taskName: name,
-        taskDes: description
+        taskDes: description,
+        taskLink: link
     })
 
     useEffect(() => setEditInputData({
         taskName: name,
-        taskDes: description
-    }), [source, name, description])
+        taskDes: description,
+        taskLink: link
+    }), [source, name, description, link])
 
     const onEditCancel = () => {
         dispatch(closeEdit());
         setEditInputData({
             taskName: name,
-            taskDes: description
+            taskDes: description,
+            taskLink: link
         })
     }
 
@@ -60,6 +64,7 @@ export const AddEditMW = () => {
             id: uuid(),
             content: inputData.taskName,
             description: inputData.taskDes,
+            link: inputData.taskLink,
             value: 0
         }
 
@@ -79,7 +84,8 @@ export const AddEditMW = () => {
 
         setInputData({
             taskName: '',
-            taskDes: ''
+            taskDes: '',
+            taskLink: ''
         })
     }
 
@@ -96,7 +102,8 @@ export const AddEditMW = () => {
             it = {
                 ...it,
                 content: editInputData.taskName,
-                description: editInputData.taskDes
+                description: editInputData.taskDes,
+                link: editInputData.taskLink
             }
             :
             it
@@ -148,6 +155,13 @@ export const AddEditMW = () => {
                         value={source === 'Edit' ? editInputData.taskDes : inputData.taskDes}
                     />
                     <br />
+                    <TextField
+                        variant='outlined'
+                        label='Task link'
+                        name='taskLink'
+                        onChange={source === 'Edit' ? (e) => onEditChange(e) : (e) => onChange(e)}
+                        value={source === 'Edit' ? editInputData.taskLink : inputData.taskLink}
+                    />
                 </div>
                 <div className={styles.commitBtn}>
                     {source === 'Edit' ?

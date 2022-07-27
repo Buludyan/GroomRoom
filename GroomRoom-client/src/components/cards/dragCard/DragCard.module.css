@@ -24,12 +24,53 @@
   color: #000;
   border-radius: 5px;
   background: #fff;
+  -webkit-box-shadow: 2px 2px 0px 0px #ccc;
+          box-shadow: 2px 2px 0px 0px #ccc;
+  direction: ltr;
+}
+
+.cardFooter {
+  position: relative;
+  width: 100%;
+  bottom: 23%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.value {
+  position: relative;
+  top: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 1px solid #C4C4C4;
+  background-color: #C4C4C4;
+  border-radius: 180px;
+  width: 8%;
+  height: 12%;
 }
 
 .link {
   position: relative;
-  left: 87%;
-  bottom: 20%;
+  top: 1vw;
+  right: -.4em;
   text-decoration: none;
 }
 
@@ -47,6 +88,49 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.cardHeader .name {
+  width: 11em;
+  height: 2em;
+  word-break: break-all;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+
+.descriptionBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-size: 15px;
+  height: 30%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.descriptionBlock .description {
+  width: 40%;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+.descriptionBlock .more {
+  cursor: pointer;
+  position: relative;
+  bottom: -4px;
+  width: 90px;
+  z-index: 50;
+}
+
+.descriptionBlock .more:hover {
+  color: blue;
 }
 
 .buttons {

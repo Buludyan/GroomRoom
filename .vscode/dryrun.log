@@ -7,11 +7,11 @@ docker build \
 	-t react-app-production:production \
 	-f Dockerfile.production .
 make[1]: Leaving directory 'c:/Users/arman/Desktop/GroomRoom/GroomRoom-client'
+ 
 cd GroomRoom-server && C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe build
  
 make[1]: Entering directory 'c:/Users/arman/Desktop/GroomRoom/GroomRoom-server'
 docker build -t api-server .
 make[1]: Leaving directory 'c:/Users/arman/Desktop/GroomRoom/GroomRoom-server'
- 
 make: Leaving directory 'c:/Users/arman/Desktop/GroomRoom'
  

@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     isDescMWActive: false,
     description: null,
-    name: null
+    name: null,
+    link: null
 }
 
 export const descriptionMWSLice = createSlice({
@@ -14,9 +15,10 @@ export const descriptionMWSLice = createSlice({
             state.isDescMWActive = action.payload;
         },
         setDescData: (state, action) => {
-            const { description, name } = action.payload;
+            const { description, name, link } = action.payload;
             state.description = description;
             state.name = name;
+            state.link = link;
         }
     }
 })

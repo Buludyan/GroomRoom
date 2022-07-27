@@ -8,7 +8,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 100%;
+  width: 100vw;
   height: 100%;
 }
 
@@ -38,9 +38,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   height: 70%;
   width: 60%;
 }
@@ -53,5 +52,12 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+@media screen and (max-width: 960px) {
+  .frame {
+    width: 80%;
+    height: 60%;
+  }
 }
 /*# sourceMappingURL=Login.module.css.map */

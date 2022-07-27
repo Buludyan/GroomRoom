@@ -1,9 +1,9 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,YAAY,CAAC;EACT,MAAM,EAAE,KAAK;EACb,KAAK,EAAE,KAAK;EACZ,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,QAAQ,EAAE,QAAQ;EAClB,WAAW,EAAE,MAAM;EACnB,eAAe,EAAE,MAAM;CAC1B;;AAED,AAAA,UAAU,CAAC;EACP,MAAM,EAAE,GAAG;EACX,KAAK,EAAE,GAAG;EACV,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,eAAe,EAAE,aAAa;CACjC;;AAED,AAAA,KAAK,CAAC;EACF,MAAM,EAAE,IAAI;EACZ,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,eAAe,EAAE,aAAa;CACjC",
     "sources": [
-        "ProfiePage.module.scss"
+        "ProfilePage.module.scss"
     ],
     "names": [],
-    "file": "ProfiePage.module.css"
+    "file": "ProfilePage.module.css"
 }
